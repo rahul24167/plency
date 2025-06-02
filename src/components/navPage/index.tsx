@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { navLinks1, navLinks2, logoText } from "./data";
 const NavPage = () => {
+  const pathname = usePathname();
   const [isInsideViewport, setIsInsideViewport] = useState(true);
-
+   const shouldAnimate = pathname === "/";
   useEffect(() => {
     const handlePointerEnter = () => {
       setIsInsideViewport(true);
@@ -28,12 +30,12 @@ const NavPage = () => {
             style={{ transformOrigin: "left top" }}
             initial={{ opacity:1, scale: 1, x: 0, y: 0 }}
             animate={{
-              opacity: isInsideViewport ? 1 : 1,
-              scale: isInsideViewport ? 5 : 1,
+              opacity: shouldAnimate && isInsideViewport ? 1 : 1,
+              scale: shouldAnimate && isInsideViewport ? 5 : 1,
               
-              y: isInsideViewport ? 50 : 0, // 10px lower
+              y: shouldAnimate && isInsideViewport ? 50 : 0, // 10px lower
             }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           >
             <h1 className="">{logoText.title}</h1>
           </motion.div>
