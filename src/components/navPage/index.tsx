@@ -37,7 +37,7 @@ const NavPage = () => {
             }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <h1 className="">{logoText.title}</h1>
+            <h1 className={`${shouldAnimate && isInsideViewport ? "font-bold" : "font-normal"} transition-all duration-500`}>{logoText.title}</h1>
           </motion.div>
           <div>
             {navLinks2.map((link, index) => (

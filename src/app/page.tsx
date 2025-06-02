@@ -21,11 +21,11 @@ export default function Home() {
   }, []);
  
   return (
-    <div className="bg-indigo-900 h-screen">
+    <div className="h-screen">
       <motion.div initial={{ opacity: 0 }}
         animate={{ opacity: isInsideViewport ? 1 : 0 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className={`h-1/2 w-full text-largest
+        className={`p-4 h-1/2 w-full text-largest font-bold
         }`}>{subHeading}</motion.div>
       <div className="h-1/2 w-full">
       </div>
