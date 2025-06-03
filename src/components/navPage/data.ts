@@ -14,6 +14,6 @@ export const navLinks2: NavLink[] = [
   { title: "Playground", path: "/playground" }
 ];
 export const logoText: NavLink = {
-  title: "Plancy",
+  title: "Plency",
   path: "/",
 }
