@@ -116,7 +116,9 @@ const NavPage = () => {
                   <button
                     key={index}
                     onClick={() => handleNavClick(link.path)}
-                    className="px-5 py-2 font-small uppercase"
+                    className={`px-5 py-2 font-small uppercase font-bold ${
+                      pathname === link.path ? "text-blue-500" : ""
+                    }`}
                   >
                     {link.title}
                   </button>
@@ -127,7 +129,9 @@ const NavPage = () => {
                   <button
                     key={index}
                     onClick={() => handleNavClick(link.path)}
-                    className="px-5 py-2 font-small uppercase"
+                    className={`px-5 py-2 font-small uppercase font-bold ${
+                      pathname === link.path ? "text-secondary" : ""
+                    }`}
                   >
                     {link.title}
                   </button>
@@ -136,7 +140,7 @@ const NavPage = () => {
             </nav>
 
             {pathname !== "/" && (
-              <div className="px-4 text-largest uppercase ">
+              <div className="px-4 text-medium md:text-large lg:text-largest font-bold uppercase ">
                 {pathname
                   .replace("/", "")
                   .replace(/-/g, " ")
