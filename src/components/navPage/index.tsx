@@ -8,6 +8,17 @@ const NavPage = () => {
   const pathname = usePathname();
 
   const [isInsideViewport, setIsInsideViewport] = useState(true);
+  const [PageLoaded, setPageLoaded] = useState(false);
+  useEffect(() => {
+    const handleLoad = () => {
+      setPageLoaded(true);
+    };
+    window.addEventListener("load", handleLoad);
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }
+  , []);
 
   const [isExiting, setIsExiting] = useState(false);
   const [nextPath, setNextPath] = useState("");
@@ -52,7 +63,7 @@ const NavPage = () => {
           initial={{ y: "-100vh" }}
           animate={{ y: 0 }}
           exit={{ y: "100vh" }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="h-screen fixed bg-transparent flex flex-col justify-between w-full uppercase "
         >
           <div className="h-1/2 w-full text-largest"></div>
@@ -60,7 +71,7 @@ const NavPage = () => {
             <nav className="flex flex-row justify-between items-center w-full p-4 ">
               <motion.div
                 style={{ transformOrigin: "left top" }}
-                initial={{ opacity: 1, scale: pathname === "/" ? 5:1, x: 0, y: pathname === "/" ? 50: 0 }}
+                initial={{ opacity: 1, scale: PageLoaded && pathname === "/" ? 5:1, x: 0, y: pathname === "/" ? 50: 0 }}
                 animate={{
                   opacity: pathname === "/" && isInsideViewport ? 1 : 1,
                   scale: pathname === "/" ?(isInsideViewport ? 1 : 5) : 1,
