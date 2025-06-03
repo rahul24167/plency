@@ -24,7 +24,7 @@ export default function Home() {
     <div className="h-screen">
       <motion.div initial={{ opacity: 0 }}
         animate={{ opacity: isInsideViewport ? 1 : 0 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        transition={{delay: 0.2, duration: 0.5, ease: "easeInOut" }}
         className={`p-4 h-1/2 w-full text-largest font-bold
         }`}>{subHeading}</motion.div>
       <div className="h-1/2 w-full">
