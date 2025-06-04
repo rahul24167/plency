@@ -1,10 +1,10 @@
-interface ProjectPageProps {
-  params: {
-    id: string;
-  };
-}
-const Project = ({ params }: ProjectPageProps) => {
-  const { id } = params;
+
+export default async function Project({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}){
+  const { id } =  await params;
   const projectInfo = {
     id: id,
     images: [
@@ -39,4 +39,3 @@ const Project = ({ params }: ProjectPageProps) => {
   );
 };
 
-export default Project;

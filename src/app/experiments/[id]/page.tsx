@@ -1,12 +1,12 @@
-interface ExperimentPageProps {
-  params: {
-    id: string;
-  };
-}
-const Experiment = ({ params }: ExperimentPageProps) => {
-  const { id } = params;
+
+export default async function Experiment({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}){
+  const { id } = await params;
   const projectInfo = {
-    id: id,
+    id: "ffjsdkj",
     images: [
       "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
@@ -52,5 +52,3 @@ const Experiment = ({ params }: ExperimentPageProps) => {
     </div>
   );
 };
-
-export default Experiment;
