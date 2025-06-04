@@ -1,9 +1,9 @@
-interface ProjectPageProps {
+interface ExperimentPageProps {
   params: {
     id: string;
   };
 }
-const Project = ({ params }: ProjectPageProps) => {
+const Experiment = ({ params }: ExperimentPageProps) => {
   const { id } = params;
   const projectInfo = {
     id: id,
@@ -21,7 +21,7 @@ const Project = ({ params }: ProjectPageProps) => {
   };
   return (
     <div className="h-screen w-screen overflow-auto flex flex-col flex-wrap p-4 py-8 pb-[15vh] gap-2">
-      <div className="w-1/2 h-[90vh] flex flex-col justify-end pb-1/4">
+      <div className="w-1/2 h-[90vh] flex flex-col justify-end">
         <h1 className="text-largest text-secondary font-bold uppercase">
           {projectInfo.title}
         </h1>
@@ -53,4 +53,4 @@ const Project = ({ params }: ProjectPageProps) => {
   );
 };
 
-export default Project;
+export default Experiment;
