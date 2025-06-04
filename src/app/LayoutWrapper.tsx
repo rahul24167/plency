@@ -1,10 +1,9 @@
 "use client";
-import {motion, AnimatePresence } from "framer-motion";
+import {motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
-//components
-import NavPage from "@/components/navPage";
 
-export default function Application({
+
+export default function LayoutWrapper({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -19,10 +18,8 @@ export default function Application({
         exit={{ y: "100vh" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="relative"
-      > 
-        <NavPage />
+      >
         {children}
-        
       </motion.div>
       </AnimatePresence>
   )
