@@ -203,7 +203,7 @@ interface ProjectInfo {
     },
   ];
   return (
-    <div className="min-h-screen p-10 flex flex-row justify-end">
+    <div className="h-screen overflow-auto p-10 flex flex-row justify-end">
      <div className="w-1/2">
       {projects.map((project, index) => (
         <div key={index} className="p-2">

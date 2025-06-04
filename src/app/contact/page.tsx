@@ -23,11 +23,11 @@ const Contact = () => {
     },
   ]
   return (
-     <div className="min-h-screen p-10">
+     <div className="min-h-screen">
       <div className='h-1/2 w-2/3 flex flex-row flex-wrap justify-center items-center'>
         {ContactUs.map((item, index) => (
-          <div key={index} className='w-1/2 flex flex-row justify-start items-start gap-2 p-3'>
-            <div className='w-1/3 uppercase font-normal'>{item.title}</div>
+          <div key={index} className='w-1/2 p-5 flex flex-row justify-start items-start gap-2 '>
+            <div className='w-1/3 uppercase'>{item.title}</div>
             <div className=''>{item.description}</div>
           </div>
         ))}

@@ -19,9 +19,10 @@ export default function Application({
         exit={{ y: "100vh" }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="relative"
-      >
+      > 
         <NavPage />
         {children}
+        
       </motion.div>
       </AnimatePresence>
   )

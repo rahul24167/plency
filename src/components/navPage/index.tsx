@@ -11,6 +11,10 @@ const NavPage = () => {
 
   const [isInsideViewport, setIsInsideViewport] = useState(true);
   const [PageLoaded, setPageLoaded] = useState(false);
+
+  const mainPages = ["/", "/work", "/about", "/contact", "/career", "/playground"];
+  const isMainPage = mainPages.includes(pathname);
+
   useEffect(() => {
     const handleLoad = () => {
       setPageLoaded(true);
@@ -60,18 +64,8 @@ const NavPage = () => {
   };
 
   return (
-    // <AnimatePresence mode="wait">
-        // <motion.div
-        //   key={pathname} // Re-animate on path change
-        //   initial={{ y: "-100vh" }}
-        //   animate={{ y: 0 }}
-        //   exit={{ y: "100vh" }}
-        //   transition={{ duration: 0.5, ease: "easeOut" }}
-          <div className="h-screen fixed bg-transparent flex flex-col justify-between w-full uppercase "
-        >
-          <div className="h-2/3 sm:h-1/2 w-full text-largest"></div>
-          <div className="h-1/3 sm:h-1/2 w-full border-b">
-            <nav className="flex flex-col-reverse sm:flex-row justify-between sm:items-center w-full py-4">
+          <div className={`fixed bottom-0 ${isMainPage? "h-1/3 sm:h-1/2 ": ""} w-full border-b pointer-events-none`}>
+            <nav className="pointer-events-auto flex flex-col-reverse sm:flex-row justify-between sm:items-center w-full py-4">
               <motion.div
                 style={{ transformOrigin: "left top" }}
                 initial={{
@@ -87,6 +81,7 @@ const NavPage = () => {
                   y: pathname === "/" ? (isInsideViewport ? 0 : 50) : 0,
                 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-1/3"
               >
                 <h1
                   onClick={() => handleNavClick(logoText.path)}
@@ -96,7 +91,7 @@ const NavPage = () => {
                 </h1>
               </motion.div>
 
-              <div >
+              <div className="w-1/3" >
                 {navLinks2.map((link, index) => (
                   <button
                     key={index}
@@ -109,7 +104,7 @@ const NavPage = () => {
                   </button>
                 ))}
               </div>
-              <div>
+              <div className="w-1/3 flex justify-end">
                 {navLinks1.map((link, index) => (
                   <button
                     key={index}
@@ -124,7 +119,7 @@ const NavPage = () => {
               </div>
             </nav>
 
-            {pathname !== "/" && (
+            {(isMainPage && pathname !== "/") && (
               <div className="px-4 text-medium md:text-large lg:text-largest font-bold uppercase ">
                 {pathname
                   .replace("/", "")
@@ -133,8 +128,7 @@ const NavPage = () => {
               </div>
             )}
           </div>
-        </div>
-    // </AnimatePresence>
+      
   );
 };
 
