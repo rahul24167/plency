@@ -2,19 +2,25 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-   --font-helvetica: 'Helvetica, Arial, sans-serif';
-}
+  /* --foreground: #171717; */
+  --foreground: #595858;
+  --font-helvetica: 'Helvetica', 'Arial', 'sans-serif';
+  --primary: #595858;
+  --secondary: #D9D9D9;
 
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
   --font-helvetica: var(--font-helvetica)
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
   --text-largest: 5.0625rem;
-  --text-large: 3.25rem;
+  --text-large: 4.25rem;
+  --text-medium: 3.25rem;
   --text-small: 1.25rem;
   --text-smallest: 1.125rem;
 }
@@ -23,6 +29,8 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #D9D9D9;
+    --secondary: #595858;
   }
 }
 
@@ -30,4 +38,5 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-helvetica);
+  line-height: 1.25;
 }
