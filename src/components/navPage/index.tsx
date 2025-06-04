@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion,} from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import { navLinks1, navLinks2, logoText } from "./data";
 import useBreakpoint from "@/hooks/useBreakpoint";
@@ -21,9 +21,6 @@ const NavPage = () => {
     };
   }, []);
 
-  const [isExiting, setIsExiting] = useState(false);
-  const [nextPath, setNextPath] = useState("");
-
   useEffect(() => {
     const handlePointerEnter = () => {
       setIsInsideViewport(true);
@@ -39,21 +36,10 @@ const NavPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isExiting && nextPath) {
-      const timeout = setTimeout(() => {
-        router.push(nextPath);
-        setIsExiting(false);
-        setNextPath("");
-      }, 500);
-      return () => clearTimeout(timeout);
-    }
-  }, [isExiting, nextPath, router]);
 
   const handleNavClick = (path: string) => {
     if (path === pathname) return;
-    setIsExiting(true);
-    setNextPath(path);
+    router.push(path);
   };
 
   const getFont = () => {
@@ -74,18 +60,17 @@ const NavPage = () => {
   };
 
   return (
-    <AnimatePresence mode="wait">
-      {!isExiting && (
-        <motion.div
-          key={pathname} // Re-animate on path change
-          initial={{ y: "-100vh" }}
-          animate={{ y: 0 }}
-          exit={{ y: "100vh" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="h-screen fixed bg-transparent flex flex-col justify-between w-full uppercase "
+    // <AnimatePresence mode="wait">
+        // <motion.div
+        //   key={pathname} // Re-animate on path change
+        //   initial={{ y: "-100vh" }}
+        //   animate={{ y: 0 }}
+        //   exit={{ y: "100vh" }}
+        //   transition={{ duration: 0.5, ease: "easeOut" }}
+          <div className="h-screen fixed bg-transparent flex flex-col justify-between w-full uppercase "
         >
           <div className="h-2/3 sm:h-1/2 w-full text-largest"></div>
-          <div className="h-1/3 sm:h-1/2 w-full">
+          <div className="h-1/3 sm:h-1/2 w-full border-b">
             <nav className="flex flex-col-reverse sm:flex-row justify-between sm:items-center w-full py-4">
               <motion.div
                 style={{ transformOrigin: "left top" }}
@@ -101,7 +86,7 @@ const NavPage = () => {
                     pathname === "/" ? (isInsideViewport ? "1.25rem" : getFont()) : "1.25rem",
                   y: pathname === "/" ? (isInsideViewport ? 0 : 50) : 0,
                 }}
-                transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 <h1
                   onClick={() => handleNavClick(logoText.path)}
@@ -117,7 +102,7 @@ const NavPage = () => {
                     key={index}
                     onClick={() => handleNavClick(link.path)}
                     className={`px-5 py-2 font-small uppercase font-bold ${
-                      pathname === link.path ? "text-blue-500" : ""
+                      pathname === link.path ? "text-secondary" : ""
                     }`}
                   >
                     {link.title}
@@ -148,9 +133,8 @@ const NavPage = () => {
               </div>
             )}
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        </div>
+    // </AnimatePresence>
   );
 };
 
