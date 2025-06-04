@@ -93,7 +93,7 @@ const NavPage = () => {
         >
           <h1
             onClick={() => handleNavClick(logoText.path)}
-            className="pointer-events-auto px-5 font-bold"
+            className="pointer-events-auto w-fit bg-amber-400 px-5 font-bold"
           >
             {logoText.title}
           </h1>
