@@ -31,10 +31,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
-        
         <LayoutWrapper>
           <NavPage />
-          {children}
+            {children}
+      
         </LayoutWrapper>
       </body>
     </html>

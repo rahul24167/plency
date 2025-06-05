@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 //import Image from "next/image";
 
@@ -68,9 +69,12 @@ const Work = () => {
     <div className="h-screen w-full p-8 flex flex-row flex-wrap overflow-auto">
       {projects.map((project, index) => (
         <div key={index} className="w-1/2 p-5 h-[75vh] flex flex-col">
+          <Link href={`/project/${project.id}`} className="w-full border flex-grow" >
           <div onClick={()=>onClickProject(project.id)} className="w-full border flex-grow" ></div>
           {/* <Image src={project.image} alt={project.title} onClick={()=>onClickProject(project.id)} className="w-full h-48 object-cover mb-3" />
            */}
+          </Link>
+          
           <div className="w-full flex flex-row justify-between items-center px-2">
             <h2 className="text-xl font-bold">{project.title}</h2>
             <p className="text-gray-600">{project.brand}</p>
