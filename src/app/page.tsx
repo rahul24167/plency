@@ -12,7 +12,7 @@ export default function Home() {
     <motion.div
       className="h-screen"
       initial="initial"
-      whileHover="visible" // 👈 Triggers child animation on hover
+      whileHover="visible" 
     >
       <motion.div
         variants={childVariants}
