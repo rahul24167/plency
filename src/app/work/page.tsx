@@ -11,7 +11,7 @@ interface ProjectInfo {
   date: Date;
 }
 const Work = () => {
-  const router = useRouter();
+ 
   const projects: ProjectInfo[] = [
     {
       id: "abc1",
@@ -62,30 +62,24 @@ const Work = () => {
       date: new Date("2023-02-01"),
     },
   ];
-  const onClickProject = (id: string) => {
-    router.push(`/project/${id}`);
-  };
+  
   return (
     
-    <div className=" bg-[url('/bgGradient.png')] bg-cover w-full  flex flex-row flex-wrap ">
+    <div className=" bg-[url('/bgGradient.png')] bg-cover w-full p-4 flex flex-row flex-wrap ">
       {projects.map((project, index) => (
         <div key={index} className="w-1/2 p-5 h-[75vh] flex flex-col">
           <Link
             href={`/project/${project.id}`}
-            className="w-full border flex-grow"
+            className="w-full border flex-grow bg-gray-500"
           >
-            <div
-              onClick={() => onClickProject(project.id)}
-              className="w-full border flex-grow"
-            ></div>
+            
             {/* <Image src={project.image} alt={project.title} onClick={()=>onClickProject(project.id)} className="w-full h-48 object-cover mb-3" />
              */}
           </Link>
 
-          <div className="w-full flex flex-row justify-between items-center px-2">
-            <h2 className="text-xl font-bold">{project.title}</h2>
-            <p className="text-gray-600">{project.brand}</p>
-            <p className="text-gray-400">{project.date.toLocaleDateString()}</p>
+          <div className="w-full flex flex-row justify-start items-center px-2">
+            <h2 className="w-1/3 uppercase font-bold">{project.title}</h2>
+            <p className="w-1/3 uppercase font-bold">{project.brand}</p>
           </div>
         </div>
       ))}
