@@ -16,7 +16,7 @@ export default function LayoutWrapper({
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="relative h-screen"
+        className="relative h-screen overflow-hidden"
       >
         {children}
       </motion.div>
