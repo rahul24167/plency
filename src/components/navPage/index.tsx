@@ -44,7 +44,7 @@ export default  function NavPage() {
       </nav>
 
       {isMainPage && pathname !== "/" && (
-        <div className="pointer-events-none px-4 text-medium md:text-large lg:text-largest font-bold uppercase">
+        <div className="pointer-events-none px-4 text-tertiary text-medium md:text-large lg:text-largest font-bold uppercase">
           {pathname
             .replace("/", "")
             .replace(/-/g, " ")

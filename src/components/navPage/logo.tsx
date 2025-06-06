@@ -59,6 +59,7 @@ const Logo = () => {
         fontSize: PageLoaded && pathname === "/" ? getFont() : "1.25rem",
         x: 0,
         y: pathname === "/" ? 50 : 0,
+        color: pathname === "/" ? "#FAFAFC" : "#E42626",
       }}
       animate={{
         opacity: pathname === "/" && isInsideViewport ? 1 : 1,
@@ -69,8 +70,9 @@ const Logo = () => {
               : getFont()
             : "1.25rem",
         y: pathname === "/" ? (isInsideViewport ? 0 : 50) : 0,
+        color: pathname === "/" ? (isInsideViewport ? "#E42626":"#FAFAFC") : "#E42626",
       }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{delay:0.2, duration: 0.5, ease: "easeInOut" }}
       className="pointer-events-none w-1/3"
     >
       <h1 className="pointer-events-auto w-fit px-5 font-bold uppercase">

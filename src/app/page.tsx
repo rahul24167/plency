@@ -6,11 +6,21 @@ const childVariants: Variants = {
   initial: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 },
 };
+const parentVariants: Variants = {
+  initial: { backgroundPositionY: "50%" },
+  visible: { backgroundPositionY: "0%" },
+};
 export default function Home() {
 
   return (
     <motion.div
-      className="h-screen"
+      variants={parentVariants}
+      style={{
+         backgroundPositionX: "center", // Lock X so only Y moves
+        backgroundPositionY: "50%", // fallback
+      }}
+      transition={{delay:0.2, duration: 0.5, ease: "easeInOut" }}
+      className="h-screen w-full bg-[url('/bgGradient.png')] bg-no-repeat"
       initial="initial"
       whileHover="visible" 
     >

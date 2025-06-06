@@ -15,9 +15,8 @@ export default function LayoutWrapper({
         key={pathname}
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
-        exit={{ y: "100vh" }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="relative"
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="relative h-screen"
       >
         {children}
       </motion.div>
