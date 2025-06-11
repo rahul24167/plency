@@ -5,6 +5,7 @@ import "./globals.css";
 import LayoutWrapper from "./LayoutWrapper";
 //components
 import NavPage from "@/components/navPage";
+import CustomCursor from "@/components/customCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
+        <CustomCursor /> 
         <LayoutWrapper>
           <NavPage />
             {children}
