@@ -63,7 +63,7 @@ const Work = () => {
   
   return (
     
-    <div className=" bg-[url('/bgGradient.png')] bg-cover w-full p-4 flex flex-row flex-wrap ">
+    <div className="bg-cover w-full p-4 flex flex-row flex-wrap ">
       {projects.map((project, index) => (
         <div key={index} className="w-1/2 p-5 h-[75vh] flex flex-col">
           <Link

@@ -1,21 +1,48 @@
 "use client";
 import Link from "next/link";
 import Logo from "./logo";
+import { motion , AnimatePresence} from "motion/react";
 import { navLinks1, navLinks2 } from "./data";
-import { usePathname } from "next/navigation";
+import { usePathname} from "next/navigation";
+import { useState } from "react";
 
 
-export default  function NavPage() {
+
+export default function NavPage() {
   const pathname = usePathname();
-
-  const mainPages = ["/", "/work", "/about", "/contact", "/career", "/playground"];
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  const mainPages = [
+    "/",
+    "/work",
+    "/about",
+    "/contact",
+    "/career",
+    "/playground",
+  ];
+  
+  
   const isMainPage = mainPages.includes(pathname);
 
   return (
-    <div className={`fixed bottom-0 ${isMainPage ? "h-1/3 sm:h-1/2" : ""} w-full border-b pointer-events-none`}>
-      <nav className="pointer-events-none flex flex-col-reverse sm:flex-row justify-between sm:items-center w-full py-4">
-        <Logo />
-        <div className="pointer-events-none w-1/3">
+    <div
+      className={`fixed top-0 md:top-auto md:bottom-0 ${
+        isMainPage ? "md:h-1/2" : ""
+      } w-full md:border-b pointer-events-none`}
+    >
+      <nav className="pointer-events-none flex flex-col md:flex-row justify-between md:items-center w-full py-4">
+        <div className="w-full md:w-1/3 flex justify-between">
+          <Logo />
+          <button
+            onClick={handleMenuClick}
+            className="flex md:hidden pointer-events-auto mx-5 font-medium"
+          >
+            {isMenuOpen ? "CLOSE" : "MENU"}
+          </button>
+        </div>
+        <div className={`hidden md:flex pointer-events-none w-1/3`}>
           {navLinks2.map((link, index) => (
             <Link
               key={index}
@@ -28,7 +55,7 @@ export default  function NavPage() {
             </Link>
           ))}
         </div>
-        <div className="pointer-events-none w-1/3 flex justify-end">
+        <div className={`hidden md:flex pointer-events-none w-1/3 justify-end`}>
           {navLinks1.map((link, index) => (
             <Link
               key={index}
@@ -44,14 +71,49 @@ export default  function NavPage() {
       </nav>
 
       {isMainPage && pathname !== "/" && (
-        <div className="pointer-events-none px-4 text-tertiary text-medium md:text-large lg:text-largest font-bold uppercase">
+        <div className="pointer-events-none px-4 text-medium md:text-large lg:text-largest font-bold uppercase">
           {pathname
             .replace("/", "")
             .replace(/-/g, " ")
             .replace(/\b\w/g, (l) => l.toUpperCase())}
         </div>
       )}
+
+        {/* Animated Menu Modal */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="pointer-events-auto fixed top-16 bottom-0 flex flex-col gap-5 w-full bg-tertiary bg-opacity-80"
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <div className="flex flex-col text-small font-bold uppercase px-5">
+              {navLinks2.map((link, index) => (
+                <Link 
+                  key={index} 
+                  href={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.title}
+                </Link>
+              ))}
+            </div>
+            <div className="flex flex-col text-small font-bold uppercase px-5">
+              {navLinks1.map((link, index) => (
+                <Link 
+                  key={index} 
+                  href={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.title}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
-

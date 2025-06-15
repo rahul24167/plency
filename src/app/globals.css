@@ -4,8 +4,8 @@
   --background: transparent;
   /* --foreground: #171717;  */
   --font-helvetica: 'Helvetica', 'Arial', 'sans-serif';
-  --primary: #E42626;
-  --secondary: #040405;
+  --secondary: #E42626;
+  --primary: #040405;
   --tertiary: #FAFAFC;
 
 }
@@ -37,7 +37,8 @@
 } */
 
 body {
-  background:url('/bgGradient.png');
+  /* background:url('/bgGradient.png'); */
+  background: var(--tertiary);
   color: var(--primary);
   font-family: var(--font-helvetica);
   line-height: 1.25;

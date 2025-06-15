@@ -10,16 +10,19 @@ export default function LayoutWrapper({
 }>){
     const pathname = usePathname();
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       <motion.div
         key={pathname}
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        exit={{ y: "100vh",
+                opacity: 0,
+         }}
+        transition={{ delay:0,duration: 1, ease: "easeInOut" }}
         className="h-screen overflow-auto"
       >
         {children}
       </motion.div>
-      </AnimatePresence>
+    </AnimatePresence>
   )
 }

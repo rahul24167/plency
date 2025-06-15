@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Readex_Pro } from "next/font/google";
 import "./globals.css";
 
 import LayoutWrapper from "./LayoutWrapper";
 //components
 import NavPage from "@/components/navPage";
 import CustomCursor from "@/components/customCursor";
+
+const readexPro = Readex_Pro({
+  variable: "--font-readex-pro",
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,12 +38,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${readexPro.variable} antialiased relative min-h-screen`}
       >
         <CustomCursor /> 
         <LayoutWrapper>
           <NavPage />
-            {children}
+          <div className="w-full h-16 md:hidden bg-transparent"></div>
+          {children}
       
         </LayoutWrapper>
       </body>

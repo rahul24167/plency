@@ -25,7 +25,7 @@ export default async function Project({
       "Superdry challenges us to create a dynamic campaign for their new collection launch in collaboration with Parmish Verma. The campaign should capture the energy of the partnership and engage the target audience effectively.",
   };
   return (
-    <div className="bg-[url('/bgGradient.png')] bg-cover py-8">
+    <div className="bg-cover py-8">
       <div className="mx-4 flex flex-wrap w-full gap-2">
         <div className=" w-full h-[90vh] text-tertiary font-bold uppercase border flex flex-col justify-end pb-1/4">
           <h1 className="text-largest">{projectInfo.title}</h1>

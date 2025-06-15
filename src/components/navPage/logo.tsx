@@ -5,9 +5,10 @@ import useBreakpoint from "@/hooks/useBreakpoint";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { logoText } from "./data";
+
 const Logo = () => {
   const pathname = usePathname();
-    const breakpoint = useBreakpoint();
+  const breakpoint = useBreakpoint();
 
   const [isInsideViewport, setIsInsideViewport] = useState(true);
   const [PageLoaded, setPageLoaded] = useState(false);
@@ -21,6 +22,7 @@ const Logo = () => {
       window.removeEventListener("load", handleLoad);
     };
   }, []);
+
   useEffect(() => {
     const handlePointerEnter = () => {
       setIsInsideViewport(true);
@@ -35,48 +37,62 @@ const Logo = () => {
       document.body.removeEventListener("pointerleave", handlePointerLeave);
     };
   }, []);
-  const getFont = () => {
-    if (pathname !== "/") return 1;
+
+  const shouldAnimate = () => {
+    return ["md", "lg", "xl", "2xl"].includes(breakpoint);
+  };
+
+  const getScale = () => {
+    if (pathname !== "/" || !shouldAnimate()) return 1;
     if (isInsideViewport) return 1;
 
-    // Scale based on breakpoints when not in viewport
-    switch (breakpoint) {
-      case "2xl":
-      case "xl":
-      case "lg":
-        return "5.0625rem";
-      case "md":
-        return "4.25rem";
-      default:
-        return "3.25rem";
-    }
+    return 4.5;
   };
+
+  const initialProps = shouldAnimate()
+    ? {
+        scale: PageLoaded && pathname === "/" ? getScale() : 1,
+        y: pathname === "/" ? 50 : 0,
+        color: pathname === "/" ? "#FAFAFC" : "#E42626",
+      }
+    : {
+        scale: 1,
+        y: 0,
+        color:"#E42626"
+      };
+
+  const animateProps = shouldAnimate()
+    ? {
+        scale:
+          pathname === "/"
+            ? isInsideViewport
+              ? 1
+              : getScale()
+            : 1,
+        y: pathname === "/" ? (isInsideViewport ? 0 : 50) : 0,
+        color:
+          pathname === "/"
+            ? isInsideViewport
+              ? "#E42626"
+              : "#FAFAFC"
+            : "#E42626",
+      }
+    : {
+        scale: 1,
+        y: 0,
+        color:"#E42626"
+      };
+
   return (
     <motion.div
       style={{ transformOrigin: "left top" }}
-      initial={{
-        opacity: 1,
-        fontSize: PageLoaded && pathname === "/" ? getFont() : "1.25rem",
-        x: 0,
-        y: pathname === "/" ? 50 : 0,
-        color: pathname === "/" ? "#FAFAFC" : "#E42626",
-      }}
-      animate={{
-        opacity: pathname === "/" && isInsideViewport ? 1 : 1,
-        fontSize:
-          pathname === "/"
-            ? isInsideViewport
-              ? "1.25rem"
-              : getFont()
-            : "1.25rem",
-        y: pathname === "/" ? (isInsideViewport ? 0 : 50) : 0,
-        color: pathname === "/" ? (isInsideViewport ? "#E42626":"#FAFAFC") : "#E42626",
-      }}
-      transition={{delay:0.2, duration: 0.5, ease: "easeInOut" }}
-      className="pointer-events-none w-1/3"
+      initial={initialProps}
+      animate={animateProps}
+      
+      transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
+      className="pointer-events-none w-1/3 mx-5"
     >
-      <h1 className="pointer-events-auto w-fit px-5 font-bold uppercase">
-        {" "}
+      <h1 className="pointer-events-auto w-fit font-bold uppercase">
         <Link href={logoText.path} className="pointer-events-auto">
           {logoText.title}
         </Link>
@@ -86,3 +102,4 @@ const Logo = () => {
 };
 
 export default Logo;
+

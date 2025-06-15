@@ -14,16 +14,16 @@ export default function Home() {
   return (
     <motion.div
       variants={parentVariants}
-      style={{
-        backgroundPositionX: "center", // Lock X so only Y moves
-        backgroundPositionY: "50%", // fallback
-      }}
+      // style={{
+      //   backgroundPositionX: "center", // Lock X so only Y moves
+      //   backgroundPositionY: "50%", // fallback
+      // }}
       transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
-      className="h-screen w-full bg-[url('/bgGradient.png')] bg-no-repeat"
+      className="h-screen w-full bg-no-repeat"
       initial="initial"
       whileHover="visible"
     >
-      <div className="flex flex-wrap px-5 pt-6 w-full">
+      <div className="flex flex-wrap px-4 pt-6 w-full">
         {subHeadingArray.map((word, index) => (
           <span key={index} className="overflow-hidden inline-block">
             <motion.span
