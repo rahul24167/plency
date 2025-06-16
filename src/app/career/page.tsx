@@ -14,11 +14,12 @@ const Career = () => {
     description: "Find freelance projects that match your skills and interests."
   }]
   return (
-    <div  className="min-h-screen p-10" >
-      <div className="h-1/2 w-full flex flex-row justify-center items-center">
-        <div className="pl-[32rem] pr-56">
+    <div  className="min-h-screen" >
+      <div className="px-5 md:hidden text-largest font-bold">CAREER</div>
+      <div className="w-full flex flex-row justify-end items-center">
+        <div className="md:w-2/3">
         {careerWithUs.map((item, index) => (
-          <div key={index} className="w-full flex flex-row p-5">
+          <div key={index} className="w-full flex flex-col md:flex-row p-5">
             <div className="w-1/4 uppercase font-normal">{item.title}</div>
             <div className="w-3/4">{item.description}</div>
           </div>
