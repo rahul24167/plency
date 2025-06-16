@@ -19,12 +19,13 @@ const About = () => {
   }]
   return (
     <div  className="min-h-screen" >
-      <div className="h-1/2 w-full flex flex-row justify-end items-center">
-        <div className="w-2/3">
+      <div className="px-5 md:hidden text-largest font-bold">ABOUT</div>
+      <div className="w-full flex flex-row justify-end items-center">
+        <div className="md:w-2/3">
         {aboutUs.map((item, index) => (
-          <div key={index} className="w-full flex flex-row p-5">
-            <div className="w-1/4 uppercase font-normal">{item.title}</div>
-            <div className="w-3/4"><b>{item.openingLine}</b>{" "}{item.description}</div>
+          <div key={index} className="w-full flex flex-col md:flex-row p-5">
+            <div className="md:w-1/4 uppercase font-normal">{item.title}</div>
+            <div className="md:w-3/4"><b>{item.openingLine}</b>{" "}{item.description}</div>
           </div>
         ))}
         </div>

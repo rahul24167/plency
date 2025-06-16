@@ -37,7 +37,7 @@ export default function NavPage() {
           <Logo />
           <button
             onClick={handleMenuClick}
-            className="flex md:hidden pointer-events-auto mx-5 font-medium"
+            className="flex md:hidden pointer-events-auto mx-5 font-bold uppercase"
           >
             {isMenuOpen ? "CLOSE" : "MENU"}
           </button>
@@ -71,7 +71,7 @@ export default function NavPage() {
       </nav>
 
       {isMainPage && pathname !== "/" && (
-        <div className="pointer-events-none px-4 text-medium md:text-large lg:text-largest font-bold uppercase">
+        <div className="pointer-events-none hidden md:flex px-4 text-medium md:text-large lg:text-largest font-bold uppercase">
           {pathname
             .replace("/", "")
             .replace(/-/g, " ")
@@ -89,7 +89,7 @@ export default function NavPage() {
             exit={{ y: "-100%" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <div className="flex flex-col text-small font-bold uppercase px-5">
+            <div className="flex flex-col text-largest font-bold uppercase px-5">
               {navLinks2.map((link, index) => (
                 <Link 
                   key={index} 
@@ -100,7 +100,7 @@ export default function NavPage() {
                 </Link>
               ))}
             </div>
-            <div className="flex flex-col text-small font-bold uppercase px-5">
+            <div className="flex flex-col text-largest font-bold uppercase px-5">
               {navLinks1.map((link, index) => (
                 <Link 
                   key={index} 

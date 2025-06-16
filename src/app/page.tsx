@@ -1,5 +1,6 @@
 import { Variants } from "motion/react";
 import * as motion from "motion/react-client";
+
 const subHeading: string = "BUILDING BRIDGES BETWEEN BRANDS AND PEOPLE.";
 const childVariants: Variants = {
   initial: { y: "100%" },
@@ -33,10 +34,15 @@ export default function Home() {
                 duration: 0.5,
                 ease: "easeInOut",
               }}
-              className="text-medium md:text-large lg:text-largest font-bold inline-block"
+              className="hidden md:inline-block text-medium md:text-large lg:text-largest font-bold"
             >
               {word}&nbsp;
             </motion.span>
+            <span
+              className="md:hidden inline-block text-medium md:text-large lg:text-largest font-bold"
+            >
+              {word}&nbsp;
+            </span>
           </span>
         ))}
       </div>

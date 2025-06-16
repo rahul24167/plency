@@ -63,9 +63,11 @@ const Work = () => {
   
   return (
     
-    <div className="bg-cover w-full p-4 flex flex-row flex-wrap ">
-      {projects.map((project, index) => (
-        <div key={index} className="w-1/2 p-5 h-[75vh] flex flex-col">
+    <div className="bg-cover w-full flex flex-row flex-wrap  ">
+      <div className="px-5 md:hidden text-largest font-bold">WORK</div>
+      <div className="flex flex-row flex-wrap w-full ">
+        {projects.map((project, index) => (
+        <div key={index} className="w-full md:w-1/2 h-[75vh] p-5 flex flex-col">
           <Link
             href={`/project/${project.id}`}
             className="w-full border flex-grow bg-gray-500"
@@ -81,6 +83,7 @@ const Work = () => {
           </div>
         </div>
       ))}
+      </div>
     </div>
   );
 };
