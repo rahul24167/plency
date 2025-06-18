@@ -32,7 +32,7 @@ export default function NavPage() {
         isMainPage ? "md:h-1/2" : ""
       } w-full md:border-b pointer-events-none`}
     >
-      <nav className="pointer-events-none flex flex-col md:flex-row justify-between md:items-center w-full py-4">
+      <nav className="pointer-events-none flex flex-col md:flex-row justify-between md:items-end py-5 w-full ">
         <div className="w-full md:w-1/3 flex justify-between">
           <Logo />
           <button
@@ -47,7 +47,7 @@ export default function NavPage() {
             <Link
               key={index}
               href={link.path}
-              className={`pointer-events-auto px-5 py-2 font-small uppercase font-bold ${
+              className={`pointer-events-auto px-5 font-small uppercase font-bold ${
                 pathname === link.path ? "text-secondary" : ""
               }`}
             >

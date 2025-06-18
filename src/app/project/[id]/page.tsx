@@ -1,4 +1,5 @@
-
+import * as motion from "motion/react-client";
+import { InfiniteMovingCards } from "@/components/infiniteScroll";
 
 export default async function Project({
   params,
@@ -8,48 +9,73 @@ export default async function Project({
   const { id } = await params;
   const projectInfo = {
     id: id,
+    heroImage: "/image.png",
     images: [
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "/image.png",
+      "/image1.png",
+      "/image.png",
+      "/image1.png",
+      "/image.png",
+      "/image1.png",
+      "/image.png",
+      "/image1.png",
+      "/image.png",
     ],
-    title: "Project Title",
-    client: "Client Name",
-    brand: "Amazing Brand",
-    description: "About the brand",
-    service: "Service Provided",
-    services:
-      "Superdry challenges us to create a dynamic campaign for their new collection launch in collaboration with Parmish Verma. The campaign should capture the energy of the partnership and engage the target audience effectively.",
+    info: {
+      title: "Project Title",
+      client: "Client Name",
+      brand: "Amazing Brand",
+      description: "About the brand",
+      service: "Service Provided",
+      services:
+        "Superdry challenges us to create a dynamic campaign for their new collection launch in collaboration with Parmish Verma. The campaign should capture the energy of the partnership and engage the target audience effectively.",
+    },
   };
   return (
-    <div className="bg-cover py-8">
-      <div className="mx-4 flex flex-wrap w-full gap-2">
-        <div className=" w-full h-[90vh] text-tertiary font-bold uppercase border flex flex-col justify-end pb-1/4">
-          <h1 className="text-largest">{projectInfo.title}</h1>
-          <h1 className="text-largest">{projectInfo.brand}</h1>
-          <h3 className="text-medium">{projectInfo.service}</h3>
-        </div>
-        <div className="w-[calc(50%-4px)] h-[60vh] border"></div>
-        <div className="w-[calc(50%-4px)] h-[60vh] border"></div>
-        <div className="w-full h-[50vh] border"></div>
-        <div className="w-full h-[90vh] border"></div>
-        <div className="w-[calc(50%-4px)] h-screen border"></div>
-        <div className="w-[calc(50%-4px)] h-screen border"></div>
-      </div>
+    <div className="bg-cover p-5">
+      <img
+        src={projectInfo.heroImage}
+        className="w-full object-cover pb-5"
+        alt=""
+      />
 
-      <div className="w-full border flex justify-center">
-        <div className="w-1/3 px-5">
-        <div>
-          <span></span>
-          <span></span>
-        </div>
-        
+      <div className="w-full flex flex-row justify-end items-center">
+        <div className="md:w-2/3">
+          {Object.entries(projectInfo.info).map(([key, value], index) => (
+            <div key={index} className="w-full flex flex-col md:flex-row p-5">
+              <div className="md:w-1/4 uppercase font-normal">{key}</div>
+              <div className="md:w-3/4">{value}</div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="w-full h-[30vh]"></div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: 0.75,
+          type: "spring",
+          damping: 10,
+          stiffness: 100,
+        }}
+        className="relative mx-auto flex w-full flex-col items-center justify-center overflow-hidden antialiased"
+      >
+        <InfiniteMovingCards items={projectInfo.images} />
+      </motion.div>
+
+      {/* video */}
+      <img
+        src={projectInfo.heroImage}
+        className="w-full object-cover pb-5"
+        alt=""
+      />
+      <div className="hidden md:flex fixed bottom-0 md:w-1/3 flex-col justify-end items-end p-5 font-medium uppercase">
+        <div className="h-full flex flex-col justify-end items-start">
+          <span>{projectInfo.info.client}</span>
+          <span className="">{projectInfo.info.title}</span>
+        </div>
+      </div>
     </div>
   );
 }
