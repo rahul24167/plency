@@ -20,6 +20,7 @@ export default function LayoutWrapper({
          }}
         transition={{ delay:0,duration: 1, ease: "easeInOut" }}
         className="h-screen overflow-auto"
+        style={{ y: "-100vh" }}
       >
         {children}
       </motion.div>

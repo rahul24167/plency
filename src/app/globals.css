@@ -66,3 +66,10 @@ body {
   color: var(--primary);
   line-height: 1.25;
 }
+html, body {
+
+  height: 100%;
+
+  overflow: hidden;
+
+}

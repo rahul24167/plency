@@ -6,8 +6,6 @@ import { navLinks1, navLinks2 } from "./data";
 import { usePathname} from "next/navigation";
 import { useState } from "react";
 
-
-
 export default function NavPage() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

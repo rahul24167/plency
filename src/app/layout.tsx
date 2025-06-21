@@ -5,8 +5,8 @@ import "./globals.css";
 
 import LayoutWrapper from "./LayoutWrapper";
 //components
-import NavPage from "@/components/navPage";
-import CustomCursor from "@/components/customCursor";
+import NavPage from "@/app/components/navPage";
+import CustomCursor from "@/app/components/customCursor";
 
 const readexPro = Readex_Pro({
   variable: "--font-readex-pro",
@@ -38,15 +38,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${readexPro.variable} antialiased relative min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${readexPro.variable} antialiased `}
       >
         <CustomCursor /> 
-        <LayoutWrapper>
-          <NavPage />
-          <div className="w-full h-16 md:hidden bg-transparent"></div>
-          {children}
-      
-        </LayoutWrapper>
+          <LayoutWrapper>
+            <NavPage />
+            <div className="w-full h-16 md:hidden bg-transparent"></div>
+            {children}
+          </LayoutWrapper>
       </body>
     </html>
   );

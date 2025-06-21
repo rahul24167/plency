@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import useBreakpoint from "@/hooks/useBreakpoint";
+import useBreakpoint from "@/app/hooks/useBreakpoint";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { logoText } from "./data";
