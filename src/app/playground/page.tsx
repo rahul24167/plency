@@ -1,28 +1,37 @@
-import * as motion from "motion/react-client"
 const Playground = () => {
-  const items = Array.from({ length: 10 }).map((_, i) => (
-    <span key={i} className="mx-6">
-      COMING SOON
-    </span>
-  ));
+  const experiments=[
+    {
+      id: 1,
+      name: "Project Title A",
+    },
+    
+    {
+      id: 2,
+      name: "Project Title B",
+    },
+    {
+      id: 3,
+      name: "Project Title C",
+    },
+
+
+  ]
+  
   return (
     
 
-    <div className="h-1/2 w-full flex flex-col flex-wrap justify-end">
-     <div className="relative overflow-hidden h-[10vh] bg-primary text-tertiary flex items-center">
-      <motion.div
-        className="absolute whitespace-nowrap text-xl font-bold"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      >
-        {items}
-        {items}
-      </motion.div>
-    </div>
+    <div className="w-full flex flex-col justify-end items-end">
+      <div className="md:w-1/3 flex flex-col justify-start">
+      {experiments.map((experiment) => (
+        <div key={experiment.id} className="w-full flex flex-col md:flex-row p-5">
+          <div>{experiment.name}</div>
+        </div>
+      ))}
+
+
+      </div>
+     
+     
     </div> 
   )
 }

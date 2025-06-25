@@ -1,29 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Readex_Pro } from "next/font/google";
+import localFont from 'next/font/local';
+//import { Readex_Pro } from "next/font/google";
 import "./globals.css";
 
 import LayoutWrapper from "./LayoutWrapper";
 //components
 import NavPage from "@/app/components/navPage";
-import CustomCursor from "@/app/components/customCursor";
-
-const readexPro = Readex_Pro({
-  variable: "--font-readex-pro",
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+const readexPro = localFont({
   display: 'swap',
-})
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  src: [
+    {
+      path: "../../public/fonts/ReadexPro-VariableFont_HEXP,wght.ttf",
+    },
+  ],
+  variable: '--font-readex-pro',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const readexPro = Readex_Pro({
+//   variable: "--font-readex-pro",
+//   subsets: ['latin'],
+//   weight: ['400', '500', '600', '700'],
+//   display: 'swap',
+// })
 
 export const metadata: Metadata = {
   title: "Plenly",
@@ -38,10 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${readexPro.variable} antialiased `}
+        className={`${readexPro.variable} antialiased `}
       >
-        <CustomCursor /> 
+       
           <LayoutWrapper>
+           
             <NavPage />
             <div className="w-full h-16 md:hidden bg-transparent"></div>
             {children}
@@ -50,3 +49,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -18,7 +18,7 @@ const About = () => {
     description: "Our clients range from startups to Fortune 500 companies, and we pride ourselves on delivering exceptional results."
   }]
   return (
-    <div  className="min-h-screen" >
+    <div  className="min-h-screen bg-transparent" >
       <div className="px-5 md:hidden text-largest font-bold">ABOUT</div>
       <div className="w-full flex flex-row justify-end items-center">
         <div className="md:w-2/3">

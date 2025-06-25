@@ -53,7 +53,7 @@ const Logo = () => {
     ? {
         scale: PageLoaded && pathname === "/" ? getScale() : 1,
         y: pathname === "/" ? 50 : 0,
-        color: pathname === "/" ? "#FAFAFC" : "#E42626",
+        color:"#E42626"
       }
     : {
         scale: 1,
@@ -70,12 +70,7 @@ const Logo = () => {
               : getScale()
             : 1,
         y: pathname === "/" ? (isInsideViewport ? 0 : 50) : 0,
-        color:
-          pathname === "/"
-            ? isInsideViewport
-              ? "#E42626"
-              : "#FAFAFC"
-            : "#E42626",
+        color:"#E42626"
       }
     : {
         scale: 1,

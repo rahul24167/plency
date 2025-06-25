@@ -69,7 +69,7 @@ const Work = () => {
         {projects.map((project, index) => (
         <div key={index} className="w-full md:w-1/2 h-[75vh] p-5 flex flex-col">
           <Link
-            href={`/project/${project.id}`}
+            href={`/work/${project.id}`}
             className="w-full border flex-grow bg-gray-500"
           >
             
