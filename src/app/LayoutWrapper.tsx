@@ -1,7 +1,7 @@
 "use client";
 import {motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
-import CustomCursor from "@/app/components/customCursor";
+import CustomCursor from "@/src/app/components/customCursor";
 
 export default function LayoutWrapper({
   children,

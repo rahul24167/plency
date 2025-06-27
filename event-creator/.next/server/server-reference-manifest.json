@@ -1,5 +1,28 @@
 {
-  "node": {},
+  "node": {
+    "409eb053f350321955e86249e3ca3f87512ab28fd3": {
+      "workers": {
+        "app/login/page": {
+          "moduleId": "[project]/event-creator/.next-internal/server/app/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/event-creator/src/app/login/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/login/page": "rsc"
+      }
+    },
+    "40d13d7c75099d1cfea115fb8e937c143f403c1cde": {
+      "workers": {
+        "app/login/page": {
+          "moduleId": "[project]/event-creator/.next-internal/server/app/login/page/actions.js { ACTIONS_MODULE0 => \"[project]/event-creator/src/app/login/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/login/page": "rsc"
+      }
+    }
+  },
   "edge": {},
   "encryptionKey": "qDx7fPK9LLtMqaS0xXN+FVIXzgcAICoHa6Zs8+ZZUv4="
 }

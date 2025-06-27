@@ -17,7 +17,9 @@ datasource db {
 
 model Project {
   id          String          @id @default(uuid())
+  client      String
   title       String
+  service     String
   description String?
   createdAt   DateTime        @default(now())
   images      ProjectImage[]

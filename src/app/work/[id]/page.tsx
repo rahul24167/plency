@@ -1,5 +1,5 @@
 import * as motion from "motion/react-client";
-import { InfiniteMovingCards } from "@/app/components/infiniteScroll";
+import { InfiniteMovingCards } from "@/src/app/components/infiniteScroll";
 
 export default async function Project({
   params,
