@@ -60,7 +60,7 @@
 
 
 
-import { login, signup } from './actions'
+import { login } from './actions'
 
 export default function LoginPage() {
   return (
@@ -101,13 +101,13 @@ export default function LoginPage() {
       >
         Log in
       </button>
-      <button
+      {/* <button
         type="submit"
         formAction={signup}
         className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
       >
         Sign up
-      </button>
+      </button> */}
     </div>
   </form>
 </div>

@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${readexPro.variable} antialiased`}
+        className={`${readexPro.variable} antialiased overflow-scroll`}
       >
         {children}
       </body>

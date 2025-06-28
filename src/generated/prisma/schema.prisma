@@ -9,6 +9,11 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
+generator client_for_event_creator {
+  provider = "prisma-client-js"
+  output   = "../event-creator/src/generated/prisma"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
