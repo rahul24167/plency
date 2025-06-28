@@ -1002,28 +1002,31 @@ export namespace Prisma {
 
   export type ProjectMinAggregateOutputType = {
     id: string | null
-    client: string | null
     title: string | null
+    client: string | null
     service: string | null
     description: string | null
+    heroImage: string | null
     createdAt: Date | null
   }
 
   export type ProjectMaxAggregateOutputType = {
     id: string | null
-    client: string | null
     title: string | null
+    client: string | null
     service: string | null
     description: string | null
+    heroImage: string | null
     createdAt: Date | null
   }
 
   export type ProjectCountAggregateOutputType = {
     id: number
-    client: number
     title: number
+    client: number
     service: number
     description: number
+    heroImage: number
     createdAt: number
     _all: number
   }
@@ -1031,28 +1034,31 @@ export namespace Prisma {
 
   export type ProjectMinAggregateInputType = {
     id?: true
-    client?: true
     title?: true
+    client?: true
     service?: true
     description?: true
+    heroImage?: true
     createdAt?: true
   }
 
   export type ProjectMaxAggregateInputType = {
     id?: true
-    client?: true
     title?: true
+    client?: true
     service?: true
     description?: true
+    heroImage?: true
     createdAt?: true
   }
 
   export type ProjectCountAggregateInputType = {
     id?: true
-    client?: true
     title?: true
+    client?: true
     service?: true
     description?: true
+    heroImage?: true
     createdAt?: true
     _all?: true
   }
@@ -1131,10 +1137,11 @@ export namespace Prisma {
 
   export type ProjectGroupByOutputType = {
     id: string
-    client: string
     title: string
+    client: string
     service: string
     description: string | null
+    heroImage: string
     createdAt: Date
     _count: ProjectCountAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
@@ -1157,10 +1164,11 @@ export namespace Prisma {
 
   export type ProjectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client?: boolean
     title?: boolean
+    client?: boolean
     service?: boolean
     description?: boolean
+    heroImage?: boolean
     createdAt?: boolean
     images?: boolean | Project$imagesArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -1168,32 +1176,35 @@ export namespace Prisma {
 
   export type ProjectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client?: boolean
     title?: boolean
+    client?: boolean
     service?: boolean
     description?: boolean
+    heroImage?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    client?: boolean
     title?: boolean
+    client?: boolean
     service?: boolean
     description?: boolean
+    heroImage?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectScalar = {
     id?: boolean
-    client?: boolean
     title?: boolean
+    client?: boolean
     service?: boolean
     description?: boolean
+    heroImage?: boolean
     createdAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client" | "title" | "service" | "description" | "createdAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "client" | "service" | "description" | "heroImage" | "createdAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | Project$imagesArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -1208,10 +1219,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      client: string
       title: string
+      client: string
       service: string
       description: string | null
+      heroImage: string
       createdAt: Date
     }, ExtArgs["result"]["project"]>
     composites: {}
@@ -1638,10 +1650,11 @@ export namespace Prisma {
    */
   interface ProjectFieldRefs {
     readonly id: FieldRef<"Project", 'String'>
-    readonly client: FieldRef<"Project", 'String'>
     readonly title: FieldRef<"Project", 'String'>
+    readonly client: FieldRef<"Project", 'String'>
     readonly service: FieldRef<"Project", 'String'>
     readonly description: FieldRef<"Project", 'String'>
+    readonly heroImage: FieldRef<"Project", 'String'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
   }
     
@@ -3249,10 +3262,11 @@ export namespace Prisma {
 
   export const ProjectScalarFieldEnum: {
     id: 'id',
-    client: 'client',
     title: 'title',
+    client: 'client',
     service: 'service',
     description: 'description',
+    heroImage: 'heroImage',
     createdAt: 'createdAt'
   };
 
@@ -3367,20 +3381,22 @@ export namespace Prisma {
     OR?: ProjectWhereInput[]
     NOT?: ProjectWhereInput | ProjectWhereInput[]
     id?: StringFilter<"Project"> | string
-    client?: StringFilter<"Project"> | string
     title?: StringFilter<"Project"> | string
+    client?: StringFilter<"Project"> | string
     service?: StringFilter<"Project"> | string
     description?: StringNullableFilter<"Project"> | string | null
+    heroImage?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     images?: ProjectImageListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
     id?: SortOrder
-    client?: SortOrder
     title?: SortOrder
+    client?: SortOrder
     service?: SortOrder
     description?: SortOrderInput | SortOrder
+    heroImage?: SortOrder
     createdAt?: SortOrder
     images?: ProjectImageOrderByRelationAggregateInput
   }
@@ -3390,20 +3406,22 @@ export namespace Prisma {
     AND?: ProjectWhereInput | ProjectWhereInput[]
     OR?: ProjectWhereInput[]
     NOT?: ProjectWhereInput | ProjectWhereInput[]
-    client?: StringFilter<"Project"> | string
     title?: StringFilter<"Project"> | string
+    client?: StringFilter<"Project"> | string
     service?: StringFilter<"Project"> | string
     description?: StringNullableFilter<"Project"> | string | null
+    heroImage?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     images?: ProjectImageListRelationFilter
   }, "id">
 
   export type ProjectOrderByWithAggregationInput = {
     id?: SortOrder
-    client?: SortOrder
     title?: SortOrder
+    client?: SortOrder
     service?: SortOrder
     description?: SortOrderInput | SortOrder
+    heroImage?: SortOrder
     createdAt?: SortOrder
     _count?: ProjectCountOrderByAggregateInput
     _max?: ProjectMaxOrderByAggregateInput
@@ -3415,10 +3433,11 @@ export namespace Prisma {
     OR?: ProjectScalarWhereWithAggregatesInput[]
     NOT?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Project"> | string
-    client?: StringWithAggregatesFilter<"Project"> | string
     title?: StringWithAggregatesFilter<"Project"> | string
+    client?: StringWithAggregatesFilter<"Project"> | string
     service?: StringWithAggregatesFilter<"Project"> | string
     description?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    heroImage?: StringWithAggregatesFilter<"Project"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
   }
 
@@ -3501,68 +3520,75 @@ export namespace Prisma {
 
   export type ProjectCreateInput = {
     id?: string
-    client: string
     title: string
+    client: string
     service: string
     description?: string | null
+    heroImage: string
     createdAt?: Date | string
     images?: ProjectImageCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
     id?: string
-    client: string
     title: string
+    client: string
     service: string
     description?: string | null
+    heroImage: string
     createdAt?: Date | string
     images?: ProjectImageUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    client?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    heroImage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ProjectImageUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    client?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    heroImage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ProjectImageUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
     id?: string
-    client: string
     title: string
+    client: string
     service: string
     description?: string | null
+    heroImage: string
     createdAt?: Date | string
   }
 
   export type ProjectUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    client?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    heroImage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    client?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    heroImage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3707,28 +3733,31 @@ export namespace Prisma {
 
   export type ProjectCountOrderByAggregateInput = {
     id?: SortOrder
-    client?: SortOrder
     title?: SortOrder
+    client?: SortOrder
     service?: SortOrder
     description?: SortOrder
+    heroImage?: SortOrder
     createdAt?: SortOrder
   }
 
   export type ProjectMaxOrderByAggregateInput = {
     id?: SortOrder
-    client?: SortOrder
     title?: SortOrder
+    client?: SortOrder
     service?: SortOrder
     description?: SortOrder
+    heroImage?: SortOrder
     createdAt?: SortOrder
   }
 
   export type ProjectMinOrderByAggregateInput = {
     id?: SortOrder
-    client?: SortOrder
     title?: SortOrder
+    client?: SortOrder
     service?: SortOrder
     description?: SortOrder
+    heroImage?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -4143,19 +4172,21 @@ export namespace Prisma {
 
   export type ProjectCreateWithoutImagesInput = {
     id?: string
-    client: string
     title: string
+    client: string
     service: string
     description?: string | null
+    heroImage: string
     createdAt?: Date | string
   }
 
   export type ProjectUncheckedCreateWithoutImagesInput = {
     id?: string
-    client: string
     title: string
+    client: string
     service: string
     description?: string | null
+    heroImage: string
     createdAt?: Date | string
   }
 
@@ -4177,19 +4208,21 @@ export namespace Prisma {
 
   export type ProjectUpdateWithoutImagesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    client?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    heroImage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectUncheckedUpdateWithoutImagesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    client?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    client?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    heroImage?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

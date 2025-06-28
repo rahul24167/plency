@@ -122,10 +122,11 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.ProjectScalarFieldEnum = {
   id: 'id',
-  client: 'client',
   title: 'title',
+  client: 'client',
   service: 'service',
   description: 'description',
+  heroImage: 'heroImage',
   createdAt: 'createdAt'
 };
 

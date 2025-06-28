@@ -3,6 +3,9 @@
     "[project]/event-creator/src/app/create-project/page": [
       "static/media/ReadexPro_VariableFont_HEXP,wght-s.p.c13cb6bc.ttf"
     ],
+    "[project]/event-creator/src/app/login/page": [
+      "static/media/ReadexPro_VariableFont_HEXP,wght-s.p.c13cb6bc.ttf"
+    ],
     "[project]/event-creator/src/app/page": [
       "static/media/ReadexPro_VariableFont_HEXP,wght-s.p.c13cb6bc.ttf"
     ]
