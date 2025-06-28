@@ -82,33 +82,7 @@ export default function CreateProjectPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="w-full flex flex-row">
-        <div>
-          <label htmlFor="">Add Image</label>
-          <input
-            type="file"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                uploadToS3(file).then((url) => {
-                  setImages((prev) => [
-                    ...prev,
-                    {
-                      url,
-                      width: 150,
-                      height: 150,
-                      positionX: 50,
-                      positionY: 50,
-                      zIndex: 1,
-                    },
-                  ]);
-                  setSelectedImage(images.length - 1);
-                });
-              }
-            }}
-          />
-        </div>
-      </div>
+      
       <div className="bg-cover p-5 w-full border flex flex-col justify-between item-center border-green-700">
         {/* Hero Image Preview */}
         {heroUrl ? (
@@ -155,6 +129,33 @@ export default function CreateProjectPage() {
         </div>
 
         {/* Image Controller */}
+        <div className="w-full flex flex-row">
+        <div>
+          <label htmlFor="">Add Image</label>
+          <input
+            type="file"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                uploadToS3(file).then((url) => {
+                  setImages((prev) => [
+                    ...prev,
+                    {
+                      url,
+                      width: 150,
+                      height: 150,
+                      positionX: 50,
+                      positionY: 50,
+                      zIndex: 1,
+                    },
+                  ]);
+                  setSelectedImage(images.length - 1);
+                });
+              }
+            }}
+          />
+        </div>
+      </div>
         <div className="w-full flex flex-row gap-3">
           {images.length > 0 &&
             images.map((image, index) => (
@@ -368,7 +369,7 @@ export default function CreateProjectPage() {
         </div>
       </div>
       <button
-        className=""
+        className="px-6 py-2 mx-[33vh] border bg-green-600 rounded-xl font-semibold disabled:opacity-50"
         disabled={
           images.length === 0 ||
           !heroUrl ||
