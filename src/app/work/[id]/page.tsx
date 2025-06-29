@@ -1,6 +1,13 @@
 import Image from "next/image";
 import { prisma } from "@/src/lib/prisma";
 
+import { Project as ProjectType, ProjectMedia } from "@prisma/client";
+
+type FullProject = ProjectType & {
+  images: ProjectMedia[];
+};
+
+
 export default async function Project({
   params,
 }: {
@@ -14,10 +21,10 @@ export default async function Project({
     include: {
       images: true,
     },
-  });
+  }) as FullProject;
   return (
     <div className="flex flex-col w-full">
-      <div className="h-screen m-5 mb-0 relative">
+      <div className="h-[50vh] md:h-screen m-5 mb-0 relative">
         <Image
           src={project?.heroImage ?? "/placeholder.png"}
           alt=""
@@ -75,7 +82,7 @@ export default async function Project({
           ))}
         </div>
       </div>
-      <div className="md:hidden mx-5 w-full flex flex-col gap-2 justify-center items-center">
+      <div className="md:hidden overflow-hidden px-5 w-full flex flex-col gap-2 justify-center items-center">
         {project?.images.map((image, index) => (
           <div key={index} className="w-full">
             {image.type === "IMAGE" && (
