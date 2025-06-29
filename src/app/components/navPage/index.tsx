@@ -58,7 +58,7 @@ export default function NavPage() {
             <Link
               key={index}
               href={link.path}
-              className={`pointer-events-auto px-5 py-2 font-small uppercase font-bold ${
+              className={`pointer-events-auto px-5 font-small uppercase font-bold ${
                 pathname === link.path ? "text-secondary" : ""
               }`}
             >
@@ -67,15 +67,6 @@ export default function NavPage() {
           ))}
         </div>
       </nav>
-
-      {isMainPage && pathname !== "/" && (
-        <div className="pointer-events-none hidden md:flex px-4 text-medium md:text-large lg:text-largest font-bold uppercase">
-          {pathname
-            .replace("/", "")
-            .replace(/-/g, " ")
-            .replace(/\b\w/g, (l) => l.toUpperCase())}
-        </div>
-      )}
 
         {/* Animated Menu Modal */}
       <AnimatePresence>

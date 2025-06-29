@@ -1,36 +1,33 @@
 interface AboutUs {
   title: string;
-  openingLine: string;
+  
   description: string;
 }
 const About = () => {
-  const aboutUs:AboutUs[]=[{
-    title: "About",
-    openingLine: "We are a team of passionate individuals",
-    description: "Our mission is to create innovative solutions that make a difference in the world."
-  }, {
+  const aboutUs:AboutUs[]=[ {
     title: "Services",
-    openingLine: "We offer a range of services to help you succeed",
-    description: "From web development to digital marketing, we have the expertise to help you achieve your goals."
+  
+    description: "BRAND STRATEGY, ADVERTISING, MOTION GRAPHIC & ANIMATION, CURATION & COLLABORATION, BRAND IDENTITY, EVENTS, FILMS, PRINT & OUTDOORS, CREATIVE CAMPAIGNS"
   }, {
     title: "Clients",
-    openingLine: "We have worked with a diverse range of clients",
-    description: "Our clients range from startups to Fortune 500 companies, and we pride ourselves on delivering exceptional results."
-  }]
+    description: "SOCH, SUPERDRY, RELIANCE TRENDS, HOUSE OF ESTE, AETHEL, PRITHAE"
+  },{
+    title: "About",
+    description: "We are a creative studio specializing in high quality project execution. We blend fashion artistry with digital design precision, creating visually stunning and highly functional experiences. We believe in designs that speak, connect and illuminate, transforming your digital presence into a beacon of relatable, human centric interaction.A full service creative studio and home to storytellers and filmmakers."
+  },];
   return (
     <div  className="min-h-screen bg-transparent" >
-      <div className="px-5 md:hidden text-largest font-bold">ABOUT</div>
       <div className="w-full flex flex-row justify-end items-center">
         <div className="md:w-2/3">
         {aboutUs.map((item, index) => (
-          <div key={index} className="w-full flex flex-col md:flex-row p-5">
-            <div className="md:w-1/4 uppercase font-normal">{item.title}</div>
-            <div className="md:w-3/4"><b>{item.openingLine}</b>{" "}{item.description}</div>
+          <div key={index} className={`${item.title!=="About"? "uppercase": ""} w-full flex flex-col md:flex-row p-5`}>
+            <div className={`md:w-1/4  font-normal`}>{item.title}</div>
+            <div className="md:w-3/4">{item.description}</div>
           </div>
         ))}
         </div>
       </div>
-      <div className="h-1/2 w-full"></div>
+      
     </div>
   );
 };

@@ -15,7 +15,6 @@ const Work = async () => {
   });
   return (
     <div className="bg-cover w-full flex flex-row flex-wrap  ">
-      <div className="px-5 md:hidden text-largest font-bold">WORK</div>
       <div className="flex flex-row flex-wrap w-full pr-5 ">
         {projects.map((project, index) => (
           <div

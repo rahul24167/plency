@@ -42,7 +42,7 @@ export default function RootLayout({
           <LayoutWrapper>
            
             <NavPage />
-            <div className="w-full h-16 md:hidden bg-transparent"></div>
+            
             {children}
           </LayoutWrapper>
       </body>
