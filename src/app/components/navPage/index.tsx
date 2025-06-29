@@ -58,7 +58,7 @@ export default function NavPage() {
             <Link
               key={index}
               href={link.path}
-              className={`pointer-events-auto px-5 py-2 font-small uppercase font-bold ${
+              className={`pointer-events-auto px-5 font-small uppercase font-bold ${
                 pathname === link.path ? "text-secondary" : ""
               }`}
             >
