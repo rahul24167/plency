@@ -68,15 +68,6 @@ export default function NavPage() {
         </div>
       </nav>
 
-      {isMainPage && pathname !== "/" && (
-        <div className="pointer-events-none hidden md:flex px-4 text-medium md:text-large lg:text-largest font-bold uppercase">
-          {pathname
-            .replace("/", "")
-            .replace(/-/g, " ")
-            .replace(/\b\w/g, (l) => l.toUpperCase())}
-        </div>
-      )}
-
         {/* Animated Menu Modal */}
       <AnimatePresence>
         {isMenuOpen && (
