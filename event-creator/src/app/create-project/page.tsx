@@ -87,7 +87,15 @@ export default function CreateProjectPage() {
       <div className="bg-cover p-5 w-full flex flex-col justify-between item-center ">
         {/* Hero Image Preview */}
         {heroUrl ? (
-          <img src={heroUrl} className="w-full object-cover" alt="" />
+          <div className="h-[50vh] md:h-screen mb-0 relative">
+        <Image
+          src={heroUrl}
+          alt=""
+          fill
+          className="object-cover"
+        />
+      </div>
+          
         ) : (
           <div className="w-full h-[50vh] bg-gray-200 flex flex-col items-center justify-center">
             <span>No Hero Media Selected</span>
