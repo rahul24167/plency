@@ -1,7 +1,7 @@
 "use client";
 import {motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
-
+import CustomCursor from "@/src/app/components/customCursor";
 
 export default function LayoutWrapper({
   children,
@@ -11,16 +11,18 @@ export default function LayoutWrapper({
     const pathname = usePathname();
   return (
     <AnimatePresence mode="popLayout">
+      
       <motion.div
         key={pathname}
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
-        exit={{ y: "100vh",
+        exit={{ y:"200vh",
                 opacity: 0,
          }}
         transition={{ delay:0,duration: 1, ease: "easeInOut" }}
-        className="h-screen overflow-auto"
-      >
+        className="h-screen overflow-auto z-10"
+        style={{ y: "-100vh" }}
+      ><CustomCursor /> 
         {children}
       </motion.div>
     </AnimatePresence>

@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String         @id @default(uuid())
+  title       String
+  client      String
+  service     String
+  description String?
+  heroImage   String
+  createdAt   DateTime       @default(now())
+  images      ProjectMedia[]
+}
+
+model ProjectMedia {
+  id        String    @id @default(uuid())
+  projectId String
+  url       String
+  type      MediaType @default(IMAGE)
+  positionX Int
+  positionY Int
+  width     Int
+  height    Int
+  zIndex    Int
+  createdAt DateTime  @default(now())
+  project   Project   @relation(fields: [projectId], references: [id])
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}

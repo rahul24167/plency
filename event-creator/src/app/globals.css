@@ -1,0 +1,54 @@
+@import "tailwindcss";
+ 
+:root {
+  --background: transparent;
+  /* --foreground: #171717;  */
+  --secondary: #E42626;
+  --primary: #040405;
+  --tertiary: #FAFAFC;
+  --text-largest: 5.0625rem;
+  --text-large: 3.75rem;
+  --text-small: 1.125rem;
+
+}
+@media (max-width: 768px) {
+  :root {
+    --text-largest: 1.5rem;
+    --text-large: 0.75rem;
+    --text-small: 0.75rem;
+  }
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--primary);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+
+  --font-readex-pro: var(--font-readex-pro);
+ 
+  --text-largest: var(--text-largest);
+  --text-large: var(--text-large);
+  --text-medium: var(--text-medium);
+  --text-small: var(--text-small);
+  --text-smallest: var(--text-smallest);
+}
+
+
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a; 
+    --foreground: #ededed;
+    --primary: #D9D9D9;
+    --secondary: #595858;
+    --tertiary: #FAFAFC;
+  }
+} */
+
+body {
+  /* background:url('/bgGradient.png'); */
+  background: var(--tertiary);
+  color: var(--primary);
+  line-height: 1.25;
+}
