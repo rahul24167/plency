@@ -7,30 +7,31 @@ type FullProject = ProjectType & {
   images: ProjectMedia[];
 };
 
-
 export default async function Project({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const project = await prisma.project.findUnique({
+  const project = (await prisma.project.findUnique({
     where: {
       id: id ?? undefined,
     },
     include: {
       images: true,
     },
-  }) as FullProject;
+  })) as FullProject;
   return (
     <div className="flex flex-col w-full">
       <div className="h-[50vh] md:h-screen m-5 mb-0 relative">
-        <Image
-          src={project?.heroImage ?? "/placeholder.png"}
-          alt=""
-          fill
-          className="object-cover"
-        />
+        {project?.heroImage && (
+          <Image
+            src={project?.heroImage}
+            alt=""
+            fill
+            className="object-cover"
+          />
+        )}
       </div>
 
       <div className="w-full flex flex-row md:justify-end justify-center items-center">
@@ -62,21 +63,24 @@ export default async function Project({
               }}
             >
               <div className="w-full h-full relative">
-                {image.type==="IMAGE"&& 
-                <Image
-                  src={image.url}
-                  alt={`Image ${index + 1}`}
-                  fill
-                  style={{ objectFit: "fill" }}
-                />}
-                {image.type==="VIDEO"&&<video
-                src={image.url}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />}
+                {image.type === "IMAGE" && (
+                  <Image
+                    src={image.url}
+                    alt={`Image ${index + 1}`}
+                    fill
+                    style={{ objectFit: "fill" }}
+                  />
+                )}
+                {image.type === "VIDEO" && (
+                  <video
+                    src={image.url}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </div>
             </div>
           ))}
