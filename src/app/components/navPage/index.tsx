@@ -28,7 +28,7 @@ export default function NavPage() {
     <div
       className={`fixed top-0 md:top-auto md:bottom-0 ${
         isMainPage ? "md:h-1/2" : ""
-      } w-full md:border-b pointer-events-none bg-transparent`}
+      } w-full md:border-b pointer-events-none bg-transparent z-50`}
     >
       <nav className="pointer-events-none flex flex-col md:flex-row justify-between md:items-end py-5 w-full ">
         <div className="w-full md:w-1/3 flex justify-between">

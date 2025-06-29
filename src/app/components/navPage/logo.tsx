@@ -85,7 +85,7 @@ const Logo = () => {
       animate={animateProps}
       
       transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
-      className="pointer-events-none w-1/3 mx-5"
+      className="pointer-events-none w-1/3 mx-5 "
     >
       <h1 className="pointer-events-auto w-fit font-bold uppercase">
         <Link href={logoText.path} className="pointer-events-auto">

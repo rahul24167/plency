@@ -4,9 +4,9 @@ import {prisma} from "@/event-creator/src/lib/prisma";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { title, clientName, service, description, heroUrl, images } = body;
+    const { title, clientName, service, description, heroUrl, medias } = body;
 
-    if (!title || !clientName || !service || !description || !heroUrl || !images ) {
+    if (!title || !clientName || !service || !description || !heroUrl || !medias ) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
         description: description,
         heroImage: heroUrl,
         images: {
-          create: images
+          create: medias
         },
       },
     });

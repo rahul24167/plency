@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,25 +8,31 @@ datasource db {
 }
 
 model Project {
-  id String @id @default(uuid())
-  title String
-  client String
-  service String
+  id          String         @id @default(uuid())
+  title       String
+  client      String
+  service     String
   description String?
-  heroImage String
-  createdAt DateTime @default(now())
-  images ProjectImage[]
+  heroImage   String
+  createdAt   DateTime       @default(now())
+  images      ProjectMedia[]
 }
 
-model ProjectImage {
-  id String @id @default(uuid())
-  project Project @relation(fields: [projectId], references: [id])
+model ProjectMedia {
+  id        String    @id @default(uuid())
   projectId String
-  url String
+  url       String
+  type      MediaType @default(IMAGE)
   positionX Int
   positionY Int
-  width Int
-  height Int
-  zIndex Int
-  createdAt DateTime @default(now())
+  width     Int
+  height    Int
+  zIndex    Int
+  createdAt DateTime  @default(now())
+  project   Project   @relation(fields: [projectId], references: [id])
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
 }

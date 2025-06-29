@@ -1,13 +1,3 @@
-// import { NextRequest, NextResponse } from 'next/server';
-// import {S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-
-// const s3Client= new S3Client({
-//   region: process.env.AWS_REGION,
-//   credentials: {
-//     accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-//     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-//   },
-// });
 import { NextRequest, NextResponse } from 'next/server';
 import { S3Client } from '@aws-sdk/client-s3';
 import { createPresignedPost } from '@aws-sdk/s3-presigned-post';
@@ -33,7 +23,7 @@ export async function GET(req: NextRequest) {
       Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET!,
       Key: filename,
       Conditions: [
-        ['content-length-range', 0, 10485760], // Max size: 10MB
+        ['content-length-range', 0, 209715200], // Max size: 200MB
       ],
       Expires: 60, // In seconds
     });

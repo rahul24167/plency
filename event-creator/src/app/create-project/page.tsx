@@ -1,13 +1,16 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
-interface Image {
+type Media = {
   url: string;
+  type: "IMAGE" | "VIDEO";
   width: number;
   height: number;
   positionX: number;
   positionY: number;
   zIndex: number;
-}
+};
+
 export default function CreateProjectPage() {
   const [heroUrl, setHeroUrl] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
@@ -18,7 +21,7 @@ export default function CreateProjectPage() {
     description: "",
   });
 
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<Media[]>([]);
 
   async function uploadToS3(file: File): Promise<string> {
     const presignRes = await fetch(
@@ -49,13 +52,12 @@ export default function CreateProjectPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-
           title: projectInfo.title,
           clientName: projectInfo.client,
           service: projectInfo.service,
           description: projectInfo.description,
           heroUrl,
-          images: images
+          medias: images,
         }),
       });
       if (res.ok) {
@@ -70,7 +72,7 @@ export default function CreateProjectPage() {
           description: "",
         });
       } else {
-        const err= await res.json();
+        const err = await res.json();
         console.error(err);
         throw new Error("Failed to submit project");
       }
@@ -82,18 +84,18 @@ export default function CreateProjectPage() {
 
   return (
     <div className="flex flex-col w-full">
-      
-      <div className="bg-cover p-5 w-full border flex flex-col justify-between item-center border-green-700">
+      <div className="bg-cover p-5 w-full flex flex-col justify-between item-center ">
         {/* Hero Image Preview */}
         {heroUrl ? (
-          <img src={heroUrl} className="w-full object-cover pb-5" alt="" />
+          <img src={heroUrl} className="w-full object-cover" alt="" />
         ) : (
           <div className="w-full h-[50vh] bg-gray-200 flex flex-col items-center justify-center">
-            <span>No Hero Image Selected</span>
+            <span>No Hero Media Selected</span>
             <label className="z-20">Hero Image</label>
             <input
               className="z-20"
               type="file"
+              accept="image/*"
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
@@ -130,32 +132,34 @@ export default function CreateProjectPage() {
 
         {/* Image Controller */}
         <div className="w-full flex flex-row">
-        <div>
-          <label htmlFor="">Add Image</label>
-          <input
-            type="file"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                uploadToS3(file).then((url) => {
-                  setImages((prev) => [
-                    ...prev,
-                    {
-                      url,
-                      width: 150,
-                      height: 150,
-                      positionX: 50,
-                      positionY: 50,
-                      zIndex: 1,
-                    },
-                  ]);
-                  setSelectedImage(images.length - 1);
-                });
-              }
-            }}
-          />
+          <div>
+            <label htmlFor="">Add Image/Video</label>
+            <input
+              type="file"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                const isVideo = file?.type.startsWith("video/");
+                if (file) {
+                  uploadToS3(file).then((url) => {
+                    setImages((prev) => [
+                      ...prev,
+                      {
+                        url,
+                        type: isVideo ? "VIDEO" : "IMAGE",
+                        width: 30,
+                        height: 30,
+                        positionX: 20,
+                        positionY: 5,
+                        zIndex: 1,
+                      },
+                    ]);
+                    setSelectedImage(images.length - 1);
+                  });
+                }
+              }}
+            />
+          </div>
         </div>
-      </div>
         <div className="w-full flex flex-row gap-3">
           {images.length > 0 &&
             images.map((image, index) => (
@@ -174,7 +178,7 @@ export default function CreateProjectPage() {
               </div>
             ))}
         </div>
-        <div className="w-full ">
+        <div className="w-full  flex flex-row flex-wrap justify-center items-center gap-4">
           {/* Image Position Controller */}
           {images[selectedImage] && (
             <div
@@ -184,10 +188,10 @@ export default function CreateProjectPage() {
                 if (!images[selectedImage]) return;
                 let dx = 0,
                   dy = 0;
-                if (e.key === "a" || e.key === "A") dx = -10;
-                if (e.key === "d" || e.key === "D") dx = 10;
-                if (e.key === "w" || e.key === "W") dy = -10;
-                if (e.key === "s" || e.key === "S") dy = 10;
+                if (e.key === "a" || e.key === "A") dx = -1;
+                if (e.key === "d" || e.key === "D") dx = 1;
+                if (e.key === "w" || e.key === "W") dy = -1;
+                if (e.key === "s" || e.key === "S") dy = 1;
                 if (dx !== 0 || dy !== 0) {
                   setImages((prev) => {
                     const newImages = [...prev];
@@ -211,7 +215,7 @@ export default function CreateProjectPage() {
                     const newImages = [...prev];
                     newImages[selectedImage] = {
                       ...newImages[selectedImage],
-                      positionY: newImages[selectedImage].positionY - 10,
+                      positionY: newImages[selectedImage].positionY - 1,
                     };
                     return newImages;
                   })
@@ -229,7 +233,7 @@ export default function CreateProjectPage() {
                       const newImages = [...prev];
                       newImages[selectedImage] = {
                         ...newImages[selectedImage],
-                        positionX: newImages[selectedImage].positionX - 10,
+                        positionX: newImages[selectedImage].positionX - 1,
                       };
                       return newImages;
                     })
@@ -246,7 +250,7 @@ export default function CreateProjectPage() {
                       const newImages = [...prev];
                       newImages[selectedImage] = {
                         ...newImages[selectedImage],
-                        positionX: newImages[selectedImage].positionX + 10,
+                        positionX: newImages[selectedImage].positionX + 1,
                       };
                       return newImages;
                     })
@@ -264,7 +268,7 @@ export default function CreateProjectPage() {
                     const newImages = [...prev];
                     newImages[selectedImage] = {
                       ...newImages[selectedImage],
-                      positionY: newImages[selectedImage].positionY + 10,
+                      positionY: newImages[selectedImage].positionY + 1,
                     };
                     return newImages;
                   })
@@ -275,6 +279,7 @@ export default function CreateProjectPage() {
               </button>
             </div>
           )}
+          {/* Image Size and Z-Index Controller */}
           {images[selectedImage] && (
             <div className="flex flex-row gap-4 items-center justify-center my-4">
               {/* Width */}
@@ -282,11 +287,11 @@ export default function CreateProjectPage() {
                 Width:
                 <input
                   type="number"
-                  min={10}
-                  max={2000}
+                  min={1}
+                  max={100}
                   value={images[selectedImage].width}
                   onChange={(e) => {
-                    const width = Math.max(10, Number(e.target.value));
+                    const width = Math.max(1, Number(e.target.value));
                     setImages((prev) => {
                       const newImages = [...prev];
                       newImages[selectedImage] = {
@@ -304,11 +309,11 @@ export default function CreateProjectPage() {
                 Height:
                 <input
                   type="number"
-                  min={10}
-                  max={2000}
+                  min={1}
+                  max={100}
                   value={images[selectedImage].height}
                   onChange={(e) => {
-                    const height = Math.max(10, Number(e.target.value));
+                    const height = Math.max(1, Number(e.target.value));
                     setImages((prev) => {
                       const newImages = [...prev];
                       newImages[selectedImage] = {
@@ -345,43 +350,62 @@ export default function CreateProjectPage() {
               </label>
             </div>
           )}
+          {/* Submit Button */}
+          <button
+            className="px-6 py-2 mx-10 border bg-green-600 rounded-xl font-semibold disabled:opacity-50"
+            disabled={
+              images.length === 0 ||
+              !heroUrl ||
+              !projectInfo.client ||
+              !projectInfo.title ||
+              !projectInfo.description ||
+              !projectInfo.service
+            }
+            onClick={handleSubmit}
+          >
+            SUBMIT
+          </button>
         </div>
         {/* Image Gallery Previews */}
-        <div className="relative min-h-screen border">
+        <div className="relative w-full h-auto border overflow-hidden border-b-0">
           {images.map((image, index) => (
-            <img
+            <div
               key={index}
-              src={image.url}
-              className={`object-fill ${
+              className={`${
                 index === selectedImage ? "border-2 border-red-500" : ""
               }`}
               style={{
-                width: image.width,
-                height: image.height,
-                position: "relative",
-                left: image.positionX,
-                top: image.positionY,
+                width: `${image.width}vw`,
+                height: `${image.height}vw`,
+                marginLeft: `${image.positionX}vw`,
+                marginTop: `${image.positionY}vw`,
                 zIndex: image.zIndex,
               }}
-              alt={`Project Image ${index + 1}`}
-            />
+            >
+              <div className="w-full h-full relative">
+                {image.type === "IMAGE" && (
+                  <Image
+                    src={image.url}
+                    alt={`Image ${index + 1}`}
+                    fill
+                    style={{ objectFit: "fill" }}
+                  />
+                )}
+                {image.type === "VIDEO" && (
+                  <video
+                    src={image.url}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </div>
-      <button
-        className="px-6 py-2 mx-[33vh] border bg-green-600 rounded-xl font-semibold disabled:opacity-50"
-        disabled={
-          images.length === 0 ||
-          !heroUrl ||
-          !projectInfo.client ||
-          !projectInfo.title ||
-          !projectInfo.description ||
-          !projectInfo.service
-        }
-        onClick={handleSubmit}
-      >
-        SUBMIT
-      </button>
     </div>
   );
 }
