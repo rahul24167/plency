@@ -88,20 +88,24 @@ export default function CreateProjectPage() {
         {/* Hero Image Preview */}
         {heroUrl ? (
           <div className="h-[50vh] md:h-screen mb-0 relative">
-        <Image
-          src={heroUrl}
-          alt=""
-          fill
-          className="object-cover"
-        />
-      </div>
-          
+            <Image src={heroUrl} alt="" fill className="object-cover" />
+          </div>
         ) : (
-          <div className="w-full h-[50vh] bg-gray-200 flex flex-col items-center justify-center">
-            <span>No Hero Media Selected</span>
-            <label className="z-20">Hero Image</label>
+          <div className="w-full h-[50vh] bg-gray-100 flex flex-col items-center justify-center border-4 border-dashed border-gray-300 rounded-2xl shadow-inner hover:shadow-lg transition-all duration-300 ease-in-out px-6 text-center">
+            <span className="text-gray-500 text-lg mb-4">
+              No Hero Media Selected
+            </span>
+
+            <label
+              htmlFor="heroImageUpload"
+              className="cursor-pointer px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors z-20"
+            >
+              Upload Hero Image
+            </label>
+
             <input
-              className="z-20"
+              id="heroImageUpload"
+              className="hidden"
               type="file"
               accept="image/*"
               onChange={(e) => {
@@ -121,29 +125,46 @@ export default function CreateProjectPage() {
                 key={index}
                 className="w-full flex flex-col md:flex-row gap-1"
               >
-                <input
-                  className="border p-2"
-                  type="text"
-                  placeholder={key}
-                  value={value}
-                  onChange={(e) => {
-                    setProjectInfo((prev) => ({
-                      ...prev,
-                      [key]: e.target.value,
-                    }));
-                  }}
-                />
+                {key !== "description" ? (
+                  <input
+                    className="border p-2"
+                    type="text"
+                    placeholder={key}
+                    value={value}
+                    onChange={(e) => {
+                      setProjectInfo((prev) => ({
+                        ...prev,
+                        [key]: e.target.value,
+                      }));
+                    }}
+                  />
+                ) : (
+                  <textarea
+                    className="border p-2"
+                    placeholder={key}
+                    value={value}
+                    onChange={(e) => {
+                      setProjectInfo((prev) => ({
+                        ...prev,
+                        [key]: e.target.value,
+                      }));
+                    }}
+                  />
+                )}
               </div>
             ))}
           </div>
         </div>
 
         {/* Image Controller */}
-        <div className="w-full flex flex-row">
-          <div>
-            <label htmlFor="">Add Image/Video</label>
+        <div className="w-full flex flex-col gap-6 p-6 bg-white rounded-xl shadow-md">
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-gray-700">
+              Add Image/Video
+            </label>
             <input
               type="file"
+              className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 const isVideo = file?.type.startsWith("video/");
@@ -168,212 +189,204 @@ export default function CreateProjectPage() {
             />
           </div>
         </div>
-        <div className="w-full flex flex-row gap-3">
+        <div className="flex flex-wrap gap-4">
           {images.length > 0 &&
             images.map((image, index) => (
-              <div key={index}>
-                <label htmlFor={index.toString()}>{index + 1}</label>
+              <label
+                key={index}
+                className="flex items-center gap-2 cursor-pointer"
+              >
                 <input
-                  id={index.toString()}
                   type="checkbox"
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedImage(index);
-                    }
-                  }}
                   checked={selectedImage === index}
+                  onChange={(e) => {
+                    if (e.target.checked) setSelectedImage(index);
+                  }}
+                  className="accent-blue-600"
                 />
-              </div>
+                <span className="text-sm font-medium text-gray-600">
+                  Media {index + 1}
+                </span>
+              </label>
             ))}
         </div>
-        <div className="w-full  flex flex-row flex-wrap justify-center items-center gap-4">
-          {/* Image Position Controller */}
-          {images[selectedImage] && (
-            <div
-              className="flex flex-row gap-2 items-center justify-center my-4"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (!images[selectedImage]) return;
-                let dx = 0,
-                  dy = 0;
-                if (e.key === "a" || e.key === "A") dx = -1;
-                if (e.key === "d" || e.key === "D") dx = 1;
-                if (e.key === "w" || e.key === "W") dy = -1;
-                if (e.key === "s" || e.key === "S") dy = 1;
-                if (dx !== 0 || dy !== 0) {
+        {/* Image Position Controller */}
+        {images[selectedImage] && (
+          <div
+            className="flex items-center justify-center gap-4 flex-wrap border p-4 rounded-lg bg-gray-50"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (!images[selectedImage]) return;
+              let dx = 0,
+                dy = 0;
+              if (e.key === "a" || e.key === "A") dx = -1;
+              if (e.key === "d" || e.key === "D") dx = 1;
+              if (e.key === "w" || e.key === "W") dy = -1;
+              if (e.key === "s" || e.key === "S") dy = 1;
+              if (dx !== 0 || dy !== 0) {
+                setImages((prev) => {
+                  const newImages = [...prev];
+                  newImages[selectedImage] = {
+                    ...newImages[selectedImage],
+                    positionX: newImages[selectedImage].positionX + dx,
+                    positionY: newImages[selectedImage].positionY + dy,
+                  };
+                  return newImages;
+                });
+                e.preventDefault();
+              }
+            }}
+            style={{ outline: "none" }}
+          >
+            <button
+              type="button"
+              className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
+              onClick={() =>
+                setImages((prev) => {
+                  const newImages = [...prev];
+                  newImages[selectedImage] = {
+                    ...newImages[selectedImage],
+                    positionY: newImages[selectedImage].positionY - 1,
+                  };
+                  return newImages;
+                })
+              }
+              aria-label="Move Up"
+            >
+              ↑
+            </button>
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
+                onClick={() =>
                   setImages((prev) => {
                     const newImages = [...prev];
                     newImages[selectedImage] = {
                       ...newImages[selectedImage],
-                      positionX: newImages[selectedImage].positionX + dx,
-                      positionY: newImages[selectedImage].positionY + dy,
+                      positionX: newImages[selectedImage].positionX - 1,
                     };
+                    return newImages;
+                  })
+                }
+                aria-label="Move Left"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
+                onClick={() =>
+                  setImages((prev) => {
+                    const newImages = [...prev];
+                    newImages[selectedImage] = {
+                      ...newImages[selectedImage],
+                      positionX: newImages[selectedImage].positionX + 1,
+                    };
+                    return newImages;
+                  })
+                }
+                aria-label="Move Right"
+              >
+                →
+              </button>
+            </div>
+            <button
+              type="button"
+              className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
+              onClick={() =>
+                setImages((prev) => {
+                  const newImages = [...prev];
+                  newImages[selectedImage] = {
+                    ...newImages[selectedImage],
+                    positionY: newImages[selectedImage].positionY + 1,
+                  };
+                  return newImages;
+                })
+              }
+              aria-label="Move Down"
+            >
+              ↓
+            </button>
+          </div>
+        )}
+        {/* Image Size and Z-Index Controller */}
+        {images[selectedImage] && (
+          <div className="flex flex-wrap items-center justify-center gap-6 border p-4 rounded-lg bg-gray-50">
+            {/* Width */}
+            <label className="flex flex-col text-sm font-medium text-gray-700">
+              Width
+              <input
+                type="number"
+                min={1}
+                max={100}
+                value={images[selectedImage].width}
+                onChange={(e) => {
+                  const width = Math.max(1, Number(e.target.value));
+                  setImages((prev) => {
+                    const newImages = [...prev];
+                    newImages[selectedImage].width = width;
                     return newImages;
                   });
-                  e.preventDefault();
-                }
-              }}
-              style={{ outline: "none" }}
-            >
-              <button
-                type="button"
-                className="border rounded px-2 py-1"
-                onClick={() =>
+                }}
+                className="border rounded p-2 w-24"
+              />
+            </label>
+            {/* Height */}
+            <label className="flex flex-col text-sm font-medium text-gray-700">
+              Height
+              <input
+                type="number"
+                min={1}
+                max={100}
+                value={images[selectedImage].height}
+                onChange={(e) => {
+                  const height = Math.max(1, Number(e.target.value));
                   setImages((prev) => {
                     const newImages = [...prev];
-                    newImages[selectedImage] = {
-                      ...newImages[selectedImage],
-                      positionY: newImages[selectedImage].positionY - 1,
-                    };
+                    newImages[selectedImage].height = height;
                     return newImages;
-                  })
-                }
-                aria-label="Move Up"
-              >
-                ↑
-              </button>
-              <div className="flex flex-col gap-1">
-                <button
-                  type="button"
-                  className="border rounded px-2 py-1"
-                  onClick={() =>
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        positionX: newImages[selectedImage].positionX - 1,
-                      };
-                      return newImages;
-                    })
-                  }
-                  aria-label="Move Left"
-                >
-                  ←
-                </button>
-                <button
-                  type="button"
-                  className="border rounded px-2 py-1"
-                  onClick={() =>
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        positionX: newImages[selectedImage].positionX + 1,
-                      };
-                      return newImages;
-                    })
-                  }
-                  aria-label="Move Right"
-                >
-                  →
-                </button>
-              </div>
-              <button
-                type="button"
-                className="border rounded px-2 py-1"
-                onClick={() =>
+                  });
+                }}
+                className="border rounded p-2 w-24"
+              />
+            </label>
+            {/* Z-Index */}
+            <label className="flex flex-col text-sm font-medium text-gray-700">
+              Z-Index
+              <input
+                type="number"
+                min={0}
+                max={100}
+                value={images[selectedImage].zIndex}
+                onChange={(e) => {
+                  const zIndex = Math.max(0, Number(e.target.value));
                   setImages((prev) => {
                     const newImages = [...prev];
-                    newImages[selectedImage] = {
-                      ...newImages[selectedImage],
-                      positionY: newImages[selectedImage].positionY + 1,
-                    };
+                    newImages[selectedImage].zIndex = zIndex;
                     return newImages;
-                  })
-                }
-                aria-label="Move Down"
-              >
-                ↓
-              </button>
-            </div>
-          )}
-          {/* Image Size and Z-Index Controller */}
-          {images[selectedImage] && (
-            <div className="flex flex-row gap-4 items-center justify-center my-4">
-              {/* Width */}
-              <label>
-                Width:
-                <input
-                  type="number"
-                  min={1}
-                  max={100}
-                  value={images[selectedImage].width}
-                  onChange={(e) => {
-                    const width = Math.max(1, Number(e.target.value));
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        width,
-                      };
-                      return newImages;
-                    });
-                  }}
-                  className="border p-1 w-20 mx-2"
-                />
-              </label>
-              {/* Height */}
-              <label>
-                Height:
-                <input
-                  type="number"
-                  min={1}
-                  max={100}
-                  value={images[selectedImage].height}
-                  onChange={(e) => {
-                    const height = Math.max(1, Number(e.target.value));
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        height,
-                      };
-                      return newImages;
-                    });
-                  }}
-                  className="border p-1 w-20 mx-2"
-                />
-              </label>
-              {/* Z-Index */}
-              <label>
-                Z-Index:
-                <input
-                  type="number"
-                  min={0}
-                  max={100}
-                  value={images[selectedImage].zIndex}
-                  onChange={(e) => {
-                    const zIndex = Math.max(0, Number(e.target.value));
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        zIndex,
-                      };
-                      return newImages;
-                    });
-                  }}
-                  className="border p-1 w-16 mx-2"
-                />
-              </label>
-            </div>
-          )}
-          {/* Submit Button */}
-          <button
-            className="px-6 py-2 mx-10 border bg-green-600 rounded-xl font-semibold disabled:opacity-50"
-            disabled={
-              images.length === 0 ||
-              !heroUrl ||
-              !projectInfo.client ||
-              !projectInfo.title ||
-              !projectInfo.description ||
-              !projectInfo.service
-            }
-            onClick={handleSubmit}
-          >
-            SUBMIT
-          </button>
-        </div>
+                  });
+                }}
+                className="border rounded p-2 w-20"
+              />
+            </label>
+          </div>
+        )}
+        {/* Submit Button */}
+        <button
+          className="self-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
+          disabled={
+            images.length === 0 ||
+            !heroUrl ||
+            !projectInfo.client ||
+            !projectInfo.title ||
+            !projectInfo.description ||
+            !projectInfo.service
+          }
+          onClick={handleSubmit}
+        >
+          SUBMIT
+        </button>
         {/* Image Gallery Previews */}
         <div className="relative w-full h-auto border overflow-hidden border-b-0">
           {images.map((image, index) => (
