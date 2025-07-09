@@ -283,9 +283,11 @@ export default function UpdateProjectPage() {
               onClick={() =>
                 setImages((prev) => {
                   const newImages = [...prev];
+                  const selected = newImages[selectedImage];
+                  if (!selected) return prev; // early return if undefined
                   newImages[selectedImage] = {
-                    ...newImages[selectedImage],
-                    positionY: newImages[selectedImage].positionY - 1,
+                    ...selected,
+                    positionY: selected.positionY - 1,
                   };
                   return newImages;
                 })
@@ -301,9 +303,11 @@ export default function UpdateProjectPage() {
                 onClick={() =>
                   setImages((prev) => {
                     const newImages = [...prev];
+                    const selected = newImages[selectedImage];
+                    if (!selected) return prev; // early return if undefined
                     newImages[selectedImage] = {
-                      ...newImages[selectedImage],
-                      positionX: newImages[selectedImage].positionX - 1,
+                      ...selected,
+                      positionX: selected.positionX - 1,
                     };
                     return newImages;
                   })
@@ -318,9 +322,12 @@ export default function UpdateProjectPage() {
                 onClick={() =>
                   setImages((prev) => {
                     const newImages = [...prev];
+                    const selected = newImages[selectedImage];
+                    if (!selected) return prev; // early return if undefined
+
                     newImages[selectedImage] = {
-                      ...newImages[selectedImage],
-                      positionX: newImages[selectedImage].positionX + 1,
+                      ...selected,
+                      positionX: selected.positionX + 1,
                     };
                     return newImages;
                   })
@@ -336,9 +343,11 @@ export default function UpdateProjectPage() {
               onClick={() =>
                 setImages((prev) => {
                   const newImages = [...prev];
+                  const selected = newImages[selectedImage];
+                  if (!selected) return prev; // early return if undefined
                   newImages[selectedImage] = {
-                    ...newImages[selectedImage],
-                    positionY: newImages[selectedImage].positionY + 1,
+                    ...selected,
+                    positionY: selected.positionY + 1,
                   };
                   return newImages;
                 })
@@ -406,6 +415,7 @@ export default function UpdateProjectPage() {
                   const zIndex = Math.max(0, Number(e.target.value));
                   setImages((prev) => {
                     const newImages = [...prev];
+                    
                     newImages[selectedImage].zIndex = zIndex;
                     return newImages;
                   });
