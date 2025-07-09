@@ -31,8 +31,8 @@ export const updateProject = async (projectId: string, data: Partial<FullProject
     const existingIds = new Set(existingMedia.map((m) => m.id));
 
     // Step 3: Separate new vs existing images
-    const toUpdate = images.filter((m) => existingIds.has(m.id));
-    const toCreate = images.filter((m) => !existingIds.has(m.id));
+    const toUpdate = (images ?? []).filter((m) => existingIds.has(m.id));
+    const toCreate = (images ?? []).filter((m) => !existingIds.has(m.id));
 
     // Step 4: Update existing images
     for (const media of toUpdate) {
