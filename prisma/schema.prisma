@@ -13,6 +13,7 @@ model Project {
   client      String
   service     String
   description String?
+  challenge   String?
   heroImage   String
   createdAt   DateTime       @default(now())
   images      ProjectMedia[]

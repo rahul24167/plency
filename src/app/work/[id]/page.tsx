@@ -40,7 +40,8 @@ export default async function Project({
             title: project?.title,
             client: project?.client,
             service: project?.service,
-            description: project?.description
+            description: project?.description,
+            challenge: project?.challenge
           }).map(([key, value], index) => (
             <div key={index} className="w-full flex flex-col md:flex-row p-3">
               <div className="md:w-1/4 uppercase font-normal break-words">{key}</div>
