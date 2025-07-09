@@ -84,19 +84,7 @@ export default function UpdateProjectPage() {
                   const file = e.target.files?.[0];
                   if (file) {
                     uploadToS3(file).then((url) =>
-                      setProject((prev) => {
-                        if (!prev) return prev;
-                        return {
-                          ...prev,
-                          heroImage: url,
-                          client: prev.client,
-                          title: prev.title,
-                          service: prev.service,
-                          description: prev.description,
-                          id: prev.id,
-                          createdAt: prev.createdAt,
-                        };
-                      })
+                      setProject((prev) => prev ? ({ ...prev, heroImage: url } as Project) : prev)
                     );
                   }
                 }}
