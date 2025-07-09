@@ -260,11 +260,16 @@ export default function UpdateProjectPage() {
               if (dx !== 0 || dy !== 0) {
                 setImages((prev) => {
                   const newImages = [...prev];
+                  const selected = newImages[selectedImage];
+
+                  if (!selected) return prev; // early return if undefined
+
                   newImages[selectedImage] = {
-                    ...newImages[selectedImage],
-                    positionX: newImages[selectedImage].positionX + dx,
-                    positionY: newImages[selectedImage].positionY + dy,
+                    ...selected,
+                    positionX: (selected.positionX ?? 0) + dx,
+                    positionY: (selected.positionY ?? 0) + dy,
                   };
+
                   return newImages;
                 });
                 e.preventDefault();
