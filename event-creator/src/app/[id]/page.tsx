@@ -84,7 +84,9 @@ export default function UpdateProjectPage() {
                   const file = e.target.files?.[0];
                   if (file) {
                     uploadToS3(file).then((url) =>
-                      setProject((prev) => prev ? ({ ...prev, heroImage: url } as Project) : prev)
+                      setProject((prev) =>
+                        prev ? ({ ...prev, heroImage: url } as Project) : prev
+                      )
                     );
                   }
                 }}
@@ -113,7 +115,9 @@ export default function UpdateProjectPage() {
                 const file = e.target.files?.[0];
                 if (file) {
                   uploadToS3(file).then((url) =>
-                    setProject((prev) => ({ ...prev, heroImage: url }))
+                    setProject((prev) =>
+                      prev ? ({ ...prev, heroImage: url } as Project) : prev
+                    )
                   );
                 }
               }}
