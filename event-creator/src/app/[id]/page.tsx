@@ -13,7 +13,7 @@ export default function UpdateProjectPage() {
   const params = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
-  const [images, setImages] = useState<Partial<ProjectMedia[]>>([]);
+  const [images, setImages] = useState<Partial<ProjectMedia>[]>([]);
 
   const projectId = params.id as string;
   useEffect(() => {
