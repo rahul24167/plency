@@ -287,7 +287,8 @@ export default function UpdateProjectPage() {
                   if (!selected) return prev; // early return if undefined
                   newImages[selectedImage] = {
                     ...selected,
-                    positionY: selected.positionY - 1,
+                    positionY: (selected.positionY ?? 0) - 1,
+                    
                   };
                   return newImages;
                 })
@@ -307,7 +308,7 @@ export default function UpdateProjectPage() {
                     if (!selected) return prev; // early return if undefined
                     newImages[selectedImage] = {
                       ...selected,
-                      positionX: selected.positionX - 1,
+                      positionX: (selected.positionX ?? 0) - 1,
                     };
                     return newImages;
                   })
@@ -327,7 +328,7 @@ export default function UpdateProjectPage() {
 
                     newImages[selectedImage] = {
                       ...selected,
-                      positionX: selected.positionX + 1,
+                      positionX: (selected.positionX ?? 0) + 1,
                     };
                     return newImages;
                   })
@@ -347,7 +348,7 @@ export default function UpdateProjectPage() {
                   if (!selected) return prev; // early return if undefined
                   newImages[selectedImage] = {
                     ...selected,
-                    positionY: selected.positionY + 1,
+                    positionY: (selected.positionY ?? 0) + 1,
                   };
                   return newImages;
                 })
