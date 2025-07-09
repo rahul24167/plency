@@ -10,7 +10,7 @@ import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { Project, ProjectMedia } from "@prisma/client";
 
 export default function UpdateProjectPage() {
-  const params = useParams();;
+  const params = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [images, setImages] = useState<Partial<ProjectMedia[]>>([]);
@@ -48,8 +48,10 @@ export default function UpdateProjectPage() {
 
   return (
     <div className="md:flex flex-col w-full">
-      <button className="bg-blue-600 text-white font-semibold py-2 px-4 mx-4 rounded w-fit self-end"
-      onClick={() => setIsEdit((prev) => !prev)}>
+      <button
+        className="bg-blue-600 text-white font-semibold py-2 px-4 mx-4 rounded w-fit self-end"
+        onClick={() => setIsEdit((prev) => !prev)}
+      >
         {!isEdit ? "Editing Mode" : "View Mode"}
       </button>
       <div className="bg-cover p-5 w-full flex flex-col justify-between item-center ">
@@ -82,7 +84,9 @@ export default function UpdateProjectPage() {
                   const file = e.target.files?.[0];
                   if (file) {
                     uploadToS3(file).then((url) =>
-                      setProject((prev) => ({ ...prev, heroImage: url }))
+                      setProject((prev) =>
+                        prev ? ({ ...prev, heroImage: url } as Project) : prev
+                      )
                     );
                   }
                 }}
@@ -140,7 +144,7 @@ export default function UpdateProjectPage() {
                         placeholder={key}
                         value={value as string}
                         onChange={(e) => {
-                             if (!isEdit) return; 
+                          if (!isEdit) return;
                           setProject((prev) =>
                             prev
                               ? {
@@ -157,7 +161,7 @@ export default function UpdateProjectPage() {
                         placeholder={key}
                         value={value as string}
                         onChange={(e) => {
-                             if (!isEdit) return; 
+                          if (!isEdit) return;
                           setProject((prev) =>
                             prev
                               ? {
@@ -176,7 +180,11 @@ export default function UpdateProjectPage() {
         </div>
 
         {/* Image Controller */}
-        <div className={`w-full ${isEdit ? "flex" : "hidden"} flex-col gap-6 p-6 bg-white rounded-xl shadow-md`}>
+        <div
+          className={`w-full ${
+            isEdit ? "flex" : "hidden"
+          } flex-col gap-6 p-6 bg-white rounded-xl shadow-md`}
+        >
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-gray-700">
               Add Image/Video
@@ -235,7 +243,9 @@ export default function UpdateProjectPage() {
         {/* Image Position Controller */}
         {images[selectedImage] && (
           <div
-            className={`${isEdit ? "flex" : "hidden"} items-center justify-center gap-4 flex-wrap border p-4 rounded-lg bg-gray-50`}
+            className={`${
+              isEdit ? "flex" : "hidden"
+            } items-center justify-center gap-4 flex-wrap border p-4 rounded-lg bg-gray-50`}
             tabIndex={0}
             onKeyDown={(e) => {
               if (!images[selectedImage]) return;
@@ -334,7 +344,11 @@ export default function UpdateProjectPage() {
         )}
         {/* Image Size and Z-Index Controller */}
         {images[selectedImage] && (
-          <div className={` ${isEdit ? "flex" : "hidden"} flex-wrap items-center justify-center gap-6 border p-4 rounded-lg bg-gray-50`}>
+          <div
+            className={` ${
+              isEdit ? "flex" : "hidden"
+            } flex-wrap items-center justify-center gap-6 border p-4 rounded-lg bg-gray-50`}
+          >
             {/* Width */}
             <label className="flex flex-col text-sm font-medium text-gray-700">
               Width
@@ -396,7 +410,9 @@ export default function UpdateProjectPage() {
         )}
         {/* Submit Button */}
         <button
-          className={` ${isEdit ? "flex" : "hidden"} self-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition`}
+          className={` ${
+            isEdit ? "flex" : "hidden"
+          } self-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition`}
           disabled={images.length === 0}
           onClick={handleSubmit}
         >
