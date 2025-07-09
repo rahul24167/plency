@@ -455,7 +455,7 @@ export default function UpdateProjectPage() {
               <div className="w-full h-full relative">
                 {image.type === "IMAGE" && (
                   <Image
-                    src={image.url}
+                    src={image.url ?? ""}
                     alt={`Image ${index + 1}`}
                     fill
                     style={{ objectFit: "fill" }}
@@ -463,7 +463,7 @@ export default function UpdateProjectPage() {
                 )}
                 {image.type === "VIDEO" && (
                   <video
-                    src={image.url}
+                    src={image.url ?? ""}
                     autoPlay
                     loop
                     muted
