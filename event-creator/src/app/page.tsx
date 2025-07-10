@@ -33,6 +33,13 @@ export default function Dashboard() {
         Create Project Page
       </button>
       <button
+        onClick={() => router.push("/create-experiment")}
+        className="bg-green-600 text-white p-2 rounded ml-4"
+      >
+        Create Experiment Page
+      </button>
+
+      <button
         onClick={handleLogout}
         className="bg-red-600 text-white p-2 rounded ml-4"
       >

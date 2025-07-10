@@ -19,7 +19,7 @@ const Work = async () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="w-full md:w-1/2 h-[76vh] flex flex-col p-5 pr-0 "
+            className="w-full md:w-1/2 h-[85vh] flex flex-col p-5 pr-0 "
           >
             <Link
               href={`/work/${project.id}`}

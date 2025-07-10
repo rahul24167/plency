@@ -33,6 +33,22 @@ model ProjectMedia {
   project   Project   @relation(fields: [projectId], references: [id])
 }
 
+model Experiment {
+  id               String            @id @default(uuid())
+  brand            String
+  brandDescription String
+  question         String
+  answer           String
+  images           ExperimentImage[]
+}
+
+model ExperimentImage {
+  id           String     @id @default(uuid())
+  experimentId String
+  url          String
+  experiment   Experiment @relation(fields: [experimentId], references: [id])
+}
+
 enum MediaType {
   IMAGE
   VIDEO
