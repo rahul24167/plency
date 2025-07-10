@@ -48,7 +48,11 @@ model ExperimentImage {
   url          String
   experiment   Experiment @relation(fields: [experimentId], references: [id])
 }
-
+model NewsLetterSubscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
 enum MediaType {
   IMAGE
   VIDEO
