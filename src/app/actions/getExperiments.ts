@@ -14,3 +14,18 @@ export const getExperiments = async () => {
 
   return experiments;
 };
+
+export const getExperimentById = async (id: string) => {
+  const experiment = await prisma.experiment.findUnique({
+    where: { id },
+    include: {
+      images: {
+        select: {
+          url: true,
+        },
+      },
+    },
+  });
+
+  return experiment;
+};
