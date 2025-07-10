@@ -4,8 +4,8 @@
   --background: transparent;
   /* --foreground: #171717;  */
   --secondary: #E42626;
-  --primary: #040405;
-  --tertiary: #FAFAFC;
+  --primary: #595858;
+  --tertiary: #D4D4D4;
   --text-largest: 5.0625rem;
   --text-large: 3.75rem;
   --text-small: 1.125rem;
@@ -24,6 +24,7 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-tertiary: var(--tertiary);
+  --color-logogradient: linear-gradient(90deg, #E42626 0%, #F8BBD0 100%);
 
   --font-readex-pro: var(--font-readex-pro);
  
@@ -33,35 +34,10 @@
   --text-small: var(--text-small);
   --text-smallest: var(--text-smallest);
 }
-@keyframes scroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 
-.animate-scroll {
-  animation-name: scroll;
-  animation-duration: var(--animation-duration, 40s);
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: var(--animation-direction, forwards);
-}
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a; 
-    --foreground: #ededed;
-    --primary: #D9D9D9;
-    --secondary: #595858;
-    --tertiary: #FAFAFC;
-  }
-} */
 
 body {
-  /* background:url('/bgGradient.png'); */
   background: var(--tertiary);
   color: var(--primary);
   line-height: 1.25;

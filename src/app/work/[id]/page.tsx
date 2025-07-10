@@ -39,12 +39,13 @@ export default async function Project({
           {Object.entries({
             title: project?.title,
             client: project?.client,
-            description: project?.description,
             service: project?.service,
+            description: project?.description,
+            challenge: project?.challenge
           }).map(([key, value], index) => (
             <div key={index} className="w-full flex flex-col md:flex-row p-3">
-              <div className="md:w-1/4 uppercase font-normal">{key}</div>
-              <div className="md:w-3/4">{value}</div>
+              <div className="md:w-1/4 uppercase font-normal break-words">{key}</div>
+              <div className="md:w-3/4 break-words whitespace-pre-line">{value}</div>
             </div>
           ))}
         </div>

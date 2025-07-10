@@ -9,7 +9,7 @@ interface FullProject extends Project {
 
 export const updateProject = async (projectId: string, data: Partial<FullProject>) => {
  try {
-    const { title, client, service, description, heroImage, images } = data;
+    const { title, client, service, description, challenge, heroImage, images } = data;
 
     // Step 1: Update project fields
     await prisma.project.update({
@@ -19,6 +19,7 @@ export const updateProject = async (projectId: string, data: Partial<FullProject
         client,
         service,
         description,
+        challenge,
         heroImage,
       },
     });

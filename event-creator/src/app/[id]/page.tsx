@@ -35,6 +35,7 @@ export default function UpdateProjectPage() {
       client: project.client,
       service: project.service,
       description: project.description ?? "",
+      challenge: project.challenge ?? "",
       heroImage: project.heroImage,
       images: images as ProjectMedia[], // ensure your state contains `id`, `projectId`, etc.
     });
@@ -130,7 +131,7 @@ export default function UpdateProjectPage() {
             {project &&
               Object.entries(project).map(([key, value], index) => {
                 if (
-                  !["client", "title", "service", "description"].includes(key)
+                  !["client", "title", "service", "description", "challenge"].includes(key)
                 )
                   return null;
 
@@ -139,7 +140,7 @@ export default function UpdateProjectPage() {
                     key={index}
                     className="w-full flex flex-col md:flex-row gap-1"
                   >
-                    {key !== "description" ? (
+                    {(key !== "description" && key !== "challenge") ? (
                       <input
                         className="border p-2"
                         type="text"
@@ -161,7 +162,7 @@ export default function UpdateProjectPage() {
                       <textarea
                         className="border p-2"
                         placeholder={key}
-                        value={value as string}
+                        value={value === null ? "" : value as string}
                         onChange={(e) => {
                           if (!isEdit) return;
                           setProject((prev) =>

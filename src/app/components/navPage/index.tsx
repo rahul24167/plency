@@ -46,7 +46,7 @@ export default function NavPage() {
               key={index}
               href={link.path}
               className={`pointer-events-auto px-5 font-small uppercase font-bold ${
-                pathname === link.path ? "text-secondary" : ""
+                pathname === link.path ? "text-white" : ""
               }`}
             >
               {link.title}
@@ -59,7 +59,7 @@ export default function NavPage() {
               key={index}
               href={link.path}
               className={`pointer-events-auto px-5 font-small uppercase font-bold ${
-                pathname === link.path ? "text-secondary" : ""
+                pathname === link.path ? "text-white" : ""
               }`}
             >
               {link.title}
