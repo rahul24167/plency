@@ -109,25 +109,36 @@ export default function CreateExperiment() {
                   onClick={(e) => {
                     e.preventDefault();
                     createExperiment(experimentInfo, images)
-  .then((response) => {
-    if (!response.success) {
-      console.error("Error creating experiment:", ('error' in response ? response.error : "Unknown error"));
-    } else {
-      console.log("Experiment created successfully:", response.experiment);
+                      .then((response) => {
+                        if (!response.success) {
+                          console.error(
+                            "Error creating experiment:",
+                            "error" in response
+                              ? response.error
+                              : "Unknown error"
+                          );
+                        } else {
+                          console.log(
+                            "Experiment created successfully:",
+                            response.experiment
+                          );
 
-      // Reset form
-      setExperimentInfo({
-        brand: "",
-        brandDescription: "",
-        question: "why this design",
-        answer: "",
-      });
-      setImages([]);
-    }
-  })
-  .catch((error) => {
-    console.error("Unexpected error creating experiment:", error);
-  });
+                          // Reset form
+                          setExperimentInfo({
+                            brand: "",
+                            brandDescription: "",
+                            question: "why this design",
+                            answer: "",
+                          });
+                          setImages([]);
+                        }
+                      })
+                      .catch((error) => {
+                        console.error(
+                          "Unexpected error creating experiment:",
+                          error
+                        );
+                      });
 
                     setIsConfirm(false);
                   }}
