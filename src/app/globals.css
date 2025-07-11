@@ -1,15 +1,14 @@
 @import "tailwindcss";
- 
+
 :root {
   --background: transparent;
   /* --foreground: #171717;  */
-  --secondary: #E42626;
+  --secondary: #e42626;
   --primary: #595858;
-  --tertiary: #D4D4D4;
+  --tertiary: #d4d4d4;
   --text-largest: 5.0625rem;
   --text-large: 3.75rem;
   --text-small: 1.125rem;
-
 }
 @media (max-width: 768px) {
   :root {
@@ -24,10 +23,10 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-tertiary: var(--tertiary);
-  --color-logogradient: linear-gradient(90deg, #E42626 0%, #F8BBD0 100%);
+  --color-logogradient: linear-gradient(90deg, #e42626 0%, #f8bbd0 100%);
 
   --font-readex-pro: var(--font-readex-pro);
- 
+
   --text-largest: var(--text-largest);
   --text-large: var(--text-large);
   --text-medium: var(--text-medium);
@@ -35,17 +34,25 @@
   --text-smallest: var(--text-smallest);
 }
 
-
-
 body {
   background: var(--tertiary);
   color: var(--primary);
   line-height: 1.25;
 }
-html, body {
 
+html,
+body {
+  cursor: "url('/fonts/cursor.png') 12 12, auto";
   height: 100%;
 
   overflow: hidden;
-
+}
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+label,
+select {
+  cursor: url("/cursor2.png") 8 8, auto !important;
 }

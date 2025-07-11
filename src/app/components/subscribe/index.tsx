@@ -15,6 +15,7 @@ interface Subscribe {
 }
 const Subscribe = () => {
   const [email, setEmail] = useState("");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const subscribe: Subscribe = {
     title: "SUBSCRIBE TO OUR NEWSLETTER AND STAY UPDATED.",
     socialLinks: [
@@ -32,7 +33,7 @@ const Subscribe = () => {
     ],
   };
   const handleSubscribe =  () => {
-    if(!email) {
+    if(!email|| !emailRegex.test(email)) {
       alert("Please enter a valid email address.");
       return;
     }
@@ -60,7 +61,7 @@ const Subscribe = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button className="uppercase text-secondary border border-secondary w-full" onClick={handleSubscribe}>
+        <button className="uppercase text-secondary hover:text-tertiary hover:bg-secondary transition-colors duration-300 ease-in-out border border-secondary w-full" onClick={handleSubscribe}>
           Subscribe
         </button>
       </div>

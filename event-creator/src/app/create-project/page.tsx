@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
+import { createProject } from "../actions/createProject";
 type Media = {
   url: string;
   type: "IMAGE" | "VIDEO";
@@ -20,44 +21,97 @@ export default function CreateProjectPage() {
     client: "",
     service: "",
     description: "",
+    challenge: "",
   });
 
   const [images, setImages] = useState<Media[]>([]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const res = await fetch("/api/create-project", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: projectInfo.title,
-          clientName: projectInfo.client,
-          service: projectInfo.service,
-          description: projectInfo.description,
-          heroUrl,
-          medias: images,
-        }),
-      });
-      if (res.ok) {
-        alert("Project submitted successfully!");
-        // Reset form or redirect as needed
-        setHeroUrl("");
-        setImages([]);
-        setProjectInfo({
-          title: "",
-          client: "",
-          service: "",
-          description: "",
-        });
-      } else {
-        const err = await res.json();
-        console.error(err);
-        throw new Error("Failed to submit project");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Failed to submit project");
+    if (
+      images.length === 0 ||
+      !heroUrl ||
+      !projectInfo.client ||
+      !projectInfo.title ||
+      !projectInfo.description ||
+      !projectInfo.service
+    ) {
+      alert("Please fill all fields and upload at least one image.");
+      return;
     }
+    try {
+      const res = await createProject({
+        id: "", // placeholder, backend will set
+        title: projectInfo.title,
+        client: projectInfo.client,
+        service: projectInfo.service,
+        description: projectInfo.description,
+        challenge: projectInfo.challenge, // placeholder, update if you have a challenge field
+        createdAt: new Date(), // placeholder, backend will set
+        heroImage: heroUrl,
+        images: images.map((image) => ({
+          id: "", // placeholder, backend will set
+          createdAt: new Date(), // placeholder, backend will set
+          projectId: "", // placeholder, backend will set
+          url: image.url,
+          type: image.type,
+          positionX: image.positionX,
+          positionY: image.positionY,
+          width: image.width,
+          height: image.height,
+          zIndex: image.zIndex,
+        })),
+      });
+      if (!res.success) {
+        throw new Error("Failed to create project");
+      }
+      alert("Project submitted successfully!");
+      // Reset form or redirect as needed
+      setHeroUrl("");
+      setImages([]);
+      setProjectInfo({
+        title: "",
+        client: "",
+        service: "",
+        description: "",
+        challenge: "",
+      });
+    } catch (error) {
+      console.error("Error submitting project:", error);
+      alert("Failed to submit project. Please try again.");
+    }
+    // try {
+    //   const res = await fetch("/api/create-project", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       title: projectInfo.title,
+    //       clientName: projectInfo.client,
+    //       service: projectInfo.service,
+    //       description: projectInfo.description,
+    //       heroUrl,
+    //       medias: images,
+    //     }),
+    //   });
+    //   if (res.ok) {
+    //     alert("Project submitted successfully!");
+    //     // Reset form or redirect as needed
+    //     setHeroUrl("");
+    //     setImages([]);
+    //     setProjectInfo({
+    //       title: "",
+    //       client: "",
+    //       service: "",
+    //       description: "",
+    //     });
+    //   } else {
+    //     const err = await res.json();
+    //     console.error(err);
+    //     throw new Error("Failed to submit project");
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    //   alert("Failed to submit project");
+    // }
   };
 
   return (
@@ -103,7 +157,7 @@ export default function CreateProjectPage() {
                 key={index}
                 className="w-full flex flex-col md:flex-row gap-1"
               >
-                {key !== "description" ? (
+                {key !== "description" && key !== "challenge" ? (
                   <input
                     className="border p-2"
                     type="text"
