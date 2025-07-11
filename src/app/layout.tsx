@@ -36,7 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${readexPro.variable} antialiased `}
+        className={` cursor-[url('/cursor.png')_12_12,auto] ${readexPro.variable} antialiased`}
+        style={{
+          cursor: "url('/cursor.png') 12 12, auto",
+          
+        }}
       >
        
           <LayoutWrapper>
