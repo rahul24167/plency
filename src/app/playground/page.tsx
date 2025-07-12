@@ -42,8 +42,8 @@ const Playground = () => {
   };
 
   return (
-    <div className="w-full flex flex-row justify-end items-end">
-      <div className="w-1/3 flex flex-col items-end ">
+    <div className="w-full flex flex-row md:justify-end items-end">
+      <div className="hidden w-1/3 md:flex flex-col items-end ">
         <motion.img
           src={experiments[id]?.images[0].url}
           alt={experiments[id]?.brand}
@@ -68,7 +68,7 @@ const Playground = () => {
             }}
             className="md:flex-row justify-center items-center h-14 p-5"
           >
-            <Link href={`/playground/${experiment.id}`} className=" uppercase ">
+            <Link href={`/playground/${experiment.id}`} className=" uppercase transition-all duration-300 ease-in-out hover:text-white hover:pl-2 font-bold">
               {experiment.brand}
             </Link>
           </div>
