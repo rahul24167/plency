@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
+//import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
+import { uploadToGCS } from "../../lib/uploadToGCS";
 import { createProject } from "../actions/createProject";
 type Media = {
   url: string;
@@ -143,7 +144,8 @@ export default function CreateProjectPage() {
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
-                  uploadToS3(file).then((url) => setHeroUrl(url));
+                  uploadToGCS(file).then((url)=> setHeroUrl(url));
+                  //uploadToS3(file).then((url) => setHeroUrl(url));
                 }
               }}
             />
@@ -201,7 +203,22 @@ export default function CreateProjectPage() {
                 const file = e.target.files?.[0];
                 const isVideo = file?.type.startsWith("video/");
                 if (file) {
-                  uploadToS3(file).then((url) => {
+                  // uploadToS3(file).then((url) => {
+                  //   setImages((prev) => [
+                  //     ...prev,
+                  //     {
+                  //       url,
+                  //       type: isVideo ? "VIDEO" : "IMAGE",
+                  //       width: 30,
+                  //       height: 30,
+                  //       positionX: 20,
+                  //       positionY: 5,
+                  //       zIndex: 1,
+                  //     },
+                  //   ]);
+                  //   setSelectedImage(images.length - 1);
+                  // });
+                  uploadToGCS(file).then((url) => {
                     setImages((prev) => [
                       ...prev,
                       {

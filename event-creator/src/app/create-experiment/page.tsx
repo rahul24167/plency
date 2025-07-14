@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
+//import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
+import { uploadToGCS } from "../../lib/uploadToGCS";
 import Image from "next/image";
 import { createExperiment } from "@/event-creator/src/app/actions/createExperiment";
 
@@ -49,7 +50,10 @@ export default function CreateExperiment() {
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
-                uploadToS3(file).then((url) =>
+                // uploadToS3(file).then((url) =>
+                //   setImages((prev) => [...prev, url])
+                // );
+                uploadToGCS(file).then((url) =>
                   setImages((prev) => [...prev, url])
                 );
               }
