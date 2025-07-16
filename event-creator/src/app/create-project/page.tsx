@@ -144,7 +144,7 @@ export default function CreateProjectPage() {
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
-                  uploadToGCS(file).then((url)=> setHeroUrl(url));
+                  uploadToGCS(file, "banner").then((url) => setHeroUrl(url));
                   //uploadToS3(file).then((url) => setHeroUrl(url));
                 }
               }}
