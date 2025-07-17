@@ -10,9 +10,9 @@ type FullProject = ProjectType & {
 export default async function Project({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }) {
-  const { id } = await params;
+  const { id } =  await params;
   const project = (await prisma.project.findUnique({
     where: {
       id: id ?? undefined,
@@ -21,6 +21,10 @@ export default async function Project({
       images: true,
     },
   })) as FullProject;
+  if (!project) {
+    return <div>Project not found</div>;
+  }
+
   return (
     <div className="flex flex-col w-full">
       <div className="h-[50vh] md:h-screen m-5 mb-0 relative">
@@ -30,6 +34,7 @@ export default async function Project({
             alt=""
             fill
             className="object-cover"
+            unoptimized
           />
         )}
       </div>
@@ -41,11 +46,15 @@ export default async function Project({
             client: project?.client,
             service: project?.service,
             description: project?.description,
-            challenge: project?.challenge
+            challenge: project?.challenge,
           }).map(([key, value], index) => (
             <div key={index} className="w-full flex flex-col md:flex-row p-3">
-              <div className="md:w-1/4 uppercase font-normal break-words">{key}</div>
-              <div className="md:w-3/4 break-words whitespace-pre-line">{value}</div>
+              <div className="md:w-1/4 uppercase font-normal break-words">
+                {key}
+              </div>
+              <div className="md:w-3/4 break-words whitespace-pre-line">
+                {value}
+              </div>
             </div>
           ))}
         </div>
@@ -70,6 +79,7 @@ export default async function Project({
                     alt={`Image ${index + 1}`}
                     fill
                     style={{ objectFit: "fill" }}
+                    unoptimized
                   />
                 )}
                 {image.type === "VIDEO" && (
@@ -97,6 +107,7 @@ export default async function Project({
                 width={image.width * 200}
                 height={image.height * 200}
                 className="w-full h-auto object-cover"
+                unoptimized
               />
             )}
             {image.type === "VIDEO" && (

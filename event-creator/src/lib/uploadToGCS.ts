@@ -1,12 +1,19 @@
 import imageCompression from 'browser-image-compression';
-type FileType =  'banner' | 'generic';
+const fileTypes = {
+  banner: { maxSizeMB: 1, maxWidthOrHeight: 1920 },
+  generic: { maxSizeMB: 1, maxWidthOrHeight: 1600 },
+  thumbnail: { maxSizeMB: 0.5, maxWidthOrHeight: 480 },
+} as const;
+
+type FileType = keyof typeof fileTypes;
 export async function compressFile(file: File, type: FileType = "generic"): Promise<File> {
   const isImage = file.type.startsWith('image/');
+  const { maxSizeMB, maxWidthOrHeight } = fileTypes[type];
 
   if (isImage) {
     const options = {
-      maxSizeMB: type === "banner" ? 1 : 0.5, // ~500 KB target for banners, ~1 MB for generic
-      maxWidthOrHeight: type === "banner" ? 1920 : 1600, // Resize for web display
+      maxSizeMB,
+      maxWidthOrHeight,
       useWebWorker: true,
     };
     const compressed = await imageCompression(file, options);

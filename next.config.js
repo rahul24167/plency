@@ -10,10 +10,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'storage.googleapis.com',
-        pathname: '/**',
+        pathname: '/plency-store/**',
       },
     ],
   },
 };
 
 module.exports = nextConfig;
+

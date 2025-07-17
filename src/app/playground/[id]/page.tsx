@@ -1,9 +1,10 @@
 import { getExperimentById } from "../../actions/getExperiments";
 import Image from "next/image";
+
 export default async function Experiment({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params;
   const experiment = await getExperimentById(id);
@@ -29,6 +30,7 @@ export default async function Experiment({
               height={0}
               sizes="100vw"
               className="w-full h-auto"
+              unoptimized
             />
             {index === 0 && (
               <div className="md:hidden flex flex-col justify-end items-start">
