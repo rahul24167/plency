@@ -6,7 +6,8 @@ import { getProjectById, getImagesByProjectId } from "../actions/getProject";
 import { updateProject } from "../actions/updateProject";
 import { v4 as uuidv4 } from "uuid";
 
-import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
+//import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
+import { uploadToGCS } from "../../lib/uploadToGCS";
 import { Project, ProjectMedia } from "@prisma/client";
 
 export default function UpdateProjectPage() {
@@ -84,7 +85,12 @@ export default function UpdateProjectPage() {
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
-                    uploadToS3(file).then((url) =>
+                    // uploadToS3(file).then((url) =>
+                    //   setProject((prev) =>
+                    //     prev ? ({ ...prev, heroImage: url } as Project) : prev
+                    //   )
+                    // );
+                     uploadToGCS(file).then((url) =>
                       setProject((prev) =>
                         prev ? ({ ...prev, heroImage: url } as Project) : prev
                       )
@@ -115,11 +121,16 @@ export default function UpdateProjectPage() {
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
-                  uploadToS3(file).then((url) =>
-                    setProject((prev) =>
-                      prev ? ({ ...prev, heroImage: url } as Project) : prev
-                    )
-                  );
+                  // uploadToS3(file).then((url) =>
+                  //   setProject((prev) =>
+                  //     prev ? ({ ...prev, heroImage: url } as Project) : prev
+                  //   )
+                  // );
+                   uploadToGCS(file).then((url) =>
+                      setProject((prev) =>
+                        prev ? ({ ...prev, heroImage: url } as Project) : prev
+                      )
+                    );
                 }
               }}
             />
@@ -199,7 +210,25 @@ export default function UpdateProjectPage() {
                 const file = e.target.files?.[0];
                 const isVideo = file?.type.startsWith("video/");
                 if (file) {
-                  uploadToS3(file).then((url) => {
+                  // uploadToS3(file).then((url) => {
+                  //   setImages((prev) => [
+                  //     ...prev,
+                  //     {
+                  //       id: uuidv4(),
+                  //       projectId: "temp-project-id",
+                  //       url,
+                  //       type: isVideo ? "VIDEO" : "IMAGE",
+                  //       width: 30,
+                  //       height: 30,
+                  //       positionX: 20,
+                  //       positionY: 5,
+                  //       zIndex: 1,
+                  //       createdAt: new Date(),
+                  //     },
+                  //   ]);
+                  //   setSelectedImage(images.length - 1);
+                  // });
+                   uploadToGCS(file).then((url) => {
                     setImages((prev) => [
                       ...prev,
                       {

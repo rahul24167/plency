@@ -30,6 +30,7 @@ const Work = async () => {
                 alt={project.title}
                 fill
                 className="object-cover"
+                unoptimized
               />
             </Link>
 
