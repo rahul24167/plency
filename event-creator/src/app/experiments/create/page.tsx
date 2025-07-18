@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-//import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
-import { uploadToGCS } from "../../lib/uploadToGCS";
+import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import Image from "next/image";
 import { createExperiment } from "@/event-creator/src/app/actions/createExperiment";
 

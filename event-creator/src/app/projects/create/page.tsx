@@ -2,8 +2,8 @@
 import Image from "next/image";
 import { useState } from "react";
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
-import { uploadToGCS } from "../../lib/uploadToGCS";
-import { createProject } from "../actions/createProject";
+import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
+import { createProject } from "@/event-creator/src/app/actions/createProject";
 type Media = {
   url: string;
   type: "IMAGE" | "VIDEO";
@@ -80,39 +80,6 @@ export default function CreateProjectPage() {
       console.error("Error submitting project:", error);
       alert("Failed to submit project. Please try again.");
     }
-    // try {
-    //   const res = await fetch("/api/create-project", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       title: projectInfo.title,
-    //       clientName: projectInfo.client,
-    //       service: projectInfo.service,
-    //       description: projectInfo.description,
-    //       heroUrl,
-    //       medias: images,
-    //     }),
-    //   });
-    //   if (res.ok) {
-    //     alert("Project submitted successfully!");
-    //     // Reset form or redirect as needed
-    //     setHeroUrl("");
-    //     setImages([]);
-    //     setProjectInfo({
-    //       title: "",
-    //       client: "",
-    //       service: "",
-    //       description: "",
-    //     });
-    //   } else {
-    //     const err = await res.json();
-    //     console.error(err);
-    //     throw new Error("Failed to submit project");
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   alert("Failed to submit project");
-    // }
   };
 
   return (

@@ -6,6 +6,7 @@ import "./globals.css";
 import LayoutWrapper from "./LayoutWrapper";
 //components
 import NavPage from "@/src/app/components/navPage";
+
 const readexPro = localFont({
   display: 'swap',
   src: [
@@ -48,6 +49,7 @@ export default function RootLayout({
             <NavPage />
             
             {children}
+           
           </LayoutWrapper>
       </body>
     </html>

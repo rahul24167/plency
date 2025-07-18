@@ -2,12 +2,13 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { getProjectById, getImagesByProjectId } from "../actions/getProject";
-import { updateProject } from "../actions/updateProject";
+import { getProjectById, getImagesByProjectId } from "@/event-creator/src/app/actions/getProject"
+
+import { updateProject } from "@/event-creator/src/app/actions/updateProject";
 import { v4 as uuidv4 } from "uuid";
 
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
-import { uploadToGCS } from "../../lib/uploadToGCS";
+import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { Project, ProjectMedia } from "@prisma/client";
 
 export default function UpdateProjectPage() {
