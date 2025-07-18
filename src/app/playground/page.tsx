@@ -13,7 +13,7 @@ const Playground = () => {
   const [experiments, setExperiments] = useState<ExperimentWithImage[]>([]);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [mouseY, setMouseY] = useState(0);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(-1);
   useEffect(() => {
     async function fetchData() {
       const experimentsData = await getExperiments();
@@ -42,8 +42,8 @@ const Playground = () => {
   };
 
   return (
-    <div className="w-full flex flex-row md:justify-end items-end">
-      <div className="hidden w-1/3 md:flex flex-col items-end ">
+    <div className="w-full flex flex-row md:justify-end items-end ">
+      <div className={`${experiments.length > 0 ? "" : "hidden"} w-1/3 md:flex flex-col items-end `}>
         <motion.img
           src={experiments[id]?.images[0].url}
           alt={experiments[id]?.brand}
