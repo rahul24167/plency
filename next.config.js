@@ -1,20 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'plency.s3.ap-south-1.amazonaws.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'storage.googleapis.com',
-        pathname: '/plency-store/**',
-      },
-    ],
+    remotePatterns: [new URL('https://storage.googleapis.com/plency-bucket/**'), new URL('https://plency.s3.ap-south-1.amazonaws.com/**')],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
 
