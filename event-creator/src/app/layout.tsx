@@ -7,7 +7,7 @@ const readexPro = localFont({
   display: 'swap',
   src: [
     {
-      path: "./fonts/ReadexPro-VariableFont_HEXP,wght.ttf",
+      path: "./font/ReadexPro-VariableFont_HEXP,wght.ttf",
     },
   ],
   variable: '--font-readex-pro',
