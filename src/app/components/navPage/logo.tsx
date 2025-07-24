@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import useBreakpoint from "@/src/app/hooks/useBreakpoint";
 import { motion } from "motion/react";
 import Link from "next/link";
+import Image from "next/image";
 import { logoText } from "./data";
 
 const Logo = () => {
@@ -46,13 +47,14 @@ const Logo = () => {
     if (pathname !== "/" || !shouldAnimate()) return 1;
     if (isInsideViewport) return 1;
 
-    return 4.5;
+    return 2.56;
   };
 
   const initialProps = shouldAnimate()
     ? {
         scale: PageLoaded && pathname === "/" ? getScale() : 1,
-        y: pathname === "/" ? 50 : 0,
+        y: pathname === "/" ? 35 : 0,
+
         color:"#E42626"
       }
     : {
@@ -69,7 +71,7 @@ const Logo = () => {
               ? 1
               : getScale()
             : 1,
-        y: pathname === "/" ? (isInsideViewport ? 0 : 50) : 0,
+        y: pathname === "/" ? (isInsideViewport ? 0 : 35) : 0,
         color:"#E42626"
       }
     : {
@@ -85,11 +87,11 @@ const Logo = () => {
       animate={animateProps}
       
       transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
-      className="pointer-events-none w-1/3 mx-5 "
+      className="pointer-events-none w-1/3 mx-4 "
     >
-      <h1 className="pointer-events-auto w-fit font-bold uppercase">
-        <Link href={logoText.path} className="pointer-events-auto">
-          {logoText.title}
+      <h1 className="pointer-events-auto m-0.5 font-bold uppercase relative">
+        <Link href={logoText.path} className="pointer-events-auto ">
+          <Image src={"/plencyLogo.png"} alt="Plency Logo" width={300} height={300} className="w-auto h-[1.125rem]" unoptimized />
         </Link>
       </h1>
     </motion.div>

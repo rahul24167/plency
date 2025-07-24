@@ -68,7 +68,7 @@ const Playground = () => {
             }}
             className="md:flex-row justify-center items-center h-14 p-5"
           >
-            <Link href={`/playground/${experiment.id}`} className=" uppercase transition-all duration-300 ease-in-out hover:text-white hover:pl-2 font-bold">
+            <Link href={`/playground/${experiment.id}`} className=" uppercase transition-all duration-300 ease-in-out hover:text-white hover:pl-2 font-normal md:font-medium">
               {experiment.brand}
             </Link>
           </div>

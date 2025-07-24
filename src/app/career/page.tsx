@@ -22,7 +22,7 @@ const Career = () => {
         {careerWithUs.map((item, index) => (
           <div key={index} className="w-full flex flex-col md:flex-row p-5">
             <div className="w-1/4 uppercase font-normal text-secondary">{item.type}</div>
-            <div className="w-3/4 flex flex-col gap-3">
+            <div className="w-3/4 flex flex-col gap-3 font-normal">
               <span>{item.career.title}</span>
               <span>{item.career.description}</span>
             </div>

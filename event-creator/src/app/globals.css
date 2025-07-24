@@ -51,4 +51,6 @@ body {
   background: var(--tertiary);
   color: var(--primary);
   line-height: 1.25;
+  font-family: var(--font-readex-pro);
+
 }

@@ -15,10 +15,10 @@ export default async function Experiment({
   return (
     <div className="h-screen w-full flex flex-col md:flex-row  gap-5 p-5  pb-0">
       <div className="hidden md:w-[38%] md:flex flex-col justify-end items-start">
-        <div className="font-bold uppercase">{experiment.brand}</div>
-        <div className="font-bold">{experiment.brandDescription}</div>
-        <div className="font-bold uppercase ">{experiment.question}</div>
-        <div className="font-bold md:mb-14">{experiment.answer}</div>
+        <div className="font-normal uppercase">{experiment.brand}</div>
+        <div className="font-normal">{experiment.brandDescription}</div>
+        <div className="font-normal uppercase ">{experiment.question}</div>
+        <div className="font-normal md:mb-14">{experiment.answer}</div>
       </div>
       <div className="md:w-[62%] overflow-auto">
         {experiment.images.map((image, index) => (
@@ -34,12 +34,12 @@ export default async function Experiment({
             />
             {index === 0 && (
               <div className="md:hidden flex flex-col justify-end items-start">
-                <div className="font-bold uppercase">{experiment.brand}</div>
-                <div className="font-bold">{experiment.brandDescription}</div>
-                <div className="font-bold uppercase ">
+                <div className="font-normal uppercase">{experiment.brand}</div>
+                <div className="font-normal">{experiment.brandDescription}</div>
+                <div className="font-normal uppercase ">
                   {experiment.question}
                 </div>
-                <div className="font-bold md:mb-14">{experiment.answer}</div>
+                <div className="font-normal md:mb-14">{experiment.answer}</div>
               </div>
             )}
           </div>
