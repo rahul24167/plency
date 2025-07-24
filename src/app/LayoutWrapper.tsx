@@ -1,7 +1,8 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
-import CustomCursor from "@/src/app/components/customCursor";
+//import CustomCursor from "@/src/app/components/customCursor";
+import TrailingCursor from "./components/trailingCursor";
 
 
 export default function LayoutWrapper({
@@ -30,14 +31,14 @@ export default function LayoutWrapper({
     transition={{ delay: 0, duration: 1, ease: "easeInOut" }}
     className="h-screen overflow-auto z-10"
   >
-    <CustomCursor />
+    <TrailingCursor />
     <div className="w-full h-16 md:hidden bg-transparent"></div>
     <div className="relative w-full">
       {/* Page Title - overlays on top of children */}
       {isMainPage && pathname !== "/" && (
         <div className="md:absolute md:top-0 md:left-0 w-full md:h-screen flex flex-col justify-end md:z-30 pointer-events-none">
          <div className="h-1/2 w-full">
-          <h1 className="px-5 md:mt-[10vh] text-medium md:text-large lg:text-largest font-bold uppercase">
+          <h1 className="px-5 md:mt-[8vh] text-medium md:text-large lg:text-largest font-bold uppercase">
             {pathname
               .replace("/", "")
               .replace(/-/g, " ")

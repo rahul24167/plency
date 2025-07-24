@@ -6,8 +6,8 @@
   --secondary: #e42626;
   --primary: #595858;
   --tertiary: #d4d4d4;
-  --text-largest: 5.0625rem;
-  --text-large: 3.75rem;
+  --text-largest: 2.875rem;
+  --text-large: 2.875rem;
   --text-small: 1.125rem;
 }
 @media (max-width: 768px) {

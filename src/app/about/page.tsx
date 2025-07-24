@@ -20,7 +20,7 @@ const About = () => {
       <div className="w-full flex flex-row justify-end items-center">
         <div className="md:w-2/3">
         {aboutUs.map((item, index) => (
-          <div key={index} className={`${item.title!=="About"? "uppercase": ""} w-full flex flex-col md:flex-row p-5`}>
+          <div key={index} className={`uppercase w-full flex flex-col md:flex-row p-5`}>
             <div className={`md:w-1/4  font-normal`}>{item.title}</div>
             <div className="md:w-3/4">{item.description}</div>
           </div>
