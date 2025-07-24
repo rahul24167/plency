@@ -5,24 +5,26 @@ import { useState, useEffect } from "react";
 const TrailingCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 const colors = [
-  "#d4d4d4",
-  "#c4c4c4",
-  "#b4b4b4",
-  "#a4a4a4",
-  "#949494",
-  "#848484",
-  "#747474",
-  "#646464",
-  "#545454",
-  "#444444",
+  "#dddddd",
+  "#d1d1d1",
+  "#c5c5c5",
+  "#b9b9b9",
+  "#adadad",
+  "#a1a1a1",
+  "#959595",
+  "#898989",
+  "#7d7d7d",
+  "#717171",
+  "#656565",
+  "#595959",
+  "#4d4d4d",
+  "#414141",
+  "#3a3a3a",
   "#343434",
+  "#2e2e2e",
   "#2c2c2c",
-  "#242424",
-  "#1c1c1c",
-  "#141414",
-  "#0c0c0c",
-  "#040404",
-  "#000000",
+  "#2b2b2b",
+  "#2a2a2a",
 ];
 
 
@@ -52,7 +54,7 @@ const colors = [
 
             zIndex: i-n+1,
           }}
-          className={`h-20 w-20 absolute top-0 left-0 pointer-events-none rounded-full transition-transform ease-linear `}
+          className={`h-8 w-8 absolute top-0 left-0 pointer-events-none rounded-full transition-transform ease-linear `}
         ></div>
       ))}
     </>
