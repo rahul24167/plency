@@ -52,7 +52,7 @@ export default async function Project({
               <div className="md:w-1/4 uppercase font-normal break-words">
                 {key}
               </div>
-              <div className="md:w-3/4 break-words whitespace-pre-line">
+              <div className="md:w-3/4 break-words font-normal whitespace-pre-line">
                 {value}
               </div>
             </div>

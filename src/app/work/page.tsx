@@ -35,8 +35,8 @@ const Work = async () => {
             </Link>
 
             <div className="w-full flex flex-row justify-start items-center px-2">
-              <h2 className="w-1/3 uppercase font-bold">{project.title}</h2>
-              <p className="w-1/3 uppercase font-bold">{project.client}</p>
+              <h2 className="w-1/3 uppercase font-normal">{project.title}</h2>
+              <p className="w-1/3 uppercase font-normal">{project.client}</p>
             </div>
           </div>
         ))}

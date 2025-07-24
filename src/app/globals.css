@@ -2,6 +2,7 @@
 
 :root {
   --background: transparent;
+  
   /* --foreground: #171717;  */
   --secondary: #e42626;
   --primary: #595858;
@@ -42,8 +43,8 @@ body {
 
 html,
 body {
-  cursor: "url('/fonts/cursor.png') 12 12, auto";
   height: 100%;
+  font-family: var(--font-readex-pro);
 
   overflow: hidden;
 }

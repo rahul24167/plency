@@ -35,7 +35,7 @@ export default function NavPage() {
           <Logo />
           <button
             onClick={handleMenuClick}
-            className="flex md:hidden pointer-events-auto mx-5 font-bold uppercase"
+            className="flex md:hidden pointer-events-auto mx-5 font-medium uppercase"
           >
             {isMenuOpen ? "CLOSE" : "MENU"}
           </button>
@@ -45,7 +45,7 @@ export default function NavPage() {
             <Link
               key={index}
               href={link.path}
-              className={`pointer-events-auto px-5 font-small uppercase font-bold ${
+              className={`pointer-events-auto px-5 font-small uppercase font-medium ${
                 pathname === link.path ? "text-white" : ""
               }`}
             >
@@ -58,7 +58,7 @@ export default function NavPage() {
             <Link
               key={index}
               href={link.path}
-              className={`pointer-events-auto px-5 font-small uppercase font-bold ${
+              className={`pointer-events-auto px-5 font-small uppercase font-medium ${
                 pathname === link.path ? "text-white" : ""
               }`}
             >
@@ -78,7 +78,7 @@ export default function NavPage() {
             exit={{ y: "-100%" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <div className="flex flex-col text-largest font-bold uppercase px-5">
+            <div className="flex flex-col text-largest font-medium uppercase px-5">
               {navLinks2.map((link, index) => (
                 <Link 
                   key={index} 
@@ -89,7 +89,7 @@ export default function NavPage() {
                 </Link>
               ))}
             </div>
-            <div className="flex flex-col text-largest font-bold uppercase px-5">
+            <div className="flex flex-col text-largest font-medium uppercase px-5">
               {navLinks1.map((link, index) => (
                 <Link 
                   key={index} 

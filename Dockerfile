@@ -11,7 +11,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # ✅ Prisma client generation
-RUN npx prisma migrate deploy
 RUN npx prisma generate
 
 # ✅ Make sure next.config.js is present before build

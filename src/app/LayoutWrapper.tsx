@@ -38,7 +38,7 @@ export default function LayoutWrapper({
       {isMainPage && pathname !== "/" && (
         <div className="md:absolute md:top-0 md:left-0 w-full md:h-screen flex flex-col justify-end md:z-30 pointer-events-none">
          <div className="h-1/2 w-full">
-          <h1 className="px-5 md:mt-[8vh] text-medium md:text-large lg:text-largest font-bold uppercase">
+          <h1 className="px-5 md:mt-[8vh] text-medium md:text-large lg:text-largest font-medium uppercase">
             {pathname
               .replace("/", "")
               .replace(/-/g, " ")

@@ -29,7 +29,7 @@ const Contact = () => {
               <div className={`md:w-1/4 uppercase font-normal`}>
                 {item.title}
               </div>
-              <div className="md:w-3/4">{item.description}</div>
+              <div className="md:w-3/4 font-normal">{item.description}</div>
             </div>
           ))}
         </div>

@@ -52,7 +52,7 @@ const colors = [
 
             zIndex: i-n+1,
           }}
-          className={`h-20 w-20 fixed top-0 left-0 pointer-events-none rounded-full transition-transform ease-linear `}
+          className={`h-20 w-20 absolute top-0 left-0 pointer-events-none rounded-full transition-transform ease-linear `}
         ></div>
       ))}
     </>

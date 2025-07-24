@@ -57,15 +57,15 @@ export default function Home() {
           <motion.h1
             variants={childVariants}
             transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
-            className=""
+            className="hidden md:flex"
           >
             {heading.map((arr, index) => (
-              <span key={index} className="block">
+              <span key={index} className="block font-normal">
                 {arr.map((word, wordIndex) => (
                   <span
                     key={wordIndex}
                     className={`inline-block ${
-                      wordIndex % 2 === 0 ? "" : "font-bold"
+                      wordIndex % 2 === 0 ? "" : "text-black"
                     }`}
                   >
                     {word}&nbsp;
@@ -77,15 +77,15 @@ export default function Home() {
           <motion.h2
             variants={childVariants}
             transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
-            className=""
+            className="hidden md:flex"
           >
             {subHeading.map((arr, index) => (
-              <span key={index} className="block">
+              <span key={index} className="block font-normal">
                 {arr.map((word, wordIndex) => (
                   <span
                     key={wordIndex}
                     className={`inline-block ${
-                      wordIndex % 2 === 0 ? "" : "font-bold"
+                      wordIndex % 2 === 0 ? "" : "text-black"
                     }`}
                   >
                     {word}&nbsp;
@@ -94,8 +94,40 @@ export default function Home() {
               </span>
             ))}
           </motion.h2>
+          <h1 className="md:hidden">
+            {heading.map((arr, index) => (
+              <span key={index} className="block font-normal">
+                {arr.map((word, wordIndex) => (
+                  <span
+                    key={wordIndex}
+                    className={`inline-block ${
+                      wordIndex % 2 === 0 ? "" : "text-black"
+                    }`}
+                  >
+                    {word}&nbsp;
+                  </span>
+                ))}
+              </span>
+            ))}
+          </h1>
+          <h2 className="md:hidden">
+            {subHeading.map((arr, index) => (
+              <span key={index} className="block font-normal">
+                {arr.map((word, wordIndex) => (
+                  <span
+                    key={wordIndex}
+                    className={`inline-block ${
+                      wordIndex % 2 === 0 ? "" : "text-black"
+                    }`}
+                  >
+                    {word}&nbsp;
+                  </span>
+                ))}
+              </span>
+            ))}
+          </h2>
         </div>
-        <div className="w-full h-1/2 border flex flex-col justify-center items-center">
+        <div className="w-full h-1/2 flex flex-col justify-center items-center">
           <video
             className="hidden md:block"
             src="https://storage.googleapis.com/plency-bucket/1080p/Laptopvideo.mp4"
