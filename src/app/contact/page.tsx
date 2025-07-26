@@ -18,7 +18,7 @@ const Contact = () => {
   ];
   return (
     <div className="min-h-screen bg-transparent">
-      <div className="w-full flex flex-col-reverse md:flex-row   justify-start items-start">
+      <div className="w-full flex flex-col-reverse md:flex-row justify-start items-start">
         <Subscribe />
         <div className="md:w-1/3">
           {contactUs.map((item, index) => (

@@ -168,39 +168,26 @@ export default function CreateProjectPage() {
               className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
               onChange={(e) => {
                 const file = e.target.files?.[0];
-                const isVideo = file?.type.startsWith("video/");
-                if (file) {
-                  // uploadToS3(file).then((url) => {
-                  //   setImages((prev) => [
-                  //     ...prev,
-                  //     {
-                  //       url,
-                  //       type: isVideo ? "VIDEO" : "IMAGE",
-                  //       width: 30,
-                  //       height: 30,
-                  //       positionX: 20,
-                  //       positionY: 5,
-                  //       zIndex: 1,
-                  //     },
-                  //   ]);
-                  //   setSelectedImage(images.length - 1);
-                  // });
-                  uploadToGCS(file).then((url) => {
-                    setImages((prev) => [
-                      ...prev,
-                      {
-                        url,
-                        type: isVideo ? "VIDEO" : "IMAGE",
-                        width: 30,
-                        height: 30,
-                        positionX: 20,
-                        positionY: 5,
-                        zIndex: 1,
-                      },
-                    ]);
-                    setSelectedImage(images.length - 1);
-                  });
-                }
+                if (!file) return;
+
+                const isVideo = file.type.startsWith("video/");
+                alert(`Uploading ${isVideo }...`);
+
+                uploadToGCS(file).then((url) => {
+                  setImages((prev) => [
+                    ...prev,
+                    {
+                      url,
+                      type: isVideo ? "VIDEO" : "IMAGE",
+                      width: 30,
+                      height: 30,
+                      positionX: 20,
+                      positionY: 5,
+                      zIndex: 1,
+                    },
+                  ]);
+                  setSelectedImage(images.length - 1);
+                });
               }}
             />
           </div>

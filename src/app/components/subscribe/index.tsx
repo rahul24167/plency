@@ -52,7 +52,7 @@ const Subscribe = () => {
   };
   return (
     <div className="w-full md:w-1/3 gap-5 flex flex-col justify-start items-start ">
-      <div className="w-full md:w-1/2 flex flex-col items-start m-5 gap-3.5">
+      <div className="w-full md:w-1/2 flex flex-col items-start p-5 gap-3.5">
         <span className="uppercase font-normal">{subscribe.title}</span>
         <input
           type="email"
