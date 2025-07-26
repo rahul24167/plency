@@ -23,8 +23,9 @@ export async function GET(req: NextRequest) {
   const isImage = contentType.startsWith("image/");
   const isVideo = contentType.startsWith("video/");
   const folder = isImage ? "images" : isVideo ? "raw" : "others";
+  const extension = contentType.split("/")[1];
 
-  const uniqueFilename = `${folder}/${uuidv4()}`;
+  const uniqueFilename = `${folder}/${uuidv4()}.${extension}`;
 
   const file = bucket.file(uniqueFilename);
 
