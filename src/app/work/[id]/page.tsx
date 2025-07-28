@@ -108,6 +108,7 @@ export default async function Project({
                 height={image.height * 200}
                 className="w-full h-auto object-cover"
                 unoptimized
+                
               />
             )}
             {image.type === "VIDEO" && (
