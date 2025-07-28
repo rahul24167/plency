@@ -32,7 +32,9 @@ export default async function Project({
           <Image
             src={project?.heroImage}
             alt=""
-            fill
+            width={1920}
+            height={1920}
+            
             className="object-cover"
             unoptimized
           />
