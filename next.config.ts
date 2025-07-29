@@ -4,12 +4,14 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'cdn.plency.com',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "cdn.plency.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
+ 
 };
 
 export default nextConfig;
