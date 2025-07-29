@@ -31,7 +31,6 @@ export default async function Experiment({
               height={0}
               sizes="100vw"
               className="w-full h-auto"
-              unoptimized
             />
             {index === 0 && (
               <div className="md:hidden flex flex-col justify-end items-start">
