@@ -2,14 +2,19 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { getProjectById, getImagesByProjectId } from "@/event-creator/src/app/actions/getProject"
+import {
+  getProjectById,
+  getImagesByProjectId,
+} from "@/event-creator/src/app/actions/getProject";
 
 import { updateProject } from "@/event-creator/src/app/actions/updateProject";
 import { v4 as uuidv4 } from "uuid";
 
+
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { Project, ProjectMedia } from "@prisma/client";
+import { cdnUrl } from "../../utills/cdnUrl";
 
 export default function UpdateProjectPage() {
   const params = useParams();
@@ -62,7 +67,7 @@ export default function UpdateProjectPage() {
         {project?.heroImage ? (
           <div className="h-[50vh] md:h-screen mb-0 relative flex items-center justify-center">
             <Image
-              src={project?.heroImage}
+              src={cdnUrl(project?.heroImage)}
               alt=""
               fill
               className="object-cover"
@@ -91,7 +96,7 @@ export default function UpdateProjectPage() {
                     //     prev ? ({ ...prev, heroImage: url } as Project) : prev
                     //   )
                     // );
-                     uploadToGCS(file).then((url) =>
+                    uploadToGCS(file).then((url) =>
                       setProject((prev) =>
                         prev ? ({ ...prev, heroImage: url } as Project) : prev
                       )
@@ -127,11 +132,11 @@ export default function UpdateProjectPage() {
                   //     prev ? ({ ...prev, heroImage: url } as Project) : prev
                   //   )
                   // );
-                   uploadToGCS(file).then((url) =>
-                      setProject((prev) =>
-                        prev ? ({ ...prev, heroImage: url } as Project) : prev
-                      )
-                    );
+                  uploadToGCS(file).then((url) =>
+                    setProject((prev) =>
+                      prev ? ({ ...prev, heroImage: url } as Project) : prev
+                    )
+                  );
                 }
               }}
             />
@@ -143,7 +148,13 @@ export default function UpdateProjectPage() {
             {project &&
               Object.entries(project).map(([key, value], index) => {
                 if (
-                  !["client", "title", "service", "description", "challenge"].includes(key)
+                  ![
+                    "client",
+                    "title",
+                    "service",
+                    "description",
+                    "challenge",
+                  ].includes(key)
                 )
                   return null;
 
@@ -152,7 +163,7 @@ export default function UpdateProjectPage() {
                     key={index}
                     className="w-full flex flex-col md:flex-row gap-1"
                   >
-                    {(key !== "description" && key !== "challenge") ? (
+                    {key !== "description" && key !== "challenge" ? (
                       <input
                         className="border p-2"
                         type="text"
@@ -174,7 +185,7 @@ export default function UpdateProjectPage() {
                       <textarea
                         className="border p-2"
                         placeholder={key}
-                        value={value === null ? "" : value as string}
+                        value={value === null ? "" : (value as string)}
                         onChange={(e) => {
                           if (!isEdit) return;
                           setProject((prev) =>
@@ -211,25 +222,8 @@ export default function UpdateProjectPage() {
                 const file = e.target.files?.[0];
                 const isVideo = file?.type.startsWith("video/");
                 if (file) {
-                  // uploadToS3(file).then((url) => {
-                  //   setImages((prev) => [
-                  //     ...prev,
-                  //     {
-                  //       id: uuidv4(),
-                  //       projectId: "temp-project-id",
-                  //       url,
-                  //       type: isVideo ? "VIDEO" : "IMAGE",
-                  //       width: 30,
-                  //       height: 30,
-                  //       positionX: 20,
-                  //       positionY: 5,
-                  //       zIndex: 1,
-                  //       createdAt: new Date(),
-                  //     },
-                  //   ]);
-                  //   setSelectedImage(images.length - 1);
-                  // });
-                   uploadToGCS(file).then((url) => {
+                  
+                  uploadToGCS(file).then((url) => {
                     setImages((prev) => [
                       ...prev,
                       {
@@ -319,7 +313,6 @@ export default function UpdateProjectPage() {
                   newImages[selectedImage] = {
                     ...selected,
                     positionY: (selected.positionY ?? 0) - 1,
-                    
                   };
                   return newImages;
                 })
@@ -447,7 +440,7 @@ export default function UpdateProjectPage() {
                   const zIndex = Math.max(0, Number(e.target.value));
                   setImages((prev) => {
                     const newImages = [...prev];
-                    
+
                     newImages[selectedImage].zIndex = zIndex;
                     return newImages;
                   });
@@ -486,7 +479,7 @@ export default function UpdateProjectPage() {
               <div className="w-full h-full relative">
                 {image.type === "IMAGE" && (
                   <Image
-                    src={image.url ?? ""}
+                    src={cdnUrl(image.url ?? "")}
                     alt={`Image ${index + 1}`}
                     fill
                     style={{ objectFit: "fill" }}
@@ -494,11 +487,12 @@ export default function UpdateProjectPage() {
                 )}
                 {image.type === "VIDEO" && (
                   <video
-                    src={image.url ?? ""}
+                    src={cdnUrl(image.url ?? "")}
                     autoPlay
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     className="w-full h-full object-cover"
                   />
                 )}

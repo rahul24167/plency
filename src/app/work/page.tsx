@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/src/lib/prisma";
+import { cdnUrl } from "../lib/cdnUrl";
 //import Image from "next/image";
 
 const Work = async () => {
@@ -26,7 +27,7 @@ const Work = async () => {
               className="w-full h-auto flex-grow relative"
             >
               <Image
-                src={project.heroImage}
+                src={cdnUrl(project.heroImage)}
                 alt={project.title}
                 fill
                 className="object-cover"

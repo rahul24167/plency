@@ -13,8 +13,8 @@ COPY . .
 # ✅ Prisma client generation
 RUN npx prisma generate
 
-# ✅ Make sure next.config.js is present before build
-COPY next.config.js ./next.config.js
+# ✅ Make sure next.config.ts is present before build
+COPY next.config.ts ./next.config.ts
 
 # ⚠️ Build from the root, not /app/src — because .next is created at root
 RUN npm run build:app

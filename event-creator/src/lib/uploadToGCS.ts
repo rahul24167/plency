@@ -51,5 +51,10 @@ export async function uploadToGCS(file: File, type: FileType = "generic"): Promi
   }
 
   // 3. Return the public URL to store in state or database
-  return publicUrl;
+  const baseUrl = 'https://storage.googleapis.com/plency-bucket/';
+  const trimmedPath = publicUrl.startsWith(baseUrl)
+  ? publicUrl.slice(baseUrl.length)
+  : publicUrl;
+
+  return trimmedPath;
 }

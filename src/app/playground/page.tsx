@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import { Experiment } from "@prisma/client";
+import { cdnUrl } from "../lib/cdnUrl";
 
 
 interface ExperimentWithImage extends Experiment {
@@ -46,8 +47,7 @@ const Playground = () => {
     <div className="w-full flex flex-row md:justify-end items-end ">
       <div className={`${experiments.length > 0 ? "" : "hidden"} w-1/3 h-full md:flex flex-col items-end justify-start relative `}>
         <motion.img
-
-          src={experiments[id]?.images[0].url}
+          src={cdnUrl(experiments[id]?.images[0].url)}
           alt={experiments[id]?.brand}
           width={112}
           height={112}
