@@ -91,7 +91,6 @@ const Logo = () => {
             width={300}
             height={300}
             className="w-auto h-[1.125rem]"
-            unoptimized
             loader={({ src }) => src}
           />
         </Link>

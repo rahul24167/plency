@@ -36,7 +36,6 @@ export default async function Project({
             width={1920}
             height={1920}
             className="object-cover"
-            unoptimized
           />
         )}
       </div>
@@ -81,7 +80,6 @@ export default async function Project({
                     alt={`Image ${index + 1}`}
                     fill
                     style={{ objectFit: "fill" }}
-                    unoptimized
                   />
                 )}
                 {image.type === "VIDEO" && (
@@ -110,7 +108,6 @@ export default async function Project({
                 width={image.width * 200}
                 height={image.height * 200}
                 className="w-full h-auto object-cover"
-                unoptimized
                 
               />
             )}
