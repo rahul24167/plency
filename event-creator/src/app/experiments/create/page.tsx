@@ -3,6 +3,7 @@ import { useState } from "react";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import Image from "next/image";
 import { createExperiment } from "@/event-creator/src/app/actions/createExperiment";
+import { cdnUrl } from "../../utills/cdnUrl";
 
 export default function CreateExperiment() {
   const [experimentInfo, setExperimentInfo] = useState({
@@ -156,8 +157,8 @@ export default function CreateExperiment() {
       <div className="w-full md:w-1/2 h-[90vh] overflow-auto">
         {images.map((url, index) => (
           <div className="w-full my-2" key={index}>
-            <Image
-              src={url}
+            <Image 
+              src={cdnUrl(url)}
               alt={`Uploaded image ${index}`}
               width={0}
               height={0}

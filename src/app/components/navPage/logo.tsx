@@ -55,29 +55,24 @@ const Logo = () => {
         scale: PageLoaded && pathname === "/" ? getScale() : 1,
         y: pathname === "/" ? 35 : 0,
 
-        color:"#E42626"
+        color: "#E42626",
       }
     : {
         scale: 1,
         y: 0,
-        color:"#E42626"
+        color: "#E42626",
       };
 
   const animateProps = shouldAnimate()
     ? {
-        scale:
-          pathname === "/"
-            ? isInsideViewport
-              ? 1
-              : getScale()
-            : 1,
+        scale: pathname === "/" ? (isInsideViewport ? 1 : getScale()) : 1,
         y: pathname === "/" ? (isInsideViewport ? 0 : 35) : 0,
-        color:"#E42626"
+        color: "#E42626",
       }
     : {
         scale: 1,
         y: 0,
-        color:"#E42626"
+        color: "#E42626",
       };
 
   return (
@@ -85,13 +80,20 @@ const Logo = () => {
       style={{ transformOrigin: "left top" }}
       initial={initialProps}
       animate={animateProps}
-      
       transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
       className="pointer-events-none w-1/3 mx-4 "
     >
       <h1 className="pointer-events-auto m-0.5 font-bold uppercase relative">
         <Link href={logoText.path} className="pointer-events-auto ">
-          <Image src={"/plencyLogo.png"} alt="Plency Logo" width={300} height={300} className="w-auto h-[1.125rem]" unoptimized />
+          <Image
+            src={"/plencyLogo.png"}
+            alt="Plency Logo"
+            width={300}
+            height={300}
+            className="w-auto h-[1.125rem]"
+            unoptimized
+            loader={({ src }) => src}
+          />
         </Link>
       </h1>
     </motion.div>
@@ -99,4 +101,3 @@ const Logo = () => {
 };
 
 export default Logo;
-

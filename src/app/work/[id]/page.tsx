@@ -1,7 +1,8 @@
-import Image from "next/image";
 import { prisma } from "@/src/lib/prisma";
+import Image from "next/image";
 
 import { Project as ProjectType, ProjectMedia } from "@prisma/client";
+import { cdnUrl } from "../../lib/cdnUrl";
 
 type FullProject = ProjectType & {
   images: ProjectMedia[];
@@ -30,9 +31,10 @@ export default async function Project({
       <div className="h-[50vh] md:h-screen m-5 mb-0 relative">
         {project?.heroImage && (
           <Image
-            src={project?.heroImage}
+            src={cdnUrl(project?.heroImage)}
             alt=""
-            fill
+            width={1920}
+            height={1920}
             className="object-cover"
             unoptimized
           />
@@ -75,7 +77,7 @@ export default async function Project({
               <div className="w-full h-full relative">
                 {image.type === "IMAGE" && (
                   <Image
-                    src={image.url}
+                    src={`https://cdn.plency.com/${image.url}`}
                     alt={`Image ${index + 1}`}
                     fill
                     style={{ objectFit: "fill" }}
@@ -84,11 +86,12 @@ export default async function Project({
                 )}
                 {image.type === "VIDEO" && (
                   <video
-                    src={image.url}
+                    src={cdnUrl(image.url)}
                     autoPlay
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     className="w-full h-full object-cover"
                   />
                 )}
@@ -102,21 +105,23 @@ export default async function Project({
           <div key={index} className="w-full">
             {image.type === "IMAGE" && (
               <Image
-                src={image.url}
+                src={cdnUrl(image.url)}
                 alt={`Image ${index + 1}`}
                 width={image.width * 200}
                 height={image.height * 200}
                 className="w-full h-auto object-cover"
                 unoptimized
+                
               />
             )}
             {image.type === "VIDEO" && (
               <video
-                src={image.url}
+                src={cdnUrl(image.url)}
                 autoPlay
                 loop
                 muted
                 playsInline
+                preload="auto"
                 className="w-full h-full object-cover"
               />
             )}

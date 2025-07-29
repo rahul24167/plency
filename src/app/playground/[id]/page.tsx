@@ -1,5 +1,6 @@
 import { getExperimentById } from "../../actions/getExperiments";
 import Image from "next/image";
+import { cdnUrl } from "../../lib/cdnUrl";
 
 export default async function Experiment({
   params,
@@ -24,7 +25,7 @@ export default async function Experiment({
         {experiment.images.map((image, index) => (
           <div className="w-full mb-2" key={index}>
             <Image
-              src={image.url}
+              src={cdnUrl(image.url)}
               alt={`Uploaded image ${index}`}
               width={0}
               height={0}

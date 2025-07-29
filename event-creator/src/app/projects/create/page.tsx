@@ -4,6 +4,7 @@ import { useState } from "react";
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { createProject } from "@/event-creator/src/app/actions/createProject";
+import { cdnUrl } from "../../utills/cdnUrl";
 type Media = {
   url: string;
   type: "IMAGE" | "VIDEO";
@@ -88,7 +89,7 @@ export default function CreateProjectPage() {
         {/* Hero Image Preview */}
         {heroUrl ? (
           <div className="h-[50vh] md:h-screen mb-0 relative">
-            <Image src={heroUrl} alt="" fill className="object-cover" />
+            <Image src={cdnUrl(heroUrl)} alt="" fill className="object-cover" />
           </div>
         ) : (
           <div className="w-full h-[50vh] bg-gray-100 flex flex-col items-center justify-center border-4 border-dashed border-gray-300 rounded-2xl shadow-inner hover:shadow-lg transition-all duration-300 ease-in-out px-6 text-center">
@@ -409,7 +410,7 @@ export default function CreateProjectPage() {
               <div className="w-full h-full relative">
                 {image.type === "IMAGE" && (
                   <Image
-                    src={image.url}
+                    src={cdnUrl(image.url)}
                     alt={`Image ${index + 1}`}
                     fill
                     style={{ objectFit: "fill" }}
@@ -417,11 +418,12 @@ export default function CreateProjectPage() {
                 )}
                 {image.type === "VIDEO" && (
                   <video
-                    src={image.url}
+                    src={cdnUrl(image.url)}
                     autoPlay
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     className="w-full h-full object-cover"
                   />
                 )}

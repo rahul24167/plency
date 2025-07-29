@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import { Experiment } from "@prisma/client";
+import { cdnUrl } from "../lib/cdnUrl";
+
 
 interface ExperimentWithImage extends Experiment {
   images: { url: string }[];
@@ -27,7 +29,7 @@ const Playground = () => {
   }, []);
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMouseY(e.clientY-126);
+      setMouseY(e.clientY-68);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -43,19 +45,19 @@ const Playground = () => {
 
   return (
     <div className="w-full flex flex-row md:justify-end items-end ">
-      <div className={`${experiments.length > 0 ? "" : "hidden"} w-1/3 md:flex flex-col items-end `}>
+      <div className={`${experiments.length > 0 ? "" : "hidden"} w-1/3 h-full md:flex flex-col items-end justify-start relative `}>
         <motion.img
-          src={experiments[id]?.images[0].url}
+          src={cdnUrl(experiments[id]?.images[0].url)}
           alt={experiments[id]?.brand}
           width={112}
           height={112}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: mouseY }}
           transition={{ duration: 0 }}
-          className={`${id===(-1)? "hidden": ""} rounded-lg`}
+          className={`${id===(-1)? "hidden": ""} rounded-lg overflow-hidden`}
         />
       </div>
-      <div className="md:w-1/3 flex flex-col justify-start relative">
+      <div className="md:w-1/3 py-6  flex flex-col justify-start relative">
         {experiments.map((experiment, index) => (
           <div
             key={experiment.id}
@@ -76,6 +78,7 @@ const Playground = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Playground;

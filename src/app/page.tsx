@@ -130,24 +130,27 @@ export default function Home() {
         <div className="w-full h-1/2 flex flex-col justify-center items-center">
           <video
             className="hidden md:block"
-            src="https://storage.googleapis.com/plency-bucket/1080p/Laptopvideo.mp4"
+            src="https://cdn.plency.com/1080p/Laptopvideo.mp4"
             muted
             loop
             autoPlay
+            preload="auto"
           ></video>
           <video
             className="md:hidden block"
-            src="https://storage.googleapis.com/plency-bucket/720p/PhoneLeftToRignt.mp4"
+            src="https://cdn.plency.com/720p/PhoneLeftToRignt.mp4"
             muted
             loop
             autoPlay
+            preload="auto"
           ></video>
           <video
             className="md:hidden block"
-            src="https://storage.googleapis.com/plency-bucket/720p/PhoneRightToLeft.mp4"
+            src="https://cdn.plency.com/plency-bucket/720p/PhoneRightToLeft.mp4"
             muted
             loop
             autoPlay
+            preload="auto"
           ></video>
         </div>
       </motion.div>
