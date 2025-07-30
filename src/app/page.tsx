@@ -1,5 +1,6 @@
 import { Variants } from "motion/react";
 import * as motion from "motion/react-client";
+import { BoxesCore } from "./components/background-boxed";
 
 const heading: string[][] = [
   ["AS A DIVERSE", "BOUTIQUE CREATIVE STUDIO", "WITH A DIVERSE TEAM,"],
@@ -32,7 +33,7 @@ export default function Home() {
         className="h-screen w-full bg-no-repeat flex flex-col justify-between"
         initial="initial"
         whileHover="visible"
-      >
+      ><BoxesCore />
         <div className="flex flex-col gap-4 px-4 pt-6 w-full">
           {/* {subHeadingArray.map((word, index) => (
           <span key={index} className="overflow-hidden inline-block">
@@ -54,6 +55,8 @@ export default function Home() {
             </span>
           </span>
         ))} */}
+       
+
           <motion.h1
             variants={childVariants}
             transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
