@@ -1,15 +1,15 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import {
   getProjectById,
   getImagesByProjectId,
 } from "@/event-creator/src/app/actions/getProject";
+import { deleteProjectById } from "@/event-creator/src/app/actions/deleteProjects";
 
 import { updateProject } from "@/event-creator/src/app/actions/updateProject";
 import { v4 as uuidv4 } from "uuid";
-
 
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
@@ -19,6 +19,8 @@ import { cdnUrl } from "../../utills/cdnUrl";
 export default function UpdateProjectPage() {
   const params = useParams();
   const [isEdit, setIsEdit] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [images, setImages] = useState<Partial<ProjectMedia>[]>([]);
 
@@ -56,12 +58,20 @@ export default function UpdateProjectPage() {
 
   return (
     <div className="md:flex flex-col w-full">
-      <button
-        className="bg-blue-600 text-white font-semibold py-2 px-4 mx-4 rounded w-fit self-end"
-        onClick={() => setIsEdit((prev) => !prev)}
-      >
-        {!isEdit ? "Editing Mode" : "View Mode"}
-      </button>
+      <div>
+        <button
+          className="bg-red-600 text-white font-semibold py-2 px-4 mx-4 rounded w-fit self-end"
+          onClick={() => setShowDeleteModal(true)}
+        >
+          {"Delete Project"}
+        </button>
+        <button
+          className="bg-blue-600 text-white font-semibold py-2 px-4 mx-4 rounded w-fit self-end"
+          onClick={() => setIsEdit((prev) => !prev)}
+        >
+          {!isEdit ? "Editing Mode" : "View Mode"}
+        </button>
+      </div>
       <div className="bg-cover p-5 w-full flex flex-col justify-between item-center ">
         {/* Hero Image Preview */}
         {project?.heroImage ? (
@@ -222,7 +232,6 @@ export default function UpdateProjectPage() {
                 const file = e.target.files?.[0];
                 const isVideo = file?.type.startsWith("video/");
                 if (file) {
-                  
                   uploadToGCS(file).then((url) => {
                     setImages((prev) => [
                       ...prev,
@@ -501,6 +510,38 @@ export default function UpdateProjectPage() {
           ))}
         </div>
       </div>
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/3">
+            <h2 className="text-xl font-semibold mb-4">Delete Project</h2>
+            <p className="mb-4">
+              Are you sure you want to delete this project? This action cannot
+              be undone.
+            </p>
+            <div className="flex justify-end gap-4">
+              <button
+              disabled={isDeleting}
+                className="bg-red-600 text-white font-semibold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={async () => {
+                  if (!projectId) return;
+                  setIsDeleting(true);
+                  await deleteProjectById(projectId);
+                  redirect("/projects");
+                }}
+              >
+                Delete
+              </button>
+              <button
+                className="bg-gray-300 text-black font-semibold py-2 px-4 rounded"
+                onClick={() => setShowDeleteModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
