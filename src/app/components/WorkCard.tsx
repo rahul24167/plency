@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,16 +12,15 @@ interface Project {
 }
 
 const WorkCard = ({ project, index }: { project: Project; index: number }) => {
-    const [imgLoading, setImgLoading] = useState(true);
+  const [imgLoading, setImgLoading] = useState(true);
   return (
     <div
       key={index}
-      className="w-full md:w-1/2 h-[85vh] flex flex-col p-5 pr-0 "
-
+      className="w-full md:w-1/2  rounded-2xl flex flex-col p-5 pr-0 "
     >
       <Link
         href={`/work/${project.id}`}
-        className="w-full h-auto flex-grow relative"   
+        className="w-full h-auto flex-grow relative "
       >
         {imgLoading && (
           <div className="z-10 h-full w-full bg-slate-200 grid place-items-center backdrop-blur-[1px]">
@@ -31,15 +30,16 @@ const WorkCard = ({ project, index }: { project: Project; index: number }) => {
         <Image
           src={cdnUrl(project.heroImage)}
           alt={project.title}
-          fill
-          className="object-cover"
+          width={1920}
+          height={1080}
+          className="object-cover aspect-video w-full rounded-2xl"
           onLoadingComplete={() => setImgLoading(false)}
         />
       </Link>
 
-      <div className="w-full flex flex-row justify-start items-center px-2">
-        <h2 className="w-1/3 uppercase font-normal">{project.title}</h2>
-        <p className="w-1/3 uppercase font-normal">{project.client}</p>
+      <div className="w-full flex flex-row justify-between items-center px-2">
+        <h2 className="w-1/2 uppercase font-normal">{project.title}</h2>
+        <p className="w-1/2 uppercase font-normal text-right">{project.client}</p>
       </div>
     </div>
   );
