@@ -6,7 +6,8 @@
   /* --foreground: #171717;  */
   --secondary: #e42626;
   --primary: #595858;
-  --tertiary: #d4d4d4;
+  /* --tertiary: #d4d4d4; */
+    --tertiary: #000000;
   --text-largest: 2.875rem;
   --text-large: 2.875rem;
   --text-small: 1.125rem;

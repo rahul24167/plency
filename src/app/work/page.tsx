@@ -19,21 +19,6 @@ const Work = async () => {
           <WorkCard key={index} project={project} index={index} />
           
         ))}
-        {projects.map((project, index) => (
-          <WorkCard key={index} project={project} index={index} />
-          
-        ))}
-        {projects.map((project, index) => (
-          <WorkCard key={index} project={project} index={index} />
-          
-        ))}
-        {projects.map((project, index) => (
-          <WorkCard key={index} project={project} index={index} />
-          
-        ))}{projects.map((project, index) => (
-          <WorkCard key={index} project={project} index={index} />
-          
-        ))}
       </div>
     </div>
   );
