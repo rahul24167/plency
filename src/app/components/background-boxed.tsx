@@ -7,15 +7,16 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
   const rows = new Array(150).fill(1);
   const cols = new Array(100).fill(1);
   const colors = [
-    "#93c5fd",
-    "#f9a8d4",
-    "#86efac",
-    "#fde047",
-    "#fca5a5",
-    "#d8b4fe",
-    "#93c5fd",
-    "#a5b4fc",
-    "#c4b5fd",
+    "#e62726",
+    "#DA3933",
+    "#DA3F35",
+    "#DC4F47",
+    "#DF615E",
+    "#E79291",
+    "#ECABAC",
+    "#F1C7C8",
+    "#F1C7C8",
+
   ];
   const getRandomColor = () => {
     return colors[Math.floor(Math.random() * colors.length)];
