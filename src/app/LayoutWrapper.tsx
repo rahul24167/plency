@@ -1,8 +1,8 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
-//import CustomCursor from "@/src/app/components/customCursor";
-import TrailingCursor from "./components/trailingCursor";
+
+
 
 
 export default function LayoutWrapper({
@@ -23,16 +23,18 @@ export default function LayoutWrapper({
   const isMainPage = mainPages.includes(pathname);
   return (
    <AnimatePresence mode="popLayout">
+
+    
   <motion.div
     key={pathname}
     initial={{ y: "-100vh" }}
     animate={{ y: 0 }}
     exit={{ y: "200vh", opacity: 0 }}
     transition={{ delay: 0, duration: 1, ease: "easeInOut" }}
-    className="h-screen overflow-auto z-10"
+    className="h-screen overflow-auto z-10 bg-transparent"
   >
-    <TrailingCursor />
-    <div className="w-full h-16 md:hidden bg-transparent"></div>
+    {/* <TrailingCursor /> */}
+    <div className="w-full h-16 md:hidden "></div>
     <div className="relative w-full">
       {/* Page Title - overlays on top of children */}
       {isMainPage && pathname !== "/" && (

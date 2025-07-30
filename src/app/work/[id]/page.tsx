@@ -28,13 +28,12 @@ export default async function Project({
 
   return (
     <div className="flex flex-col w-full">
-      <div className="h-[50vh] md:h-screen m-5 mb-0 relative">
+      <div className="h-[50vh] md:h-screen p-5 mb-0 relative">
         {project?.heroImage && (
           <Image
             src={cdnUrl(project?.heroImage)}
             alt=""
-            width={1920}
-            height={1920}
+            fill
             className="object-cover"
           />
         )}
