@@ -21,6 +21,7 @@ export default function UpdateProjectPage() {
   const [isEdit, setIsEdit] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [images, setImages] = useState<Partial<ProjectMedia>[]>([]);
 
@@ -38,6 +39,7 @@ export default function UpdateProjectPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmiting(true);
     if (!project) return;
     const res = await updateProject(projectId, {
       title: project.title,
@@ -464,7 +466,7 @@ export default function UpdateProjectPage() {
           className={` ${
             isEdit ? "flex" : "hidden"
           } self-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition`}
-          disabled={images.length === 0}
+          disabled={images.length === 0 || isSubmiting}
           onClick={handleSubmit}
         >
           SUBMIT
