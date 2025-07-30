@@ -7,12 +7,12 @@ interface ContactUs {
 const Contact = () => {
   const contactUs: ContactUs[] = [
     {
-      title: "Office Address",
+      title: "Address",
       description:
-        "Kh No. 621 Silver Oak Farms, Zero Number Rd, Ghitorni, New Delhi, 110030",
+        "New Delhi, India",
     },
     {
-      title: "General Email",
+      title: "Email",
       description: "hi@plency.com",
     },
   ];

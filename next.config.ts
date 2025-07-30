@@ -1,9 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "standalone",
   images: {
-    remotePatterns: [new URL('https://cdn.plency.com/**')],
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.plency.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
 };
 
