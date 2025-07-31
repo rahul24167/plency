@@ -425,7 +425,7 @@ export default function CreateProjectPage() {
             >
               {image.type === "IMAGE" && (
                 <Image
-                  src={image.url}
+                  src={cdnUrl(image.url)}
                   alt={`Image ${index + 1}`}
                   width={image.width * 150}
                   height={image.height * 150 || 1}
@@ -436,7 +436,7 @@ export default function CreateProjectPage() {
               )}
               {image.type === "VIDEO" && (
                 <video
-                  src={image.url}
+                  src={cdnUrl(image.url)}
                   autoPlay
                   loop
                   muted
