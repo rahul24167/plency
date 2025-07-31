@@ -13,6 +13,10 @@ export async function compressFile(
   fileTypeOverride?: string
 ): Promise<File> {
   const isImage = file.type.startsWith("image/");
+  const isGif = file.type === "image/gif";
+  if (isGif) {
+    return file;
+  }
   const { maxSizeMB} = fileTypes[type];
   const isLargerThanLimit = file.size / 1024 / 1024 > maxSizeMB;
 
@@ -51,6 +55,7 @@ export async function uploadToGCS(
   type: FileType = "generic"
 ): Promise<string> {
   const isImage = file.type.startsWith("image/");
+  
   // 1. Get a presigned URL from the API route
   const compressedFile = isImage ? await compressFile(file, type) : file;
   const presignRes = await fetch(
