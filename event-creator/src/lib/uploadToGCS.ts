@@ -40,7 +40,7 @@ export async function compressFile(
         high = q; // too big -> lower quality
       }
     }
-    return best
+    return best || file;
   }
   // Handle videos or other types as-is for now
   return file;
