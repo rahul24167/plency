@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { createProject } from "@/event-creator/src/app/actions/createProject";
 import { cdnUrl } from "../../utills/cdnUrl";
+import { ResizableImageWrapper } from "@/event-creator/src/app/components/ResizeImageWrapper";
 type Media = {
   url: string;
   type: "IMAGE" | "VIDEO";
@@ -16,6 +17,7 @@ type Media = {
 };
 
 export default function CreateProjectPage() {
+  const divRef = useRef<HTMLDivElement>(null);
   const [heroUrl, setHeroUrl] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
   const [projectInfo, setProjectInfo] = useState({
@@ -27,6 +29,24 @@ export default function CreateProjectPage() {
   });
 
   const [images, setImages] = useState<Media[]>([]);
+
+  useEffect(() => {
+    if (!divRef.current) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      const newHeight = entry.contentRect.height;
+      // const height = Math.max(1, Number(e.target.value));
+      setImages((prev) => {
+        const newImages = [...prev];
+        newImages[selectedImage].height = newHeight;
+        return newImages;
+      });
+    });
+
+    observer.observe(divRef.current);
+
+    return () => observer.disconnect(); // clean up
+  }, []);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
@@ -172,8 +192,6 @@ export default function CreateProjectPage() {
                   if (!file) return;
 
                   const isVideo = file.type.startsWith("video/");
-                  alert(`Uploading ${isVideo}...`);
-
                   uploadToGCS(file).then((url) => {
                     setImages((prev) => [
                       ...prev,
@@ -215,52 +233,34 @@ export default function CreateProjectPage() {
               ))}
           </div>
           <div className="flex flex-row">
-          {/* Image Position Controller */}
-          {images[selectedImage] && (
-            <div
-              className="flex items-center justify-center gap-4 flex-wrap border p-4 rounded-lg bg-gray-50"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (!images[selectedImage]) return;
-                let dx = 0,
-                  dy = 0;
-                if (e.key === "a" || e.key === "A") dx = -1;
-                if (e.key === "d" || e.key === "D") dx = 1;
-                if (e.key === "w" || e.key === "W") dy = -1;
-                if (e.key === "s" || e.key === "S") dy = 1;
-                if (dx !== 0 || dy !== 0) {
-                  setImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[selectedImage] = {
-                      ...newImages[selectedImage],
-                      positionX: newImages[selectedImage].positionX + dx,
-                      positionY: newImages[selectedImage].positionY + dy,
-                    };
-                    return newImages;
-                  });
-                  e.preventDefault();
-                }
-              }}
-              style={{ outline: "none" }}
-            >
-              <button
-                type="button"
-                className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
-                onClick={() =>
-                  setImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[selectedImage] = {
-                      ...newImages[selectedImage],
-                      positionY: newImages[selectedImage].positionY - 1,
-                    };
-                    return newImages;
-                  })
-                }
-                aria-label="Move Up"
+            {/* Image Position Controller */}
+            {images[selectedImage] && (
+              <div
+                className="flex items-center justify-center gap-4 flex-wrap border p-4 rounded-lg bg-gray-50"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (!images[selectedImage]) return;
+                  let dx = 0,
+                    dy = 0;
+                  if (e.key === "a" || e.key === "A") dx = -1;
+                  if (e.key === "d" || e.key === "D") dx = 1;
+                  if (e.key === "w" || e.key === "W") dy = -1;
+                  if (e.key === "s" || e.key === "S") dy = 1;
+                  if (dx !== 0 || dy !== 0) {
+                    setImages((prev) => {
+                      const newImages = [...prev];
+                      newImages[selectedImage] = {
+                        ...newImages[selectedImage],
+                        positionX: newImages[selectedImage].positionX + dx,
+                        positionY: newImages[selectedImage].positionY + dy,
+                      };
+                      return newImages;
+                    });
+                    e.preventDefault();
+                  }
+                }}
+                style={{ outline: "none" }}
               >
-                ↑
-              </button>
-              <div className="flex flex-col gap-2">
                 <button
                   type="button"
                   className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
@@ -269,15 +269,51 @@ export default function CreateProjectPage() {
                       const newImages = [...prev];
                       newImages[selectedImage] = {
                         ...newImages[selectedImage],
-                        positionX: newImages[selectedImage].positionX - 1,
+                        positionY: newImages[selectedImage].positionY - 1,
                       };
                       return newImages;
                     })
                   }
-                  aria-label="Move Left"
+                  aria-label="Move Up"
                 >
-                  ←
+                  ↑
                 </button>
+                <div className="flex flex-col gap-2">
+                  <button
+                    type="button"
+                    className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
+                    onClick={() =>
+                      setImages((prev) => {
+                        const newImages = [...prev];
+                        newImages[selectedImage] = {
+                          ...newImages[selectedImage],
+                          positionX: newImages[selectedImage].positionX - 1,
+                        };
+                        return newImages;
+                      })
+                    }
+                    aria-label="Move Left"
+                  >
+                    ←
+                  </button>
+                  <button
+                    type="button"
+                    className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
+                    onClick={() =>
+                      setImages((prev) => {
+                        const newImages = [...prev];
+                        newImages[selectedImage] = {
+                          ...newImages[selectedImage],
+                          positionX: newImages[selectedImage].positionX + 1,
+                        };
+                        return newImages;
+                      })
+                    }
+                    aria-label="Move Right"
+                  >
+                    →
+                  </button>
+                </div>
                 <button
                   type="button"
                   className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
@@ -286,98 +322,81 @@ export default function CreateProjectPage() {
                       const newImages = [...prev];
                       newImages[selectedImage] = {
                         ...newImages[selectedImage],
-                        positionX: newImages[selectedImage].positionX + 1,
+                        positionY: newImages[selectedImage].positionY + 1,
                       };
                       return newImages;
                     })
                   }
-                  aria-label="Move Right"
+                  aria-label="Move Down"
                 >
-                  →
+                  ↓
                 </button>
               </div>
-              <button
-                type="button"
-                className="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-3 rounded"
-                onClick={() =>
-                  setImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[selectedImage] = {
-                      ...newImages[selectedImage],
-                      positionY: newImages[selectedImage].positionY + 1,
-                    };
-                    return newImages;
-                  })
-                }
-                aria-label="Move Down"
-              >
-                ↓
-              </button>
-            </div>
-          )}
-          {/* Image Size and Z-Index Controller */}
-          {images[selectedImage] && (
-            <div className="flex flex-wrap items-center justify-center gap-6 border p-4 rounded-lg bg-gray-50">
-              {/* Width */}
-              <label className="flex flex-col text-sm font-medium text-gray-700">
-                Width
-                <input
-                  type="number"
-                  min={1}
-                  max={100}
-                  value={images[selectedImage].width}
-                  onChange={(e) => {
-                    const width = Math.max(1, Number(e.target.value));
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage].width = width;
-                      return newImages;
-                    });
-                  }}
-                  className="border rounded p-2 w-24"
-                />
-              </label>
-              {/* Height */}
-              <label className="flex flex-col text-sm font-medium text-gray-700">
-                Height
-                <input
-                  type="number"
-                  min={1}
-                  max={100}
-                  value={images[selectedImage].height}
-                  onChange={(e) => {
-                    const height = Math.max(1, Number(e.target.value));
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage].height = height;
-                      return newImages;
-                    });
-                  }}
-                  className="border rounded p-2 w-24"
-                />
-              </label>
-              {/* Z-Index */}
-              <label className="flex flex-col text-sm font-medium text-gray-700">
-                Z-Index
-                <input
-                  type="number"
-                  min={0}
-                  max={100}
-                  value={images[selectedImage].zIndex}
-                  onChange={(e) => {
-                    const zIndex = Math.max(0, Number(e.target.value));
-                    setImages((prev) => {
-                      const newImages = [...prev];
-                      newImages[selectedImage].zIndex = zIndex;
-                      return newImages;
-                    });
-                  }}
-                  className="border rounded p-2 w-20"
-                />
-              </label>
-            </div>
-          )}
+            )}
+            {/* Image Size and Z-Index Controller */}
+            {images[selectedImage] && (
+              <div className="flex flex-wrap items-center justify-center gap-6 border p-4 rounded-lg bg-gray-50">
+                {/* Width */}
+                <label className="flex flex-col text-sm font-medium text-gray-700">
+                  Width
+                  <input
+                    type="number"
+                    min={1}
+                    max={100}
+                    value={images[selectedImage].width}
+                    onChange={(e) => {
+                      const width = Math.max(1, Number(e.target.value));
+                      setImages((prev) => {
+                        const newImages = [...prev];
+                        newImages[selectedImage].width = width;
+                        return newImages;
+                      });
+                    }}
+                    className="border rounded p-2 w-24"
+                  />
+                </label>
+                {/* Height */}
+                <label className="flex flex-col text-sm font-medium text-gray-700">
+                  Height
+                  <input
+                    type="number"
+                    min={1}
+                    max={100}
+                    value={images[selectedImage].height}
+                    onChange={(e) => {
+                      const height = Math.max(1, Number(e.target.value));
+                      setImages((prev) => {
+                        const newImages = [...prev];
+                        newImages[selectedImage].height = height;
+                        return newImages;
+                      });
+                    }}
+                    className="border rounded p-2 w-24"
+                  />
+                </label>
+                {/* Z-Index */}
+                <label className="flex flex-col text-sm font-medium text-gray-700">
+                  Z-Index
+                  <input
+                    type="number"
+                    min={0}
+                    max={100}
+                    value={images[selectedImage].zIndex}
+                    onChange={(e) => {
+                      const zIndex = Math.max(0, Number(e.target.value));
+                      setImages((prev) => {
+                        const newImages = [...prev];
+                        newImages[selectedImage].zIndex = zIndex;
+                        return newImages;
+                      });
+                    }}
+                    className="border rounded p-2 w-20"
+                  />
+                </label>
+              </div>
+            )}
           </div>
+
           {/* Submit Button */}
           <button
             className="self-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
@@ -397,41 +416,36 @@ export default function CreateProjectPage() {
         {/* Image Gallery Previews */}
         <div className="relative w-full h-auto border overflow-hidden border-b-0">
           {images.map((image, index) => (
-            <div
+            <ResizableImageWrapper
               key={index}
-              className={`${
-                index === selectedImage ? "border-2 border-red-500" : ""
-              }`}
-              style={{
-                width: `${image.width}vw`,
-                height: `${image.height}vw`,
-                marginLeft: `${image.positionX}vw`,
-                marginTop: `${image.positionY}vw`,
-                zIndex: image.zIndex,
-              }}
+              image={image}
+              index={index}
+              selectedImage={selectedImage}
+              setImages={setImages}
             >
-              <div className="w-full h-full relative">
-                {image.type === "IMAGE" && (
-                  <Image
-                    src={cdnUrl(image.url)}
-                    alt={`Image ${index + 1}`}
-                    fill
-                    style={{ objectFit: "fill" }}
-                  />
-                )}
-                {image.type === "VIDEO" && (
-                  <video
-                    src={cdnUrl(image.url)}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover"
-                  />
-                )}
-              </div>
-            </div>
+              {image.type === "IMAGE" && (
+                <Image
+                  src={image.url}
+                  alt={`Image ${index + 1}`}
+                  width={image.width * 150}
+                  height={image.height * 150 || 1}
+                  className={`${
+                    index === selectedImage ? "" : ""
+                  } w-full h-auto`}
+                />
+              )}
+              {image.type === "VIDEO" && (
+                <video
+                  src={image.url}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="w-full h-auto object-cover"
+                />
+              )}
+            </ResizableImageWrapper>
           ))}
         </div>
       </div>
