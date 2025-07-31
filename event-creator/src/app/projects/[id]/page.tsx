@@ -221,7 +221,7 @@ export default function UpdateProjectPage() {
             {/* Image Controller */}
             
             <div
-              className={` ${
+              className={`w-full ${
                 isEdit ? "flex" : "hidden"
               } flex-col gap-6 p-6 bg-white rounded-xl shadow-md`}
             >
