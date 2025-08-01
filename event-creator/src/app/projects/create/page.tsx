@@ -363,14 +363,6 @@ export default function CreateProjectPage() {
                     min={1}
                     max={100}
                     value={images[selectedImage].height}
-                    onChange={(e) => {
-                      const height = Math.max(1, Number(e.target.value));
-                      setImages((prev) => {
-                        const newImages = [...prev];
-                        newImages[selectedImage].height = height;
-                        return newImages;
-                      });
-                    }}
                     className="border rounded p-2 w-24"
                   />
                 </label>
