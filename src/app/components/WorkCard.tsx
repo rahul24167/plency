@@ -23,7 +23,7 @@ const WorkCard = ({ project, index }: { project: Project; index: number }) => {
         className="w-full h-auto flex-grow relative "
       >
         {imgLoading && (
-          <div className="absolute inset-0 z-20 w-full h-full  bg-slate-200 grid place-items-center backdrop-blur-[1px]">
+          <div className="absolute inset-0 z-20 w-full h-full  grid place-items-center backdrop-blur-[1px]">
             <LoaderThree />
           </div>
         )}
