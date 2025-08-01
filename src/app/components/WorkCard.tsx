@@ -22,11 +22,11 @@ const WorkCard = ({ project, index }: { project: Project; index: number }) => {
         href={`/work/${project.id}`}
         className="w-full h-auto flex-grow relative "
       >
-        {imgLoading ? (
-          <div className="z-10 h-full w-full bg-slate-200 grid place-items-center backdrop-blur-[1px]">
+        {imgLoading && (
+          <div className="absolute inset-0 z-20 w-full h-full  bg-slate-200 grid place-items-center backdrop-blur-[1px]">
             <LoaderThree />
           </div>
-        ):
+        )}
         <Image
           src={cdnUrl(project.heroImage)}
           alt={project.title}
@@ -34,7 +34,7 @@ const WorkCard = ({ project, index }: { project: Project; index: number }) => {
           height={1080}
           className="object-cover aspect-video w-full rounded-2xl"
           onLoadingComplete={() => setImgLoading(false)}
-        />}
+        />
       </Link>
 
       <div className="w-full flex flex-row justify-between items-center px-2">

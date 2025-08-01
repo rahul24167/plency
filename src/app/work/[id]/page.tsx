@@ -75,7 +75,7 @@ export default async function Project({
               <div className="w-full h-full relative">
                 {image.type === "IMAGE" && (
                   <Image
-                    src={`https://cdn.plency.com/${image.url}`}
+                    src={cdnUrl(image.url)}
                     alt={`Image ${index + 1}`}
                     fill
                     style={{ objectFit: "fill" }}

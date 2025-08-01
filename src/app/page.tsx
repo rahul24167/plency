@@ -60,7 +60,7 @@ export default function Home() {
           <motion.h1
             variants={childVariants}
             transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
-            className="hidden md:flex"
+            className="hidden md:block"
           >
             {heading.map((arr, index) => (
               <span key={index} className="block font-normal">
@@ -68,7 +68,7 @@ export default function Home() {
                   <span
                     key={wordIndex}
                     className={`inline-block ${
-                      wordIndex % 2 === 0 ? "" : "text-black"
+                      wordIndex % 2 === 0 ? "" : "text-white"
                     }`}
                   >
                     {word}&nbsp;
@@ -80,7 +80,7 @@ export default function Home() {
           <motion.h2
             variants={childVariants}
             transition={{ delay: 0.2, duration: 0.5, ease: "easeInOut" }}
-            className="hidden md:flex"
+            className="hidden md:block"
           >
             {subHeading.map((arr, index) => (
               <span key={index} className="block font-normal">
@@ -88,7 +88,7 @@ export default function Home() {
                   <span
                     key={wordIndex}
                     className={`inline-block ${
-                      wordIndex % 2 === 0 ? "" : "text-black"
+                      wordIndex % 2 === 0 ? "" : "text-white"
                     }`}
                   >
                     {word}&nbsp;
@@ -104,7 +104,7 @@ export default function Home() {
                   <span
                     key={wordIndex}
                     className={`inline-block ${
-                      wordIndex % 2 === 0 ? "" : "text-black"
+                      wordIndex % 2 === 0 ? "" : "text-white"
                     }`}
                   >
                     {word}&nbsp;
@@ -120,7 +120,7 @@ export default function Home() {
                   <span
                     key={wordIndex}
                     className={`inline-block ${
-                      wordIndex % 2 === 0 ? "" : "text-black"
+                      wordIndex % 2 === 0 ? "" : "text-white"
                     }`}
                   >
                     {word}&nbsp;
