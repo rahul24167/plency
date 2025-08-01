@@ -16,7 +16,7 @@ const WorkCard = ({ project, index }: { project: Project; index: number }) => {
   return (
     <div
       key={index}
-      className="w-full md:w-1/2  rounded-2xl flex flex-col p-5 pr-0 "
+      className="w-full md:w-1/2  rounded-2xl flex flex-col p-5 pr-0 pb-0 "
     >
       <Link
         href={`/work/${project.id}`}
@@ -32,14 +32,14 @@ const WorkCard = ({ project, index }: { project: Project; index: number }) => {
           alt={project.title}
           width={1920}
           height={1080}
-          className="object-cover aspect-video w-full rounded-2xl"
+          className="object-cover aspect-[4/3] w-full rounded-2xl"
           onLoadingComplete={() => setImgLoading(false)}
         />
       </Link>
 
-      <div className="w-full flex flex-row justify-between items-center px-2">
-        <h2 className="w-1/2 uppercase font-normal">{project.title}</h2>
-        <p className="w-1/2 uppercase font-normal text-right">{project.client}</p>
+      <div className="w-full flex flex-row flex-wrap justify-between items-center px-2">
+        <h2 className="max-w-1/2 uppercase font-normal">{project.title}</h2>
+        <p className="max-w-1/2 uppercase font-normal text-right">{project.client}</p>
       </div>
     </div>
   );
