@@ -473,19 +473,7 @@ export default function UpdateProjectPage() {
         {/* Image Gallery Previews */}
         <div className="relative w-full h-auto border overflow-hidden border-b-0">
           {images.map((image, index) => (
-            <div
-              key={index}
-              className={`${
-                index === selectedImage ? "border-2 border-red-500" : ""
-              }`}
-              style={{
-                width: `${image.width}vw`,
-                height: `${image.height}vw`,
-                marginLeft: `${image.positionX}vw`,
-                marginTop: `${image.positionY}vw`,
-                zIndex: image.zIndex,
-              }}
-            >
+            
               <ResizableImageWrapper
                 key={index}
                 image={image}
@@ -514,7 +502,6 @@ export default function UpdateProjectPage() {
                   />
                 )}
               </ResizableImageWrapper>
-            </div>
           ))}
         </div>
       </div>
