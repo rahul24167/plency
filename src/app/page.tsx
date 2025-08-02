@@ -150,7 +150,7 @@ export default function Home() {
           ></video>
           <video
             className="md:hidden block"
-            src="https://cdn.plency.com/plency-bucket/720p/PhoneRightToLeft.mp4"
+            src="https://cdn.plency.com/720p/PhoneRightToLeft.mp4"
             muted
             loop
             autoPlay
