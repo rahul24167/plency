@@ -46,7 +46,7 @@ export default function CreateProjectPage() {
     observer.observe(divRef.current);
 
     return () => observer.disconnect(); // clean up
-  }, []);
+  }, [selectedImage]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
@@ -363,6 +363,7 @@ export default function CreateProjectPage() {
                     min={1}
                     max={100}
                     value={images[selectedImage].height}
+                    readOnly
                     className="border rounded p-2 w-24"
                   />
                 </label>
@@ -417,7 +418,7 @@ export default function CreateProjectPage() {
             >
               {image.type === "IMAGE" && (
                 <Image
-                  src={cdnUrl(image.url)}
+                  src={image.url}
                   alt={`Image ${index + 1}`}
                   width={image.width * 150}
                   height={image.height * 150 || 1}
@@ -428,7 +429,7 @@ export default function CreateProjectPage() {
               )}
               {image.type === "VIDEO" && (
                 <video
-                  src={cdnUrl(image.url)}
+                  src={image.url}
                   autoPlay
                   loop
                   muted

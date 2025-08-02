@@ -14,7 +14,7 @@ const Work = async () => {
   });
   return (
     <div className="bg-cover w-full flex flex-row flex-wrap  ">
-      <div className="flex flex-row flex-wrap w-full pr-5 ">
+      <div className="flex flex-row  flex-wrap w-full pr-5 ">
         {projects.map((project, index) => (
           <WorkCard key={index} project={project} index={index} />
           

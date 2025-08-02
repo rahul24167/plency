@@ -10,12 +10,7 @@ type Media = {
   zIndex: number;
 };
 interface ImageWrapperProps {
-  image: {
-    width: number;
-    positionX: number;
-    positionY: number;
-    zIndex: number;
-  };
+  image: Media;
   index: number;
   selectedImage: number;
   setImages: React.Dispatch<React.SetStateAction<Media[]>>;
@@ -40,6 +35,7 @@ export const ResizableImageWrapper = ({
       const heightInVw = (newHeight / vwInPx) * 100;
 
       setImages((prev) => {
+        if (selectedImage < 0 || selectedImage >= prev.length) return prev;
         const newImages = [...prev];
         newImages[selectedImage].height = heightInVw;
         return newImages;
