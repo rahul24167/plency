@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { Project, ProjectMedia } from "@prisma/client";
+import { ResizableImageWrapper } from "@/event-creator/src/app/components/ResizeImageWrapper";
 import { cdnUrl } from "@/event-creator/src/app/utills/cdnUrl";
 
 export default function UpdateProjectPage() {
@@ -472,6 +473,7 @@ export default function UpdateProjectPage() {
         {/* Image Gallery Previews */}
         <div className="relative w-full h-auto border overflow-hidden border-b-0">
           {images.map((image, index) => (
+
             <div
               key={index}
               className={`${
@@ -486,12 +488,20 @@ export default function UpdateProjectPage() {
               }}
             >
               <div className="w-full h-full relative">
+                <ResizableImageWrapper
+                              key={index}
+                              image={image}
+                              index={index}
+                              selectedImage={selectedImage}
+                              setImages={setImages}
+                            >
                 {image.type === "IMAGE" && (
                   <Image
                     src={cdnUrl(image.url ?? "")}
                     alt={`Image ${index + 1}`}
-                    fill
-                    style={{ objectFit: "fill" }}
+                     width={image.width * 150}
+                      height={image.height * 150}
+                    className="w-full h-auto"
                   />
                 )}
                 {image.type === "VIDEO" && (
@@ -502,9 +512,10 @@ export default function UpdateProjectPage() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-cover"
                   />
                 )}
+                </ResizableImageWrapper>
               </div>
             </div>
           ))}

@@ -11,9 +11,9 @@ type FullProject = ProjectType & {
 export default async function Project({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } =  await params;
+  const { id } = await params;
   const project = (await prisma.project.findUnique({
     where: {
       id: id ?? undefined,
@@ -77,7 +77,9 @@ export default async function Project({
                   <Image
                     src={cdnUrl(image.url)}
                     alt={`Image ${index + 1}`}
-                    fill
+                   width={image.width * 150}
+                      height={image.height * 150}
+                    className="w-full h-auto"
                     style={{ objectFit: "fill" }}
                   />
                 )}
@@ -89,7 +91,7 @@ export default async function Project({
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover"
+                    className="w-full  h-auto object-cover"
                   />
                 )}
               </div>
@@ -107,7 +109,6 @@ export default async function Project({
                 width={image.width * 200}
                 height={image.height * 200}
                 className="w-full h-auto object-cover"
-                
               />
             )}
             {image.type === "VIDEO" && (

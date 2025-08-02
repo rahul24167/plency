@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 
 type Media = {
   url: string;
-  type: "IMAGE" | "VIDEO";
+  type: ("IMAGE" | "VIDEO");
   width: number;
   height: number;
   positionX: number;
@@ -10,7 +10,7 @@ type Media = {
   zIndex: number;
 };
 interface ImageWrapperProps {
-  image: Media;
+  image:Partial<Media>;
   index: number;
   selectedImage: number;
   setImages: React.Dispatch<React.SetStateAction<Media[]>>;
