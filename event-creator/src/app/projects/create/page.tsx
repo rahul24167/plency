@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from "react";
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { createProject } from "@/event-creator/src/app/actions/createProject";
-import { cdnUrl } from "../../utills/cdnUrl";
 import { ResizableImageWrapper } from "@/event-creator/src/app/components/ResizeImageWrapper";
+import { cdnUrl } from "@/event-creator/src/app/utills/cdnUrl";
 type Media = {
   url: string;
   type: "IMAGE" | "VIDEO";
@@ -418,7 +418,7 @@ export default function CreateProjectPage() {
             >
               {image.type === "IMAGE" && (
                 <Image
-                  src={image.url}
+                  src={cdnUrl(image.url)}
                   alt={`Image ${index + 1}`}
                   width={image.width * 150}
                   height={image.height * 150 || 1}
@@ -429,7 +429,7 @@ export default function CreateProjectPage() {
               )}
               {image.type === "VIDEO" && (
                 <video
-                  src={image.url}
+                  src={cdnUrl(image.url)}
                   autoPlay
                   loop
                   muted
