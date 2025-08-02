@@ -3,7 +3,7 @@ import { useState } from "react";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import Image from "next/image";
 import { createExperiment } from "@/event-creator/src/app/actions/createExperiment";
-import { cdnUrl } from "../../utills/cdnUrl";
+import { cdnUrl } from "@/event-creator/src/app/utills/cdnUrl";
 
 export default function CreateExperiment() {
   const [experimentInfo, setExperimentInfo] = useState({

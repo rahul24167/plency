@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { Project, ProjectMedia } from "@prisma/client";
-import { cdnUrl } from "../../utills/cdnUrl";
+import { cdnUrl } from "@/event-creator/src/app/utills/cdnUrl";
 
 export default function UpdateProjectPage() {
   const params = useParams();
