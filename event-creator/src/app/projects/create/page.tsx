@@ -269,9 +269,9 @@ export default function CreateProjectPage() {
                         return prev;
                       }
                       newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        positionX: newImages[selectedImage].positionX + dx,
-                        positionY: newImages[selectedImage].positionY + dy,
+                        ...selected,
+                        positionX: selected.positionX + dx,
+                        positionY: selected.positionY + dy,
                       };
                       return newImages;
                     });
@@ -286,9 +286,16 @@ export default function CreateProjectPage() {
                   onClick={() =>
                     setImages((prev) => {
                       const newImages = [...prev];
+                      const selected = newImages[selectedImage];
+                      if (
+                        !selected ||
+                        selected.positionY === undefined
+                      ) {
+                        return prev;
+                      }
                       newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        positionY: newImages[selectedImage].positionY - 1,
+                        ...selected,
+                        positionY: selected.positionY - 1,
                       };
                       return newImages;
                     })
@@ -304,9 +311,16 @@ export default function CreateProjectPage() {
                     onClick={() =>
                       setImages((prev) => {
                         const newImages = [...prev];
+                        const selected = newImages[selectedImage];
+                      if (
+                        !selected ||
+                        selected.positionX === undefined
+                      ) {
+                        return prev;
+                      }
                         newImages[selectedImage] = {
-                          ...newImages[selectedImage],
-                          positionX: newImages[selectedImage].positionX - 1,
+                          ...selected,
+                          positionX: selected.positionX - 1,
                         };
                         return newImages;
                       })
@@ -321,9 +335,16 @@ export default function CreateProjectPage() {
                     onClick={() =>
                       setImages((prev) => {
                         const newImages = [...prev];
+                         const selected = newImages[selectedImage];
+                      if (
+                        !selected ||
+                        selected.positionX === undefined
+                      ) {
+                        return prev;
+                      }
                         newImages[selectedImage] = {
-                          ...newImages[selectedImage],
-                          positionX: newImages[selectedImage].positionX + 1,
+                          ...selected,
+                          positionX: selected.positionX + 1,
                         };
                         return newImages;
                       })
@@ -339,9 +360,16 @@ export default function CreateProjectPage() {
                   onClick={() =>
                     setImages((prev) => {
                       const newImages = [...prev];
+                       const selected = newImages[selectedImage];
+                      if (
+                        !selected ||
+                        selected.positionY === undefined
+                      ) {
+                        return prev;
+                      }
                       newImages[selectedImage] = {
-                        ...newImages[selectedImage],
-                        positionY: newImages[selectedImage].positionY + 1,
+                        ...selected,
+                        positionY: selected.positionY + 1,
                       };
                       return newImages;
                     })
@@ -367,6 +395,7 @@ export default function CreateProjectPage() {
                       const width = Math.max(1, Number(e.target.value));
                       setImages((prev) => {
                         const newImages = [...prev];
+                        
                         newImages[selectedImage].width = width;
                         return newImages;
                       });
