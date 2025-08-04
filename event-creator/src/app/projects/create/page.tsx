@@ -70,18 +70,29 @@ export default function CreateProjectPage() {
         challenge: projectInfo.challenge, // placeholder, update if you have a challenge field
         createdAt: new Date(), // placeholder, backend will set
         heroImage: heroUrl,
-        images: images.map((image) => ({
-          id: "", // placeholder, backend will set
-          createdAt: new Date(), // placeholder, backend will set
-          projectId: "", // placeholder, backend will set
-          url: image.url,
-          type: image.type,
-          positionX: image.positionX,
-          positionY: image.positionY,
-          width: image.width,
-          height: image.height,
-          zIndex: image.zIndex,
-        })),
+        images: images
+          .filter(
+            (img): img is Media =>
+              !!img.url &&
+              !!img.type &&
+              typeof img.positionX === "number" &&
+              typeof img.positionY === "number" &&
+              typeof img.width === "number" &&
+              typeof img.height === "number" &&
+              typeof img.zIndex === "number"
+          )
+          .map((image) => ({
+            id: "",
+            createdAt: new Date(),
+            projectId: "",
+            url: image.url,
+            type: image.type,
+            positionX: image.positionX,
+            positionY: image.positionY,
+            width: image.width,
+            height: image.height,
+            zIndex: image.zIndex,
+          })),
       });
       if (!res.success) {
         throw new Error("Failed to create project");
