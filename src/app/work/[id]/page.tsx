@@ -59,7 +59,7 @@ export default async function Project({
           ))}
         </div>
       </div>
-      <div className="hidden md:block overflow-hidden m-5">
+      <div className="hidden md:block relative w-full h-auto overflow-hidden m-5">
   
           {project?.images.map((image, index) => (
             <div
