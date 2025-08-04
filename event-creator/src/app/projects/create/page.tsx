@@ -28,7 +28,7 @@ export default function CreateProjectPage() {
     challenge: "",
   });
 
-  const [images, setImages] = useState<Media[]>([]);
+  const [images, setImages] = useState<Partial<Media>[]>([]);
 
   useEffect(() => {
     if (!divRef.current) return;
