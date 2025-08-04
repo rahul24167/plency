@@ -260,6 +260,14 @@ export default function CreateProjectPage() {
                   if (dx !== 0 || dy !== 0) {
                     setImages((prev) => {
                       const newImages = [...prev];
+                      const selected = newImages[selectedImage];
+                      if (
+                        !selected ||
+                        selected.positionX === undefined ||
+                        selected.positionY === undefined
+                      ) {
+                        return prev;
+                      }
                       newImages[selectedImage] = {
                         ...newImages[selectedImage],
                         positionX: newImages[selectedImage].positionX + dx,
