@@ -60,7 +60,7 @@ export default async function Project({
         </div>
       </div>
       <div className="hidden md:block overflow-hidden m-5">
-        <div className="relative w-full h-auto">
+  
           {project?.images.map((image, index) => (
             <div
               key={index}
@@ -72,7 +72,6 @@ export default async function Project({
                 zIndex: image.zIndex,
               }}
             >
-              <div className="w-full h-full relative">
                 {image.type === "IMAGE" && (
                   <Image
                     src={cdnUrl(image.url)}
@@ -80,7 +79,6 @@ export default async function Project({
                    width={image.width * 150}
                       height={image.height * 150}
                     className="w-full h-auto"
-                    style={{ objectFit: "fill" }}
                   />
                 )}
                 {image.type === "VIDEO" && (
@@ -94,10 +92,10 @@ export default async function Project({
                     className="w-full  h-auto object-cover"
                   />
                 )}
-              </div>
+
             </div>
           ))}
-        </div>
+
       </div>
       <div className="md:hidden overflow-hidden px-5 w-full flex flex-col gap-2 justify-center items-center">
         {project?.images.map((image, index) => (
