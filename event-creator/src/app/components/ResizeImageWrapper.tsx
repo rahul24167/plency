@@ -13,7 +13,9 @@ interface ImageWrapperProps {
   image:Partial<Media>;
   index: number;
   selectedImage: number;
-  setImages: React.Dispatch<React.SetStateAction<Media[]>>;
+  // setImages: React.Dispatch<React.SetStateAction<Media[]>>;
+  setImages: React.Dispatch<React.SetStateAction<Partial<Media>[]>>
+
   children: React.ReactNode;
 }
 
