@@ -464,7 +464,7 @@ export default function CreateProjectPage() {
               selectedImage={selectedImage}
               setImages={setImages}
             >
-              {image.type === "IMAGE" && (
+              {image.type === "IMAGE" && image.url && image.width && image.height && (
                 <Image
                   src={cdnUrl(image.url)}
                   alt={`Image ${index + 1}`}
@@ -475,7 +475,7 @@ export default function CreateProjectPage() {
                   } w-full h-auto`}
                 />
               )}
-              {image.type === "VIDEO" && (
+              {image.type === "VIDEO" && image.url && image.width && image.height && (
                 <video
                   src={cdnUrl(image.url)}
                   autoPlay
