@@ -481,7 +481,8 @@ export default function UpdateProjectPage() {
                 selectedImage={selectedImage}
                 setImages={setImages}
               >
-                {image.type === "IMAGE" && (
+                
+                {typeof image.width === "number" && typeof image.height === "number" && image.url && image.type === "IMAGE" && (
                   <Image
                     src={cdnUrl(image.url ?? "")}
                     alt={`Image ${index + 1}`}
@@ -490,7 +491,7 @@ export default function UpdateProjectPage() {
                     className="w-full h-auto"
                   />
                 )}
-                {image.type === "VIDEO" && (
+                {typeof image.width === "number" && typeof image.height === "number" && image.url && image.type === "VIDEO" && (
                   <video
                     src={cdnUrl(image.url ?? "")}
                     autoPlay
