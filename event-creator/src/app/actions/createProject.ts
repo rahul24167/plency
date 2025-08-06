@@ -9,9 +9,9 @@ interface  ProjectWithMedia extends Project {
 
 
 export async function createProject(formData:ProjectWithMedia) {
-    const { title, client, service, description, heroImage, images } = formData;
+    const { title, client, service, description, challenge, heroImage, images } = formData;
 
-    if (!title || !client || !service || !description || !heroImage || !images) {
+    if (!title || !client || !service || !description || !challenge || !heroImage || !images) {
         throw new Error("Missing fields");
     }
 
@@ -22,6 +22,7 @@ export async function createProject(formData:ProjectWithMedia) {
                 client: client,
                 service: service,
                 description: description,
+                challenge: challenge,
                 heroImage: heroImage,
                 images: {
                     create: images.map((image) => ({

@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 //import { uploadToS3 } from "@/event-creator/src/lib/s3Uploader";
 import { uploadToGCS } from "@/event-creator/src/lib/uploadToGCS";
 import { Project, ProjectMedia } from "@prisma/client";
+import { ResizableImageWrapper } from "@/event-creator/src/app/components/ResizeImageWrapper";
 import { cdnUrl } from "@/event-creator/src/app/utills/cdnUrl";
 
 export default function UpdateProjectPage() {
@@ -59,7 +60,7 @@ export default function UpdateProjectPage() {
   };
 
   return (
-    <div className="md:flex flex-col w-full">
+    <div className="flex flex-col w-full">
       <div>
         <button
           className="bg-red-600 text-white font-semibold py-2 px-4 mx-4 rounded w-fit self-end"
@@ -218,68 +219,68 @@ export default function UpdateProjectPage() {
         </div>
 
         <div className="fixed flex flex-col justify-center items-center bg-transparent w-[90vw] z-50">
-            {/* Image Controller */}
-            
-            <div
-              className={`w-full ${
-                isEdit ? "flex" : "hidden"
-              } flex-col gap-6 p-6 bg-white rounded-xl shadow-md`}
-            >
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Add Image/Video
+          {/* Image Controller */}
+
+          <div
+            className={`w-full ${
+              isEdit ? "flex" : "hidden"
+            } flex-col gap-6 p-6 bg-white rounded-xl shadow-md`}
+          >
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-gray-700">
+                Add Image/Video
+              </label>
+              <input
+                type="file"
+                className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  const isVideo = file?.type.startsWith("video/");
+                  if (file) {
+                    uploadToGCS(file).then((url) => {
+                      setImages((prev) => [
+                        ...prev,
+                        {
+                          id: uuidv4(),
+                          projectId: "temp-project-id",
+                          url,
+                          type: isVideo ? "VIDEO" : "IMAGE",
+                          width: 30,
+                          height: 30,
+                          positionX: 20,
+                          positionY: 5,
+                          zIndex: 1,
+                          createdAt: new Date(),
+                        },
+                      ]);
+                      setSelectedImage(images.length - 1);
+                    });
+                  }
+                }}
+              />
+            </div>
+          </div>
+          <div className={`${isEdit ? "flex" : "hidden"} flex-wrap gap-4`}>
+            {images.length > 0 &&
+              images.map((image, index) => (
+                <label
+                  key={index}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedImage === index}
+                    onChange={(e) => {
+                      if (e.target.checked) setSelectedImage(index);
+                    }}
+                    className="accent-blue-600"
+                  />
+                  <span className="text-sm font-medium text-gray-600">
+                    New Media {index + 1}
+                  </span>
                 </label>
-                <input
-                  type="file"
-                  className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    const isVideo = file?.type.startsWith("video/");
-                    if (file) {
-                      uploadToGCS(file).then((url) => {
-                        setImages((prev) => [
-                          ...prev,
-                          {
-                            id: uuidv4(),
-                            projectId: "temp-project-id",
-                            url,
-                            type: isVideo ? "VIDEO" : "IMAGE",
-                            width: 30,
-                            height: 30,
-                            positionX: 20,
-                            positionY: 5,
-                            zIndex: 1,
-                            createdAt: new Date(),
-                          },
-                        ]);
-                        setSelectedImage(images.length - 1);
-                      });
-                    }
-                  }}
-                />
-              </div>
-            </div>
-            <div className={`${isEdit ? "flex" : "hidden"} flex-wrap gap-4`}>
-              {images.length > 0 &&
-                images.map((image, index) => (
-                  <label
-                    key={index}
-                    className="flex items-center gap-2 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedImage === index}
-                      onChange={(e) => {
-                        if (e.target.checked) setSelectedImage(index);
-                      }}
-                      className="accent-blue-600"
-                    />
-                    <span className="text-sm font-medium text-gray-600">
-                      New Media {index + 1}
-                    </span>
-                  </label>
-                ))}
-            </div>
+              ))}
+          </div>
 
           <div className="flex flex-row">
             {/* Image Position Controller */}
@@ -472,29 +473,25 @@ export default function UpdateProjectPage() {
         {/* Image Gallery Previews */}
         <div className="relative w-full h-auto border overflow-hidden border-b-0">
           {images.map((image, index) => (
-            <div
-              key={index}
-              className={`${
-                index === selectedImage ? "border-2 border-red-500" : ""
-              }`}
-              style={{
-                width: `${image.width}vw`,
-                height: `${image.height}vw`,
-                marginLeft: `${image.positionX}vw`,
-                marginTop: `${image.positionY}vw`,
-                zIndex: image.zIndex,
-              }}
-            >
-              <div className="w-full h-full relative">
-                {image.type === "IMAGE" && (
+            
+              <ResizableImageWrapper
+                key={index}
+                image={image}
+                index={index}
+                selectedImage={selectedImage}
+                setImages={setImages}
+              >
+                
+                {typeof image.width === "number" && typeof image.height === "number" && image.url && image.type === "IMAGE" && (
                   <Image
                     src={cdnUrl(image.url ?? "")}
                     alt={`Image ${index + 1}`}
-                    fill
-                    style={{ objectFit: "fill" }}
+                    width={image.width * 150}
+                    height={image.height * 150}
+                    className="w-full h-auto"
                   />
                 )}
-                {image.type === "VIDEO" && (
+                {typeof image.width === "number" && typeof image.height === "number" && image.url && image.type === "VIDEO" && (
                   <video
                     src={cdnUrl(image.url ?? "")}
                     autoPlay
@@ -502,11 +499,10 @@ export default function UpdateProjectPage() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-cover"
                   />
                 )}
-              </div>
-            </div>
+              </ResizableImageWrapper>
           ))}
         </div>
       </div>

@@ -11,9 +11,9 @@ type FullProject = ProjectType & {
 export default async function Project({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } =  await params;
+  const { id } = await params;
   const project = (await prisma.project.findUnique({
     where: {
       id: id ?? undefined,
@@ -27,14 +27,15 @@ export default async function Project({
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="h-[50vh] md:h-screen p-5 mb-0 relative">
+    <div className="bg-cover p-5 w-full flex flex-col justify-between item-center ">
+      <div className="h-auto md:h-screen mb-0 relative flex items-center justify-center">
         {project?.heroImage && (
           <Image
             src={cdnUrl(project?.heroImage)}
             alt=""
-            fill
-            className="object-cover"
+            width={2000}
+            height={2000}
+            className="w-full h-auto"
           />
         )}
       </div>
@@ -59,26 +60,27 @@ export default async function Project({
           ))}
         </div>
       </div>
-      <div className="hidden md:block overflow-hidden m-5">
-        <div className="relative w-full h-auto">
+      <div className="hidden md:block relative w-full h-auto overflow-hidden">
+  
           {project?.images.map((image, index) => (
             <div
               key={index}
+              className="relative"
               style={{
                 width: `${image.width}vw`,
-                height: `${image.height}vw`,
+                // height: `${image.height}vw`,
                 marginLeft: `${image.positionX}vw`,
                 marginTop: `${image.positionY}vw`,
                 zIndex: image.zIndex,
               }}
             >
-              <div className="w-full h-full relative">
                 {image.type === "IMAGE" && (
                   <Image
                     src={cdnUrl(image.url)}
                     alt={`Image ${index + 1}`}
-                    fill
-                    style={{ objectFit: "fill" }}
+                   width={image.width * 150}
+                      height={image.height * 150}
+                    className="w-full h-auto"
                   />
                 )}
                 {image.type === "VIDEO" && (
@@ -89,15 +91,15 @@ export default async function Project({
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover"
+                    className="w-full  h-auto object-cover"
                   />
                 )}
-              </div>
+
             </div>
           ))}
-        </div>
+
       </div>
-      <div className="md:hidden overflow-hidden px-5 w-full flex flex-col gap-2 justify-center items-center">
+      <div className="md:hidden overflow-hidden w-full flex flex-col gap-2 justify-center items-center">
         {project?.images.map((image, index) => (
           <div key={index} className="w-full">
             {image.type === "IMAGE" && (
@@ -107,7 +109,6 @@ export default async function Project({
                 width={image.width * 200}
                 height={image.height * 200}
                 className="w-full h-auto object-cover"
-                
               />
             )}
             {image.type === "VIDEO" && (
