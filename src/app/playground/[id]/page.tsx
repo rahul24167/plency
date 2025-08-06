@@ -24,14 +24,23 @@ export default async function Experiment({
       <div className="md:w-[62%] overflow-auto">
         {experiment.images.map((image, index) => (
           <div className="w-full mb-2" key={index}>
-            <Image
+            {image.url.startsWith("images/") ?(<Image
               src={cdnUrl(image.url)}
               alt={`Uploaded image ${index}`}
               width={0}
               height={0}
               sizes="100vw"
               className="w-full h-auto"
-            />
+            />):(
+              <video
+                src={cdnUrl(image.url)}
+                muted
+                autoPlay
+                loop
+                className="w-full h-auto"
+              />
+            )}
+            
             {index === 0 && (
               <div className="md:hidden flex flex-col justify-end items-start">
                 <div className="font-normal uppercase">{experiment.brand}</div>
