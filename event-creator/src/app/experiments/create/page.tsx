@@ -12,7 +12,7 @@ export default function CreateExperiment() {
     question: "why this design",
     answer: "",
   });
-  const [images, setImages] = useState<string[]>([]);
+  const [medias, setMedias] = useState<string[]>([]);
   const [isConfirm, setIsConfirm] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ export default function CreateExperiment() {
           onClick={() => setIsConfirm(true)}
           className={`px-4 py-2 rounded text-white transition 
           ${
-            !images.length ||
+            !medias.length ||
             !experimentInfo.brand ||
             !experimentInfo.brandDescription ||
             !experimentInfo.answer ||
@@ -32,7 +32,7 @@ export default function CreateExperiment() {
               : "bg-blue-600 hover:bg-blue-700"
           }`}
           disabled={
-            !images.length ||
+            !medias.length ||
             !experimentInfo.brand ||
             !experimentInfo.brandDescription ||
             !experimentInfo.answer ||
@@ -54,12 +54,32 @@ export default function CreateExperiment() {
                 //   setImages((prev) => [...prev, url])
                 // );
                 uploadToGCS(file).then((url) =>
-                  setImages((prev) => [...prev, url])
+                  setMedias((prev) => [...prev, url])
                 );
               }
             }}
           />
         </div>
+         <div className="flex flex-col py-5">
+          <label htmlFor="video">Video</label>
+          <input
+            id="video"
+            type="file"
+            accept="video/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                // uploadToS3(file).then((url) =>
+                //   setImages((prev) => [...prev, url])
+                // );
+                uploadToGCS(file).then((url) =>
+                  setMedias((prev) => [...prev, url])
+                );
+              }
+            }}
+          />
+        </div>
+        
         <label htmlFor="brand">Brand</label>
         <input
           id="brand"
@@ -112,7 +132,7 @@ export default function CreateExperiment() {
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                   onClick={(e) => {
                     e.preventDefault();
-                    createExperiment(experimentInfo, images)
+                    createExperiment(experimentInfo, medias)
                       .then((response) => {
                         if (!response.success) {
                           console.error(
@@ -134,7 +154,7 @@ export default function CreateExperiment() {
                             question: "why this design",
                             answer: "",
                           });
-                          setImages([]);
+                          setMedias([]);
                         }
                       })
                       .catch((error) => {
@@ -155,7 +175,7 @@ export default function CreateExperiment() {
         )}
       </form>
       <div className="w-full md:w-1/2 h-[90vh] overflow-auto">
-        {images.map((url, index) => (
+        {medias.map((url, index) => (
           <div className="w-full my-2" key={index}>
             <Image 
               src={cdnUrl(url)}
