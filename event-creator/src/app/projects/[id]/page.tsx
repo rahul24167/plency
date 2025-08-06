@@ -60,7 +60,7 @@ export default function UpdateProjectPage() {
   };
 
   return (
-    <div className="md:flex flex-col w-full">
+    <div className="flex flex-col w-full">
       <div>
         <button
           className="bg-red-600 text-white font-semibold py-2 px-4 mx-4 rounded w-fit self-end"

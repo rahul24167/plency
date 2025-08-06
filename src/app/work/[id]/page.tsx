@@ -27,14 +27,15 @@ export default async function Project({
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="h-[50vh] md:h-screen p-5 mb-0 relative">
+    <div className="bg-cover p-5 w-full flex flex-col justify-between item-center ">
+      <div className="h-auto md:h-screen mb-0 relative flex items-center justify-center">
         {project?.heroImage && (
           <Image
             src={cdnUrl(project?.heroImage)}
             alt=""
-            fill
-            className="object-cover"
+            width={2000}
+            height={2000}
+            className="w-full h-auto"
           />
         )}
       </div>
@@ -59,14 +60,15 @@ export default async function Project({
           ))}
         </div>
       </div>
-      <div className="hidden md:block relative w-full h-auto overflow-hidden m-5">
+      <div className="hidden md:block relative w-full h-auto overflow-hidden">
   
           {project?.images.map((image, index) => (
             <div
               key={index}
+              className="relative"
               style={{
                 width: `${image.width}vw`,
-                height: `${image.height}vw`,
+                // height: `${image.height}vw`,
                 marginLeft: `${image.positionX}vw`,
                 marginTop: `${image.positionY}vw`,
                 zIndex: image.zIndex,
@@ -97,7 +99,7 @@ export default async function Project({
           ))}
 
       </div>
-      <div className="md:hidden overflow-hidden px-5 w-full flex flex-col gap-2 justify-center items-center">
+      <div className="md:hidden overflow-hidden w-full flex flex-col gap-2 justify-center items-center">
         {project?.images.map((image, index) => (
           <div key={index} className="w-full">
             {image.type === "IMAGE" && (
