@@ -74,7 +74,7 @@ export default async function Project({
                 zIndex: image.zIndex,
               }}
             >
-                {image.type === "IMAGE" && (
+                {image.url.startsWith("images/")  && (
                   <Image
                     src={cdnUrl(image.url)}
                     alt={`Image ${index + 1}`}
@@ -83,7 +83,7 @@ export default async function Project({
                     className="w-full h-auto"
                   />
                 )}
-                {image.type === "VIDEO" && (
+                {!image.url.startsWith("images/") && (
                   <video
                     src={cdnUrl(image.url)}
                     autoPlay
@@ -102,7 +102,7 @@ export default async function Project({
       <div className="md:hidden overflow-hidden w-full flex flex-col gap-2 justify-center items-center">
         {project?.images.map((image, index) => (
           <div key={index} className="w-full">
-            {image.type === "IMAGE" && (
+            {image.url.startsWith("images/") && (
               <Image
                 src={cdnUrl(image.url)}
                 alt={`Image ${index + 1}`}
@@ -111,7 +111,7 @@ export default async function Project({
                 className="w-full h-auto object-cover"
               />
             )}
-            {image.type === "VIDEO" && (
+            {!image.url.startsWith("images/")  && (
               <video
                 src={cdnUrl(image.url)}
                 autoPlay
