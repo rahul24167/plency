@@ -126,7 +126,7 @@ export default async function Project({
         ))}
       </div>
 
-      <div className="hidden md:flex fixed bottom-0 md:w-1/3 flex-col justify-end items-end p-5 font-medium uppercase">
+      <div className="z-50 hidden md:flex fixed bottom-0 md:w-1/3 flex-col justify-end items-end p-5 font-medium uppercase">
         <div className="h-full flex flex-col justify-end items-start">
           <span>{project?.client}</span>
           <span className="">{project?.title}</span>

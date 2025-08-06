@@ -15,10 +15,10 @@ type CreateExperimentResult =
 
 export async function createExperiment(
   experimentInfo: ExperimentInfo,
-  images: string[]
+  medias: string[]
 ): Promise<CreateExperimentResult> {
   try {
-    if (!experimentInfo || !images || images.length === 0) {
+    if (!experimentInfo || !medias || medias.length === 0) {
       return { success: false, error: "Missing fields" };
     }
 
@@ -26,7 +26,7 @@ export async function createExperiment(
       data: {
         ...experimentInfo,
         images: {
-          create: images.map((image) => ({ url: image })),
+          create: medias.map((media) => ({ url: media })),
         },
       },
     });
